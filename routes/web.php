@@ -26,6 +26,9 @@ Route::get('/buku', function () {
 });
 
 Route::get('/populer', function () {
-    return view('frontend.porpuler');
+    return view('frontend.populer');
 });
-
+//---------------------backend----------------------
+Route::get('/dashboard', function () {
+    return view('frontend.dashboard');
+});
