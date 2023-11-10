@@ -1,33 +1,36 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MahasiswaController;
-use App\Http\Controllers\FormController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
 |
 */
 
 Route::get('/', function () {
-    return view('home', ["title" => "Home"]);
+    return view('frontend.home');
 });
 
-Route::get('/about', function () {
-    return view('about', ["title" => "About"]);
+Route::get('/home', function () {
+    return view('frontend.home');
 });
 
-Route::get('/post', function(){
-    return view('post');
+
+Route::get('/buku', function () {
+    return view('frontend.buku');
 });
 
-Route::get('/login', function () {
-    return view('login', ["title" => "Login"]);
+Route::get('/populer', function () {
+    return view('frontend.populer');
 });
 
-Route::resource("mahasiswa", MahasiswaController::class);
+//======================BackEnd==============================
+Route::get('/dashboard', function () {
+    return view('backend.dashboard');
+});
