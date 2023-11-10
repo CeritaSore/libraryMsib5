@@ -21,16 +21,11 @@ Route::get('/home', function () {
     return view('frontend.home');
 });
 
-
 Route::get('/buku', function () {
     return view('frontend.buku');
 });
 
 Route::get('/populer', function () {
-    return view('frontend.populer');
+    return view('frontend.porpuler');
 });
 
-//======================BackEnd==============================
-Route::get('/dashboard', function () {
-    return view('backend.dashboard');
-});
