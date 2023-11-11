@@ -30,5 +30,5 @@ Route::get('/populer', function () {
 });
 //---------------------backend----------------------
 Route::get('/dashboard', function () {
-    return view('frontend.dashboard');
+    return view('backend.dashboard');
 });
