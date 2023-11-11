@@ -1,12 +1,6 @@
 # Repository MSIB 5 - Rancangan Tata Kelola Perpustakaan
 berisi progres dari project yang sedang dilaksanakan.
 
-# Progress yang telah berjalan.
-- mencari tema front end
-- merancang database
-- membuat repo
-- mencari tema admin
-
 # Anggota dalam Project Ini
 - Ahmad Fadhliansyah - Project Manager/Lead Team
 - Fajar septianto - Database Designer
@@ -14,5 +8,14 @@ berisi progres dari project yang sedang dilaksanakan.
 - Kurniawan - Backend
 - Lora Lorensa Manafe - Dokumentasi
 
+# Progress yang telah berjalan.
+- implementasi front end
+- membuat repo
+- implementasi admin
+- perangcangan database
 
-
+# Progres yang akan datang
+- migrasi database
+- membuat models
+- membuat controller untuk memanggil menu
+- menambah kelas active di navbar
