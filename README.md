@@ -15,7 +15,8 @@ berisi progres dari project yang sedang dilaksanakan.
 - perangcangan database
 
 # Progres yang akan datang
-- migrasi database
+- migrasi database(baru 4 tabel)
 - membuat models
 - membuat controller untuk memanggil menu
 - menambah kelas active di navbar
+
