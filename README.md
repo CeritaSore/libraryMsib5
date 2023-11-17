@@ -13,9 +13,9 @@ berisi progres dari project yang sedang dilaksanakan.
 - membuat repo
 - implementasi admin
 - perangcangan database
+- migrasi database(full)
 
 # Progres yang akan datang
-- migrasi database(baru 4 tabel)
 - membuat models
 - membuat controller untuk memanggil menu
 - menambah kelas active di navbar
