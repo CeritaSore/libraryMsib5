@@ -15,11 +15,11 @@ class Pengarangbuku extends Model
     public $timestamps = false;
 
     public function pengarang(): BelongsTo{
-        return $this->BelongsTo(Pengarang::class); 
+        return $this->belongsTo(Pengarang::class); 
     }
 
     public function buku(): BelongsTo{
-        return $this->BelongsTo(Buku::class); 
+        return $this->belongsTo(Buku::class); 
     }
 
 }

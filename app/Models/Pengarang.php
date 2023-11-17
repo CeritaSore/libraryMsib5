@@ -15,6 +15,6 @@ class Pengarang extends Model
     public $timestamps = false;
 
     public function pengarangbuku(): HasMany{
-        return $this->HasMany(Pengarangbuku::class); 
+        return $this->hasMany(Pengarangbuku::class); 
     }
 }

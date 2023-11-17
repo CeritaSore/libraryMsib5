@@ -40,6 +40,10 @@ Route::get('/dashboard', function () {
     return view('backend.dashboard');
 });
 
+Route::get('/buku', function () {
+    return view('backend.');
+});
+
 Route::resource('/buku',BukuController::class);
 Route::resource('/kategori',KategoriController::class);
 Route::resource('/meminjam',MeminjamController::class);

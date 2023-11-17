@@ -16,7 +16,7 @@ class Salinanbuku extends Model
     public $timestamps = false;
 
     public function meminjam(): HasMany{
-        return $this->HasMany(Salinanbuku::class); 
+        return $this->hasMany(Salinanbuku::class); 
     }
 
     public function penerbit(): BelongsTo{

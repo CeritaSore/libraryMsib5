@@ -16,7 +16,7 @@
             <div class="collapse" id="tables">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                   <a class="nav-link" href="?hal=data_person">Tabel Person</a>
+                   <a class="nav-link" href="{{ url('/buku') }}">Tabel Buku</a>
                 </li>
               </ul>
             </div>

@@ -9,6 +9,8 @@ use App\Models\Salinanbuku;
 use App\Models\Kategori;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\RedirectResponse;
+
 
 
 class BukuController extends Controller
@@ -51,9 +53,10 @@ class BukuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(string $id)
     {
-        //
+        $rs = Buku::find($idbuku);
+        return view('backend.buku.detail',compact('rs'));
     }
 
     /**

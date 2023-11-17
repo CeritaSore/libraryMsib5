@@ -15,6 +15,6 @@ class Penerbit extends Model
     public $timestamps = false;
 
     public function salinan(): HasMany{
-        return $this->HasMany(Salinanbuku::class); 
+        return $this->hasMany(Salinanbuku::class); 
     }
 }

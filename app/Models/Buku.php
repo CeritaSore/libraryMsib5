@@ -16,14 +16,14 @@ class Buku extends Model
     public $timestamps = false;
 
     public function pengarangbuku(): HasMany{
-        return $this->HasMany(Pengarangbuku::class); 
+        return $this->hasMany(Pengarangbuku::class); 
     }
 
     public function salinanbuku(): HasMany{
-        return $this->HasMany(Salinanbuku::class); 
+        return $this->hasMany(Salinanbuku::class); 
     }
 
     public function kategori(): BelongsTo{
-        return $this->BelongsTo(Kategori::class); 
+        return $this->belongsTo(Kategori::class); 
     }
 }
