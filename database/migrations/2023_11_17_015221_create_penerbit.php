@@ -1,5 +1,6 @@
 <?php
 
+use Brick\Math\BigInteger;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,12 +14,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('buku', function (Blueprint $table) {
-            $table->bigIncrements('idbuku');
-            $table->string('judulbuku',45);
-            $table->unsignedBigInteger('kategori_idkategori')->unsigned();
+        Schema::create('penerbit', function (Blueprint $table) {
+            $table->bigIncrements('idpenerbit');
+            $table->string('namapenerbit');
             $table->timestamps();
-            $table->foreign('kategori_idkategori')->references('idkategori')->on('kategori')->onDelete('cascade');
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('buku');
+        Schema::dropIfExists('penerbit');
     }
 };

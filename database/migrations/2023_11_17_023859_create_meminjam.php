@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('buku', function (Blueprint $table) {
-            $table->bigIncrements('idbuku');
-            $table->string('judulbuku',45);
-            $table->unsignedBigInteger('kategori_idkategori')->unsigned();
+        Schema::create('meminjam', function (Blueprint $table) {
+            $table->bigIncrements('idpeminjaman');
+            $table->date('tanggal_pengambilan');
+            $table->date('tanggal_pengembalian');
+            $table->unsignedBigInteger('salinanbuku_id');
             $table->timestamps();
-            $table->foreign('kategori_idkategori')->references('idkategori')->on('kategori')->onDelete('cascade');
+            $table->foreign('salinanbuku_id')->references('idsalinanbuku')->on('salinanbuku')->onDelete('cascade');
         });
     }
 
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('buku');
+        Schema::dropIfExists('meminjam');
     }
 };
