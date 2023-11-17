@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="{{ asset('backend/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
   <link rel="stylesheet" href="{{ asset('backend/assets/vendors/ti-icons/css/themify-icons.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/js/select.dataTables.min.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="{{ asset('backend/assets/css/vertical-layout-light/style.css') }}">
@@ -26,9 +27,9 @@
     <div class="container-fluid page-body-wrapper">
         @include('backend.header')
         @include('backend.sidebar')
-        <main id="main">
+
             @yield('content')
-        </main> 
+
     </div>  
     @include('backend.footer') 
     <!-- page-body-wrapper ends -->
@@ -36,25 +37,27 @@
   <!-- container-scroller -->
 
   <!-- plugins:js -->
-  <script src="{{ asset('backend/assets/endors/js/vendor.bundle.base.js"></script>
+  <script src="{{ asset('backend/assets/vendors/js/vendor.bundle.base.js') }}"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
-  <script src="{{ asset('backend/assets/vendors/chart.js/Chart.min.js"></script>
-  <script src="{{ asset('backend/assets/vendors/datatables.net/jquery.dataTables.js"></script>
-  <script src="{{ asset('backend/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-  <script src="{{ asset('backend/assets/js/dataTables.select.min.js"></script>
+  <script src="{{ asset('backend/assets/vendors/chart.js/Chart.min.js') }}"></script>
+
+
+
 
   <!-- End plugin js for this page -->
   <!-- inject:js -->
-  <script src="{{ asset('backend/assets/js/off-canvas.js"></script>
-  <script src="{{ asset('backend/assets/js/hoverable-collapse.js"></script>
-  <script src="{{ asset('backend/assets/js/template.js"></script>
-  <script src="{{ asset('backend/assets/js/settings.js"></script>
-  <script src="{{ asset('backend/assets/js/todolist.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+  <script src="{{ asset('backend/assets/js/off-canvas.js') }}"></script>
+  <script src="{{ asset('backend/assets/js/hoverable-collapse.js') }}"></script>
+  <script src="{{ asset('backend/assets/js/template.js') }}"></script>
+  <script src="{{ asset('backend/assets/js/settings.js') }}"></script>
+  <script src="{{ asset('backend/assets/js/todolist.js') }}"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="{{ asset('backend/assets/js/dashboard.js"></script>
-  <script src="{{ asset('backend/assets/js/Chart.roundedBarCharts.js"></script>
+  <script src="{{ asset('backend/assets/js/dashboard.js') }}"></script>
+  <script src="{{ asset('backend/assets/js/Chart.roundedBarCharts.js') }}"></script>
   <!-- End custom js for this page-->
 </body>
 
