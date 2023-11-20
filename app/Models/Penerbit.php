@@ -10,7 +10,7 @@ class Penerbit extends Model
 {
     use HasFactory;
     protected $table = 'penerbit';
-    protected $filltable = ['namapenerbit'];
+    protected $fillable = ['namapenerbit'];
 
     public $timestamps = false;
 

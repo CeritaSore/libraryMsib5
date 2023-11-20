@@ -11,7 +11,7 @@ class Buku extends Model
 {
     use HasFactory;
     protected $table = 'buku';
-    protected $filltable = ['judulbuku','kategori_idkategori'];
+    protected $fillable = ['judulbuku','kategori_idkategori'];
 
     public $timestamps = false;
 

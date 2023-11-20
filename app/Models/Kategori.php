@@ -11,7 +11,7 @@ class Kategori extends Model
 {
     use HasFactory;
     protected $table = 'kategori';
-    protected $filltable = ['listkategori'];
+    protected $fillable = ['listkategori'];
 
     public $timestamps = false;
 

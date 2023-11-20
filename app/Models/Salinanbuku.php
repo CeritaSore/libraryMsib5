@@ -11,7 +11,7 @@ class Salinanbuku extends Model
 {
     use HasFactory;
     protected $table = 'salinanbuku';
-    protected $filltable = ['tahunterbit','buku_idbuku','penerbit_idpenerbit'];
+    protected $fillable = ['tahunterbit','buku_idbuku','penerbit_idpenerbit'];
 
     public $timestamps = false;
 

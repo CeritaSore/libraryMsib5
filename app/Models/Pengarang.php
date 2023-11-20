@@ -10,7 +10,7 @@ class Pengarang extends Model
 {
     use HasFactory;
     protected $table = 'pengarang';
-    protected $filltable = ['namapengarang'];
+    protected $fillable = ['namapengarang'];
 
     public $timestamps = false;
 

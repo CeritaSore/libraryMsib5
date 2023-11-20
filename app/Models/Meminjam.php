@@ -10,7 +10,7 @@ class Meminjam extends Model
 {
     use HasFactory;
     protected $table = 'meminjam';
-    protected $filltable = ['tanggal_pengambilan','tanggal_pengembalian'];
+    protected $fillable = ['tanggal_pengambilan','tanggal_pengembalian'];
 
     public $timestamps = false;
 

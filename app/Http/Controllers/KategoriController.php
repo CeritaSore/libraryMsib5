@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Buku;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,7 +16,8 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        //
+        $ar_kategori = Kategori::orderBy('id', 'desc')->get();
+        return view('backend.kategori.index', compact('ar_kategori'));
     }
 
     /**
