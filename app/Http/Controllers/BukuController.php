@@ -24,7 +24,7 @@ class BukuController extends Controller
      */
     public function index()
     {
-        $ar_buku = Buku::orderBy('idbuku', 'desc')->get();
+        $ar_buku = Buku::orderBy('id', 'desc')->get();
         return view('backend.buku.index', compact('ar_buku'));
     }
 
@@ -36,7 +36,7 @@ class BukuController extends Controller
     public function create()
     {
         $ar_kategori = Kategori::all();
-        return view('backend.buku.form', compact('ar_kategori'));
+        return view('buku.create', compact('ar_kategori'));
     }
 
     /**
@@ -71,7 +71,7 @@ class BukuController extends Controller
         ]
     );
        Buku::create($request->all());
-       return redirect()->route('buku.index')->with('Berhasil','Berhasil Menambahkan Buku!');
+       return redirect()->route('backend.buku.index')->with('Berhasil','Berhasil Menambahkan Buku!');
        /*
        //------------apakah user  ingin upload foto------------
        /if(!empty($request->foto)){
@@ -111,8 +111,8 @@ class BukuController extends Controller
      */
     public function show(string $id)
     {
-        $rs = Buku::find($idbuku);
-        return view('backend.buku.detail',compact('rs'));
+        $asset = Buku::find($id);
+        return view('backend.buku.show', compact('asset'));
     }
 
     /**
@@ -123,7 +123,8 @@ class BukuController extends Controller
      */
     public function edit($id)
     {
-        //
+        $asset = Buku::find($id);
+        return view('backend.buku.edit', compact('asset'));
     }
 
     /**
@@ -135,7 +136,19 @@ class BukuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Validasi form input jika diperlukan
+        $request->validate([
+            'judulbuku' => 'required',
+            'kategori_id' => 'required',
+            'created_at' => 'required',
+            'updated_at	' => 'required',
+            // Sesuaikan dengan kolom lainnya
+        ]);
+
+        // Update data dalam database
+        Buku::find($id)->update($request->all());
+
+        return redirect()->route('buku.index')->with('success', 'Data berhasil diupdate.');
     }
 
     /**
@@ -146,6 +159,9 @@ class BukuController extends Controller
      */
     public function destroy($id)
     {
-        //
+         // Hapus data dari database
+         Buku::find($id)->delete();
+
+         return redirect()->route('buku.index')->with('success', 'Data berhasil dihapus.');
     }
 }

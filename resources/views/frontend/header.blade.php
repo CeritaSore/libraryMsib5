@@ -65,7 +65,7 @@
                     <div class="main-menu stellarnav">
                         <ul class="menu-list">
                             <li class="menu-item active"><a href="{{ url('/home') }}">Home</a></li>
-                            <li class="menu-item"><a href="{{ url('/buku') }}" class="nav-link">Featured</a></li>
+                            <li class="menu-item"><a href="{{ url('/bukunya') }}" class="nav-link">Featured</a></li>
                             <li class="menu-item"><a href="{{ url('/populer') }}" class="nav-link">Popular</a></li>
                             <li class="menu-item"><a href="{{ url('/dashboard') }}" class="nav-link btn btn-outline-dark rounded-pill m-0" >Login</a></li>
                         </ul>

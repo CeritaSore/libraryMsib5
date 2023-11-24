@@ -28,8 +28,8 @@ Route::get('/home', function () {
     return view('frontend.home');
 });
 
-Route::get('/buku', function () {
-    return view('frontend.buku');
+Route::get('/bukunya', function () {
+    return view('frontend.bukunya');
 });
 
 Route::get('/populer', function () {

@@ -32,10 +32,10 @@ $no = 1;
 					<form method="POST" action="">
 					@csrf
                     @method('DELETE')		
-					<a class="btn btn-info btn-sm" href="{{ route('buku.show', $b->idbuku) }}" title="Detail Buku">
+					<a class="btn btn-info btn-sm" href="{{ route('buku.show', $b->id) }}" title="Detail Buku">
                         <i class="bi bi-eye"></i>
                     </a>
-                    <a class="btn btn-warning btn-sm" href="" title="Ubah Buku">
+                    <a class="btn btn-warning btn-sm" href="{{ route('buku.edit', $b->id) }}" title="Ubah Buku">
                         <i class="bi bi-pencil-fill"></i>
                     </a>
 					<button type="submit" class="btn btn-danger btn-sm show-alert-delete-box" title="Hapus Asset">
