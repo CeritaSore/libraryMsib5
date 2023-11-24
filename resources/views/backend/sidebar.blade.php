@@ -18,6 +18,9 @@
                 <li class="nav-item">
                    <a class="nav-link" href="{{ url('/buku') }}">Tabel Buku</a>
                 </li>
+                <li class="nav-item">
+                   <a class="nav-link" href="{{ url('/pengarang') }}">pengarang</a>
+                </li>
               </ul>
             </div>
           </li>

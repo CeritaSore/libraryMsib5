@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('buku', function (Blueprint $table) {
-            $table->bigIncrements('idbuku');
-            $table->string('judulbuku',45);
-            $table->unsignedBigInteger('kategori_idkategori')->unsigned();
+        Schema::create('pengarangs', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
-            $table->foreign('kategori_idkategori')->references('idkategori')->on('kategori')->onDelete('cascade');
         });
     }
 
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('buku');
+        Schema::dropIfExists('pengarangs');
     }
 };

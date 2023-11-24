@@ -24,7 +24,7 @@ class BukuController extends Controller
      */
     public function index()
     {
-        $ar_buku = Buku::orderBy('id', 'desc')->get();
+        $ar_buku = Buku::orderBy('idbuku', 'desc')->get();
         return view('backend.buku.index', compact('ar_buku'));
     }
 
@@ -36,7 +36,7 @@ class BukuController extends Controller
     public function create()
     {
         $ar_kategori = Kategori::all();
-        return view('buku.create', compact('ar_kategori'));
+        return view('backend.buku.create', compact('ar_kategori'));
     }
 
     /**
@@ -49,29 +49,29 @@ class BukuController extends Controller
     {
         $validated = $request->validate([
             'judulbuku' => 'required|max:45',
-            'kategori_idkategori' => 'required|integer',
+            // 'kategori_idkategori' => 'required|integer',
            //'textarea' => 'required|varchar',
            //'foto' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|min:2|max:5000'
         ],
     
-        [
-            'judulbuku.required'=>'Judul Buku Wajib Diisi',
-            'judulbuku.max'=>'Judul Buku Maksimal 45 karakter',
-            'kategori_idkategori.required'=>'Kategori Wajib Memilih Salah Satu',
-            'kategori_idkategori.integer'=>'Kategori Wajib Memilih Salah Satu',
+        // [
+        //     'judulbuku.required'=>'Judul Buku Wajib Diisi',
+        //     'judulbuku.max'=>'Judul Buku Maksimal 45 karakter',
+        //     'kategori_idkategori.required'=>'Kategori Wajib Memilih Salah Satu',
+        //     'kategori_idkategori.integer'=>'Kategori Wajib Memilih Salah Satu',
 
-            /*
-            'textarea.required'=>'textarea Wajib Diisi',
-            'textarea.varchar'=>'textarea Maksimal ... karakter',
-            'foto.min'=>'Ukuran file kurang 2 KB',
-            'foto.max'=>'Ukuran file melebihi 9000 KB',
-            'foto.image'=>'File foto bukan gambar',
-            'foto.mimes'=>'Extension file selain jpg,jpeg,png,gif,svg',
-            */
-        ]
+        //     /*
+        //     'textarea.required'=>'textarea Wajib Diisi',
+        //     'textarea.varchar'=>'textarea Maksimal ... karakter',
+        //     'foto.min'=>'Ukuran file kurang 2 KB',
+        //     'foto.max'=>'Ukuran file melebihi 9000 KB',
+        //     'foto.image'=>'File foto bukan gambar',
+        //     'foto.mimes'=>'Extension file selain jpg,jpeg,png,gif,svg',
+        //     */
+        // ]
     );
        Buku::create($request->all());
-       return redirect()->route('backend.buku.index')->with('Berhasil','Berhasil Menambahkan Buku!');
+       return redirect('/buku');
        /*
        //------------apakah user  ingin upload foto------------
        /if(!empty($request->foto)){

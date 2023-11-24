@@ -44,10 +44,16 @@ Route::get('/buku', function () {
     return view('backend.');
 });
 
-Route::resource('/buku',BukuController::class);
-Route::resource('/kategori',KategoriController::class);
-Route::resource('/meminjam',MeminjamController::class);
-Route::resource('/penerbit',PenerbitController::class);
-Route::resource('/pengarangbuku',PengarangbukuController::class);
-Route::resource('/pengarang',PengarangController::class);
-Route::resource('/salinanbuku',SalinanbukuController::class);
+Route::resource('/buku', BukuController::class);
+Route::resource('/kategori', KategoriController::class);
+Route::resource('/meminjam', MeminjamController::class);
+Route::resource('/penerbit', PenerbitController::class);
+Route::resource('/pengarangbuku', PengarangbukuController::class);
+// Route::resource('/pengarang',PengarangController::class);
+Route::resource('/salinanbuku', SalinanbukuController::class);
+
+
+Route::get('/pengarang', [PengarangController::class, 'index']);
+Route::post('/pengarang', [PengarangController::class, 'store'])->name('simpandata');
+Route::put('/pengarang/{idpengarang}', [PengarangController::class, 'update'])->name('ubahdata');
+Route::delete('/pengarang/{idpengarang}', [PengarangController::class, 'destroy'])->name('hapusdata');

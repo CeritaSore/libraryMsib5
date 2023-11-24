@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Pengarang;
+use App\Http\Requests\StorePengarangRequest;
+use App\Http\Requests\UpdatePengarangRequest;
 
 class PengarangController extends Controller
 {
@@ -17,6 +16,8 @@ class PengarangController extends Controller
     public function index()
     {
         //
+        $listpengarang = Pengarang::all();
+        return view('backend.pengarang.index', compact('listpengarang'));
     }
 
     /**
@@ -32,21 +33,25 @@ class PengarangController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StorePengarangRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePengarangRequest $request)
     {
         //
+        Pengarang::create([
+            'namapengarang' => $request->input('nama')
+        ]);
+        return redirect('/pengarang');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Pengarang  $pengarang
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Pengarang $pengarang)
     {
         //
     }
@@ -54,10 +59,10 @@ class PengarangController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Pengarang  $pengarang
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Pengarang $pengarang)
     {
         //
     }
@@ -65,23 +70,33 @@ class PengarangController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\UpdatePengarangRequest  $request
+     * @param  \App\Models\Pengarang  $pengarang
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePengarangRequest $request, $idpengarang)
     {
         //
+        $request->validate([
+            'nama' => 'required|string|max:45',
+        ]);
+        $pengarang = Pengarang::find($idpengarang);
+        $pengarang->namapengarang = $request->nama;
+        $pengarang->save();
+        return redirect('/pengarang');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Pengarang  $pengarang
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idpengarang)
     {
         //
+        $pengarang = Pengarang::find($idpengarang);
+        $pengarang->delete();
+        return redirect('/pengarang');
     }
 }
