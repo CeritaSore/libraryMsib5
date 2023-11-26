@@ -14,7 +14,7 @@ berisi progres dari project yang sedang dilaksanakan.
 - implementasi admin
 - perangcangan database
 - migrasi database(full)
-- CRUD (pengarang)
+- CRUD (pengarang, penerbit, kategori)
 
 # Progres yang akan datang
 - membuat models
