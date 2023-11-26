@@ -19,8 +19,14 @@
                    <a class="nav-link" href="{{ url('/buku') }}">Tabel Buku</a>
                 </li>
                 <li class="nav-item">
-                   <a class="nav-link" href="{{ url('/pengarang') }}">pengarang</a>
+                   <a class="nav-link" href="{{ url('/kategori') }}">Kategori</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url('/pengarang') }}">Pengarang</a>
+               </li>
+               <li class="nav-item">
+                <a class="nav-link" href="{{ url('/penerbit') }}">Penerbit</a>
+             </li>
               </ul>
             </div>
           </li>

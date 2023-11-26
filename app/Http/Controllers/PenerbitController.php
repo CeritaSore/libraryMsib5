@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Penerbit;
+use App\Http\Requests\StorePenerbitRequest;
+use App\Http\Requests\UpdatePenerbitRequest;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Model;
 
 class PenerbitController extends Controller
 {
@@ -16,7 +16,8 @@ class PenerbitController extends Controller
      */
     public function index()
     {
-        //
+        $namapenerbit = Penerbit::orderBy('idpenerbit', 'desc')->get();
+        return view('backend.penerbit.index', compact('namapenerbit'));
     }
 
     /**
@@ -26,27 +27,31 @@ class PenerbitController extends Controller
      */
     public function create()
     {
-        //
+        //    
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StorePenerbitRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePenerbitRequest $request)
     {
         //
+         Penerbit::create([
+            'namapenerbit' => $request->input('nama')
+        ]);
+        return redirect('/penerbit');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Penerbit  $penerbit
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Penerbit $penerbit)
     {
         //
     }
@@ -54,34 +59,44 @@ class PenerbitController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Penerbit  $penerbit
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Penerbit $penerbit)
     {
         //
     }
 
-    /**
+     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\UpdatePenerbitRequest  $request
+     * @param  \App\Models\Penerbit  $penerbit
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePenerbitRequest $request, $idpenerbit)
     {
         //
+        $request->validate([
+            'nama' => 'required|string|max:45',
+        ]);
+        $penerbit = Penerbit::find($idpenerbit);
+        $penerbit->namapenerbit = $request->nama;
+        $penerbit->save();
+        return redirect('/penerbit');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Penerbit  $penerbit
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idpenerbit)
     {
         //
+        $penerbit = Penerbit::find($idpenerbit);
+        $penerbit->delete();
+        return redirect('/penerbit');
     }
 }

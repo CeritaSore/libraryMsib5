@@ -1,187 +1,207 @@
 @extends('backend.index')
+@php
+    $no = 1;
+@endphp
 @section('content')
-    @php
-        $ar_judul = ['No', 'Judul Buku', 'Kategori', 'Action'];
-        $no = 1;
-    @endphp
-    <main id="main" class="col-md-12">
-        <br>
+    <main id="main" class="col-md-12 mb-5">
         <h3>Daftar Buku</h3>
-        <a href="{{ route('buku.create') }}" class="btn btn-primary btn-sm" title="Tambah Data">
+        {{-- <button type="button" class="btn btn-primary btn-sm" title="Tambah Data" data-bs-toggle="modal"
+            data-bs-target="#exampleModal-1">
+            
+        </button> --}}
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <i class="bi bi-clipboard-plus"></i> Tambah
-        </a>
+        </button>
 
-        <br /><br />
-        <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
+    </main>
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Basic Sortable Table</h4>
+                <p class="card-description">Add class <code>.sortable-table</code></p>
+                <div class="row">
+                    <div class="table-sorter-wrapper col-lg-12 table-responsive">
+                        <table id="sortable-table-1" class="table">
                             <thead>
-                                @foreach ($ar_judul as $jdl)
-                                    <th>{{ $jdl }}</th>
-                                @endforeach
+                                <tr>
+                                    <th>#</th>
+                                    <th class="sortStyle descStyle">Judul Buku<i class="ti-angle-down"></i></th>
+                                    <th class="sortStyle descStyle">Kategori<i class="ti-angle-down"></i></th>
+                                    <th class="sortStyle descStyle">Action</th>
+
+                                </tr>
                             </thead>
                             <tbody>
-                                @foreach ($ar_buku as $b)
+                                @foreach ($judulbuku as $buku)
                                     <tr>
                                         <td>{{ $no++ }}</td>
-                                        <td>{{ $b->judulbuku }}</td>
-                                        <td>{{ $b->kategori_idkategori }}</td>
+                                        <td>{{ $buku->judulbuku }}</td>
+                                        <td>{{ $buku->kategori_idkategori }}</td>
                                         <td>
+                                            <button type="button" class="btn btn-primary bi bi-pencil btn-sm"
+                                                data-bs-toggle="modal" data-bs-target="#exampleModal1{{ $buku->idbuku }}">
 
-                                            {{-- <a class="btn btn-info btn-sm" href="#" title="Detail Buku">
-                                                <i class="  ti-pencil  "></i>
-                                            </a> --}}
-
-                                            {{-- <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal-2"></button> --}}
-                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal-2"><i class="  ti-pencil  "></i></button>
-
-                                            <button class="btn btn-warning btn-sm" href="#" title="Ubah Buku"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModal-2">
-                                                <i class=" ti-eye  "></i>
                                             </button>
-                                            <button type="submit" class="btn btn-danger btn-sm show-alert-delete-box"
-                                                title="Hapus Asset" data-bs-toggle="modal" data-bs-target="#exampleModal-2">
-                                                <i class=" ti-trash "></i>
-                                            </button>
+                                            <button type="button" class="btn btn-warning bi bi-eye btn-sm"
+                                                data-bs-toggle="modal" data-bs-target="#exampleModal2{{ $buku->idbuku }}">
 
+                                            </button>
+                                            <button type="button" class="btn btn-danger bi bi-trash btn-sm"
+                                                data-bs-toggle="modal" data-bs-target="#exampleModal3{{ $buku->idbuku }}">
+
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach
-
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    {{-- input --}}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Input Data</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="forms-sample" action="{{ route('simpandata0') }}" method="POST">
+                        @csrf
+                        <div class="form-floating">
+                            <input type="text" class="form-control mb-3" placeholder="Masukan nama"
+                                id="floatingTextarea2" name="nama" required />
+                            <label for="floatingTextarea2">Judul Buku </label>
+                        </div>
+                        <div class="form-floating">
+                            <select name="kategori_idkategori" class="form-select" id="floatingSelect"
+                                aria-label="Floating label select example">
+                                <option>-- Kategori Buku --</option>
+                                @foreach ($listkategori as $kategori)
+                                    <option value="{{ $kategori->idkategori }}"> {{ $kategori->listkategori }} </option>
+                                @endforeach
+                            </select>
+                            <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
+                        </div>
 
 
-        {{-- input --}}
-        <div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2"
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {{-- edit --}}
+    @foreach ($judulbuku as $buku)
+        <div class="modal fade" id="exampleModal1{{ $buku->idbuku }}" tabindex="-1" aria-labelledby="exampleModalLabel1"
             aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel-2">Modal title</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"></span>
-                        </button>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel1">Edit Data</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        {{-- isi disini --}}
-                        <form class="forms-sample" method="POST" action="{{ route('buku.store') }}"
-                            enctype="multipart/form-data">
+                        <form class="forms-sample" action="{{ route('ubahdata0', $buku->idbuku) }}" method="POST">
                             @csrf
-                            <div class="form-group">
-                                <label for="exampleInputName1">Judul Buku</label>
-                                <input type="text" name="judulbuku" class="form-control" id="exampleInputName1"
-                                    placeholder="Judul Buku">
+                            @method('PUT')
+                            <div class="form-floating">
+                                <input type="text" class="form-control mb-3" placeholder="Masukan nama"
+                                    id="floatingTextarea2" name="nama" value="{{ $buku->judulbuku }}" required />
+                                <label for="floatingTextarea2">Nama</label>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleSelectKategori">Kategori Buku</label>
-                                <select name="kategori_idkategori" class="form-control" id="exampleSelectKategori">
+                            <div class="form-floating">
+                                <select name="kategori_idkategori" class="form-select" id="floatingSelect"
+                                    aria-label="Floating label select example">
                                     <option>-- Kategori Buku --</option>
-                                    {{-- @foreach ($ar_kategori as $k)
-                                        <option value="{{ $k->idkategori }}"> {{ $k->listkategori }} </option>
-                                    @endforeach --}}
+                                    @foreach ($listkategori as $kategori)
+                                        <option value="{{ $kategori->idkategori }}"> {{ $kategori->listkategori }} </option>
+                                    @endforeach
                                 </select>
+                                <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
                             </div>
-                            <div class="form-group">
-                                <label>Upload Foto</label>
-                                <input type="file" name="img[]" class="file-upload-default">
-                                <div class="input-group col-xs-12">
-                                    <input type="text" class="form-control file-upload-info" disabled
-                                        placeholder="Upload Image">
-                                    <span class="input-group-append">
-                                        <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
-                                    </span>
-                                </div>
-                            </div>
+                            <br>
 
-                            <div class="form-group">
-                                <label for="exampleTextarea1">Tentang Buku</label>
-                                <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary mr-2">Simpan</button>
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
                         </form>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
-        {{-- edit --}}
-        <div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
+    @endforeach
+    @foreach ($judulbuku as $buku)
+        <div class="modal fade" id="exampleModal2{{ $buku->idbuku }}" tabindex="-1"
+            aria-labelledby="exampleModalLabel1" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel-2">Modal title</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"></span>
-                        </button>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel1">Edit Data</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        {{-- isi disini --}}
-                        <p>Modal body text goes here.</p>
+                        <div class="card" style="border-radius: 15px;">
+                            <div class="card-body text-center">
+                                <div class="mt-3 mb-4">
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
+                                        class="rounded-circle img-fluid" style="width: 100px;" />
+                                </div>
+                                <h4 class="mb-2">{{ $buku->judulbuku }}</h4>
+                                <p class="text-muted mb-4">@Programmer <span class="mx-2">|</span> <a
+                                        href="#!">mdbootstrap.com</a></p>
+                                <div class="mb-4 pb-2">
+                                    <button type="button" class="btn btn-outline-primary btn-floating">
+                                        <i class="fab fa-facebook-f fa-lg"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-primary btn-floating">
+                                        <i class="fab fa-twitter fa-lg"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-primary btn-floating">
+                                        <i class="fab fa-skype fa-lg"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success">Submit</button>
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                    </div>
+
                 </div>
             </div>
         </div>
-        {{-- view --}}
-        <div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
+    @endforeach
+    @foreach ($judulbuku as $buku)
+        <div class="modal fade" id="exampleModal3{{ $buku->idbuku }}" tabindex="-1"
+            aria-labelledby="exampleModalLabel1" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel-2">Modal title</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"></span>
-                        </button>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel1">Edit Data</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        {{-- isi disini --}}
-                        <p>Modal body text goes here.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success">Submit</button>
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{-- delete --}}
-        <div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel-2">Modal title</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"></span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        {{-- isi disini --}}
-                        <p>Modal body text goes here.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success">Submit</button>
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        <form class="forms-sample" action="{{ route('hapusdata0', $buku->idbuku) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <div class="form-floating">
+                                <input type="text" class="form-control mb-3" placeholder="Masukan nama"
+                                    id="floatingTextarea2" name="nama" value="{{ $buku->judulbuku }}" required />
+                                <label for="floatingTextarea2">Nama</label>
+                            </div>
 
 
-    </main>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    @endforeach
 @endsection

@@ -44,16 +44,36 @@ Route::get('/buku', function () {
     return view('backend.');
 });
 
-Route::resource('/buku', BukuController::class);
-Route::resource('/kategori', KategoriController::class);
+//Route::resource('/buku', BukuController::class);
+//Route::resource('/kategori', KategoriController::class);
 Route::resource('/meminjam', MeminjamController::class);
-Route::resource('/penerbit', PenerbitController::class);
+//Route::resource('/penerbit', PenerbitController::class);
 Route::resource('/pengarangbuku', PengarangbukuController::class);
 // Route::resource('/pengarang',PengarangController::class);
 Route::resource('/salinanbuku', SalinanbukuController::class);
 
+//-----------------table buku------------------
+Route::get('/buku', [BukuController::class, 'index']);
+Route::post('/buku', [BukuController::class, 'store'])->name('simpandata0');
+Route::put('/buku/{idbuku}', [BukuController::class, 'update'])->name('ubahdata0');
+Route::delete('/buku/{idbuku}', [BukuController::class, 'destroy'])->name('hapusdata0');
 
+//-----------------table kategori------------------
+Route::get('/kategori', [KategoriController::class, 'index']);
+Route::post('/kategori', [KategoriController::class, 'store'])->name('simpandata1');
+Route::put('/kategori/{idkategori}', [KategoriController::class, 'update'])->name('ubahdata1');
+Route::delete('/kategori/{idkategori}', [KategoriController::class, 'destroy'])->name('hapusdata1');
+
+
+//-----------------table pengarang------------------
 Route::get('/pengarang', [PengarangController::class, 'index']);
 Route::post('/pengarang', [PengarangController::class, 'store'])->name('simpandata');
 Route::put('/pengarang/{idpengarang}', [PengarangController::class, 'update'])->name('ubahdata');
 Route::delete('/pengarang/{idpengarang}', [PengarangController::class, 'destroy'])->name('hapusdata');
+
+
+//-----------------table penerbit------------------
+Route::get('/penerbit', [PenerbitController::class, 'index']);
+Route::post('/penerbit', [PenerbitController::class, 'store'])->name('simpandata2');
+Route::put('/penerbit/{idpenerbit}', [PenerbitController::class, 'update'])->name('ubahdata2');
+Route::delete('/penerbit/{idpenerbit}', [PenerbitController::class, 'destroy'])->name('hapusdata2');

@@ -2,17 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Buku;
-use App\Models\Pengarangbuku;
-use App\Models\Salinanbuku;
 use App\Models\Kategori;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\RedirectResponse; 
-use Illuminate\view\View;
-
-
+use App\Http\Requests\StoreBukuRequest;
+use App\Http\Requests\UpdateBukuRequest;
 
 
 class BukuController extends Controller
@@ -24,8 +17,12 @@ class BukuController extends Controller
      */
     public function index()
     {
-        $ar_buku = Buku::orderBy('idbuku', 'desc')->get();
-        return view('backend.buku.index', compact('ar_buku'));
+        $judulbuku = Buku::orderBy('idbuku', 'desc')->get();
+        $listkategori = Kategori::all();
+        return view('backend.buku.index', compact('judulbuku','listkategori'));
+        
+
+        
     }
 
     /**
@@ -35,8 +32,8 @@ class BukuController extends Controller
      */
     public function create()
     {
-        $ar_kategori = Kategori::all();
-        return view('backend.buku.create', compact('ar_kategori'));
+        //    
+
     }
 
     /**
@@ -45,14 +42,17 @@ class BukuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreBukuRequest $request)
     {
-        $validated = $request->validate([
-            'judulbuku' => 'required|max:45',
+
+
+/*
+      //  $validated = $request->validate([
+       //     'judulbuku' => 'required|max:45',
             // 'kategori_idkategori' => 'required|integer',
            //'textarea' => 'required|varchar',
            //'foto' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|min:2|max:5000'
-        ],
+       // ],
     
         // [
         //     'judulbuku.required'=>'Judul Buku Wajib Diisi',
@@ -67,12 +67,12 @@ class BukuController extends Controller
         //     'foto.max'=>'Ukuran file melebihi 9000 KB',
         //     'foto.image'=>'File foto bukan gambar',
         //     'foto.mimes'=>'Extension file selain jpg,jpeg,png,gif,svg',
-        //     */
+        //     
         // ]
-    );
-       Buku::create($request->all());
-       return redirect('/buku');
-       /*
+   // );
+       //Buku::create($request->all());
+      // return redirect('/buku');
+       
        //------------apakah user  ingin upload foto------------
        /if(!empty($request->foto)){
         $fileName = 'buku_'.date("Ymd_h-i-s").'.'.$request->foto->extension();
@@ -106,37 +106,38 @@ class BukuController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Buku  $buku
      * @return \Illuminate\Http\Response
      */
-    public function show(string $id)
+    public function show(Buku $buku)
     {
-        $asset = Buku::find($id);
-        return view('backend.buku.show', compact('asset'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Buku  $buku
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Buku $buku)
     {
-        $asset = Buku::find($id);
-        return view('backend.buku.edit', compact('asset'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\UpdateBukuRequest  $request
+     * @param  \App\Models\Buku  $buku
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBukuRequest $request, $buku )
     {
-        // Validasi form input jika diperlukan
+
+   
+
+        /* Validasi form input jika diperlukan
         $request->validate([
             'judulbuku' => 'required',
             'kategori_id' => 'required',
@@ -149,19 +150,20 @@ class BukuController extends Controller
         Buku::find($id)->update($request->all());
 
         return redirect()->route('buku.index')->with('success', 'Data berhasil diupdate.');
+        */
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Buku  $buku
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idbuku)
     {
-         // Hapus data dari database
-         Buku::find($id)->delete();
-
-         return redirect()->route('buku.index')->with('success', 'Data berhasil dihapus.');
+        //
+        $buku = Buku::find($idbuku);
+        $buku->delete();
+        return redirect('/buku');
     }
 }

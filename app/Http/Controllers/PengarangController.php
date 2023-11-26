@@ -16,7 +16,7 @@ class PengarangController extends Controller
     public function index()
     {
         //
-        $listpengarang = Pengarang::all();
+        $listpengarang = Pengarang::orderBy('idpengarang', 'desc')->get();
         return view('backend.pengarang.index', compact('listpengarang'));
     }
 
