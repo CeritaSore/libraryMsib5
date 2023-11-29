@@ -24,10 +24,6 @@ Route::get('/', function () {
     return view('frontend.home');
 });
 
-Route::get('/home', function () {
-    return view('frontend.home');
-});
-
 Route::get('/bukunya', function () {
     return view('frontend.bukunya');
 });

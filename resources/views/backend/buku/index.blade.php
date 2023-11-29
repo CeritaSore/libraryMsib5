@@ -1,6 +1,7 @@
 @extends('backend.index')
 @php
     $no = 1;
+
 @endphp
 @section('content')
     <main id="main" class="col-md-12 mb-5">
@@ -36,7 +37,7 @@
                                     <tr>
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $buku->judulbuku }}</td>
-                                        <td>{{ $buku->kategori_idkategori }}</td>
+                                        <td>{{ $buku->kategori->listkategori }}</td>
                                         <td>
                                             <button type="button" class="btn btn-primary bi bi-pencil btn-sm"
                                                 data-bs-toggle="modal" data-bs-target="#exampleModal1{{ $buku->idbuku }}">
@@ -77,7 +78,27 @@
                             <label for="floatingTextarea2">Judul Buku </label>
                         </div>
                         <div class="form-floating">
-                            <select name="kategori_idkategori" class="form-select" id="floatingSelect"
+                            <select name="pengarang" class="form-select" id="floatingSelect"
+                                aria-label="Floating label select example">
+                                <option>-- pengarang Buku --</option>
+                                @foreach ($listpengarang as $pengarang)
+                                    <option value="{{ $pengarang->idpengarang }}"> {{ $pengarang->namapengarang }} </option>
+                                @endforeach
+                            </select>
+                            <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
+                        </div>
+                        <div class="form-floating">
+                            <select name="penerbit" class="form-select" id="floatingSelect"
+                                aria-label="Floating label select example">
+                                <option>-- penerbit Buku --</option>
+                                @foreach ($listpenerbit as $penerbit)
+                                    <option value="{{ $penerbit->idpenerbit }}"> {{ $penerbit->namapenerbit }} </option>
+                                @endforeach
+                            </select>
+                            <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
+                        </div>
+                        <div class="form-floating">
+                            <select name="kategori" class="form-select" id="floatingSelect"
                                 aria-label="Floating label select example">
                                 <option>-- Kategori Buku --</option>
                                 @foreach ($listkategori as $kategori)
@@ -116,11 +137,46 @@
                                 <label for="floatingTextarea2">Nama</label>
                             </div>
                             <div class="form-floating">
-                                <select name="kategori_idkategori" class="form-select" id="floatingSelect"
+                                <select name="pengarang" class="form-select" id="floatingSelect"
+                                    aria-label="Floating label select example">
+                                    <option>-- pengarang Buku --</option>
+                                    @foreach ($listpengarang as $pengarang)
+                                        @php
+                                            $select1 = $pengarang->idpengarang === $buku->pengarang_idpengarang ? 'selected' : '';
+                                        @endphp
+                                        <option value="{{ $pengarang->idpengarang }}" {{ $select1 }}>
+                                            {{ $pengarang->namapengarang }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
+                            </div>
+                            <div class="form-floating">
+                                <select name="penerbit" class="form-select" id="floatingSelect"
+                                    aria-label="Floating label select example">
+                                    <option>-- penerbit Buku --</option>
+                                    @foreach ($listpenerbit as $penerbit)
+                                        @php
+                                            $select2 = $penerbit->idpenerbit === $buku->penerbit_idpenerbit ? 'selected' : '';
+                                        @endphp
+                                        <option value="{{ $penerbit->idpenerbit }}" {{ $select2 }}>
+                                            {{ $penerbit->namapenerbit }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
+                            </div>
+                            <div class="form-floating">
+                                <select name="kategori" class="form-select" id="floatingSelect"
                                     aria-label="Floating label select example">
                                     <option>-- Kategori Buku --</option>
                                     @foreach ($listkategori as $kategori)
-                                        <option value="{{ $kategori->idkategori }}"> {{ $kategori->listkategori }} </option>
+                                        @php
+                                            $select3 = $kategori->idkategori === $buku->kategori_idkategori ? 'selected' : '';
+                                        @endphp
+                                        <option value="{{ $kategori->idkategori }}" {{ $select3 }}>
+                                            {{ $kategori->listkategori }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
