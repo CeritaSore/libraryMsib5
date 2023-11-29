@@ -13,7 +13,7 @@ berisi progres dari project yang sedang dilaksanakan.
 - membuat repo
 - implementasi admin
 - perangcangan database
-- migrasi database(full)
+- migrasi database(Revisi full)
 - CRUD (pengarang, penerbit, kategori)
 
 # Progres yang akan datang

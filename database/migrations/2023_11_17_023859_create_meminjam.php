@@ -17,9 +17,9 @@ return new class extends Migration
             $table->bigIncrements('idpeminjaman');
             $table->date('tanggal_pengambilan');
             $table->date('tanggal_pengembalian');
-            $table->unsignedBigInteger('salinanbuku_id');
+            $table->unsignedBigInteger('buku_id');
             $table->timestamps();
-            $table->foreign('salinanbuku_id')->references('idsalinanbuku')->on('salinanbuku')->onDelete('cascade');
+            $table->foreign('buku_id')->references('idbuku')->on('buku')->onDelete('cascade');
         });
     }
 

@@ -13,8 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pengarangs', function (Blueprint $table) {
-            $table->id();
+        Schema::create('team', function (Blueprint $table) {
+            $table->bigIncrements('idteam');
+            $table->string('nama',45);
+            $table->string('asal',45);
+            $table->string('role',45);
+            $table->string('foto',45);
+
             $table->timestamps();
         });
     }
