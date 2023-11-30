@@ -15,9 +15,11 @@ berisi progres dari project yang sedang dilaksanakan.
 - perangcangan database
 - migrasi database(Revisi full)
 - CRUD (pengarang, penerbit, kategori)
+- Membuat Auth (perlu di rapihin)
 
 # Progres yang akan datang
 - membuat models
 - membuat controller untuk memanggil menu
 - menambah kelas active di navbar
+- Buat kelola akun untuk admin
 
