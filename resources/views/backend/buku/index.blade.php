@@ -10,9 +10,11 @@
             data-bs-target="#exampleModal-1">
             
         </button> --}}
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <i class="bi bi-clipboard-plus"></i> Tambah
-        </button>
+        @if (Auth::user()->role != 'anggota')
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="bi bi-clipboard-plus"></i> Tambah
+            </button>
+        @endif
 
     </main>
     <div class="col-12 grid-margin">
@@ -39,17 +41,21 @@
                                         <td>{{ $buku->judulbuku }}</td>
                                         <td>{{ $buku->kategori->listkategori }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-primary bi bi-pencil btn-sm"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModal1{{ $buku->idbuku }}">
-
+                                            @if (Auth::user()->role != 'anggota')
+                                                <button type="button" class="btn btn-primary bi bi-pencil btn-sm"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal1{{ $buku->idbuku }}">
+                                            @endif
                                             </button>
                                             <button type="button" class="btn btn-warning bi bi-eye btn-sm"
                                                 data-bs-toggle="modal" data-bs-target="#exampleModal2{{ $buku->idbuku }}">
 
                                             </button>
-                                            <button type="button" class="btn btn-danger bi bi-trash btn-sm"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModal3{{ $buku->idbuku }}">
-
+                                            @if (Auth::user()->role != 'anggota')
+                                                <button type="button" class="btn btn-danger bi bi-trash btn-sm"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal3{{ $buku->idbuku }}">
+                                            @endif
                                             </button>
                                         </td>
                                     </tr>
@@ -61,91 +67,29 @@
             </div>
         </div>
     </div>
-    {{-- input --}}
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Input Data</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="forms-sample" action="{{ route('simpandata0') }}" method="POST">
-                        @csrf
-                        <div class="form-floating">
-                            <input type="text" class="form-control mb-3" placeholder="Masukan nama"
-                                id="floatingTextarea2" name="nama" required />
-                            <label for="floatingTextarea2">Judul Buku </label>
-                        </div>
-                        <div class="form-floating">
-                            <select name="pengarang" class="form-select" id="floatingSelect"
-                                aria-label="Floating label select example">
-                                <option>-- pengarang Buku --</option>
-                                @foreach ($listpengarang as $pengarang)
-                                    <option value="{{ $pengarang->idpengarang }}"> {{ $pengarang->namapengarang }} </option>
-                                @endforeach
-                            </select>
-                            <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
-                        </div>
-                        <div class="form-floating">
-                            <select name="penerbit" class="form-select" id="floatingSelect"
-                                aria-label="Floating label select example">
-                                <option>-- penerbit Buku --</option>
-                                @foreach ($listpenerbit as $penerbit)
-                                    <option value="{{ $penerbit->idpenerbit }}"> {{ $penerbit->namapenerbit }} </option>
-                                @endforeach
-                            </select>
-                            <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
-                        </div>
-                        <div class="form-floating">
-                            <select name="kategori" class="form-select" id="floatingSelect"
-                                aria-label="Floating label select example">
-                                <option>-- Kategori Buku --</option>
-                                @foreach ($listkategori as $kategori)
-                                    <option value="{{ $kategori->idkategori }}"> {{ $kategori->listkategori }} </option>
-                                @endforeach
-                            </select>
-                            <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
-                        </div>
-
-
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    {{-- edit --}}
-    @foreach ($judulbuku as $buku)
-        <div class="modal fade" id="exampleModal1{{ $buku->idbuku }}" tabindex="-1" aria-labelledby="exampleModalLabel1"
-            aria-hidden="true">
+    @if (Auth::user()->role != 'anggota')
+        {{-- input --}}
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel1">Edit Data</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Input Data</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="forms-sample" action="{{ route('ubahdata0', $buku->idbuku) }}" method="POST">
+                        <form class="forms-sample" action="{{ route('simpandata0') }}" method="POST">
                             @csrf
-                            @method('PUT')
                             <div class="form-floating">
                                 <input type="text" class="form-control mb-3" placeholder="Masukan nama"
-                                    id="floatingTextarea2" name="nama" value="{{ $buku->judulbuku }}" required />
-                                <label for="floatingTextarea2">Nama</label>
+                                    id="floatingTextarea2" name="nama" required />
+                                <label for="floatingTextarea2">Judul Buku </label>
                             </div>
                             <div class="form-floating">
                                 <select name="pengarang" class="form-select" id="floatingSelect"
                                     aria-label="Floating label select example">
                                     <option>-- pengarang Buku --</option>
                                     @foreach ($listpengarang as $pengarang)
-                                        @php
-                                            $select1 = $pengarang->idpengarang === $buku->pengarang_idpengarang ? 'selected' : '';
-                                        @endphp
-                                        <option value="{{ $pengarang->idpengarang }}" {{ $select1 }}>
-                                            {{ $pengarang->namapengarang }}
+                                        <option value="{{ $pengarang->idpengarang }}"> {{ $pengarang->namapengarang }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -156,11 +100,7 @@
                                     aria-label="Floating label select example">
                                     <option>-- penerbit Buku --</option>
                                     @foreach ($listpenerbit as $penerbit)
-                                        @php
-                                            $select2 = $penerbit->idpenerbit === $buku->penerbit_idpenerbit ? 'selected' : '';
-                                        @endphp
-                                        <option value="{{ $penerbit->idpenerbit }}" {{ $select2 }}>
-                                            {{ $penerbit->namapenerbit }}
+                                        <option value="{{ $penerbit->idpenerbit }}"> {{ $penerbit->namapenerbit }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -171,17 +111,13 @@
                                     aria-label="Floating label select example">
                                     <option>-- Kategori Buku --</option>
                                     @foreach ($listkategori as $kategori)
-                                        @php
-                                            $select3 = $kategori->idkategori === $buku->kategori_idkategori ? 'selected' : '';
-                                        @endphp
-                                        <option value="{{ $kategori->idkategori }}" {{ $select3 }}>
-                                            {{ $kategori->listkategori }}
+                                        <option value="{{ $kategori->idkategori }}"> {{ $kategori->listkategori }}
                                         </option>
                                     @endforeach
                                 </select>
                                 <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
                             </div>
-                            <br>
+
 
                             <button type="submit" class="btn btn-primary">Save changes</button>
                             <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
@@ -191,7 +127,82 @@
                 </div>
             </div>
         </div>
-    @endforeach
+        {{-- edit --}}
+        @foreach ($judulbuku as $buku)
+            <div class="modal fade" id="exampleModal1{{ $buku->idbuku }}" tabindex="-1"
+                aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel1">Edit Data</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="forms-sample" action="{{ route('ubahdata0', $buku->idbuku) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <div class="form-floating">
+                                    <input type="text" class="form-control mb-3" placeholder="Masukan nama"
+                                        id="floatingTextarea2" name="nama" value="{{ $buku->judulbuku }}" required />
+                                    <label for="floatingTextarea2">Nama</label>
+                                </div>
+                                <div class="form-floating">
+                                    <select name="pengarang" class="form-select" id="floatingSelect"
+                                        aria-label="Floating label select example">
+                                        <option>-- pengarang Buku --</option>
+                                        @foreach ($listpengarang as $pengarang)
+                                            @php
+                                                $select1 = $pengarang->idpengarang === $buku->pengarang_idpengarang ? 'selected' : '';
+                                            @endphp
+                                            <option value="{{ $pengarang->idpengarang }}" {{ $select1 }}>
+                                                {{ $pengarang->namapengarang }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
+                                </div>
+                                <div class="form-floating">
+                                    <select name="penerbit" class="form-select" id="floatingSelect"
+                                        aria-label="Floating label select example">
+                                        <option>-- penerbit Buku --</option>
+                                        @foreach ($listpenerbit as $penerbit)
+                                            @php
+                                                $select2 = $penerbit->idpenerbit === $buku->penerbit_idpenerbit ? 'selected' : '';
+                                            @endphp
+                                            <option value="{{ $penerbit->idpenerbit }}" {{ $select2 }}>
+                                                {{ $penerbit->namapenerbit }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
+                                </div>
+                                <div class="form-floating">
+                                    <select name="kategori" class="form-select" id="floatingSelect"
+                                        aria-label="Floating label select example">
+                                        <option>-- Kategori Buku --</option>
+                                        @foreach ($listkategori as $kategori)
+                                            @php
+                                                $select3 = $kategori->idkategori === $buku->kategori_idkategori ? 'selected' : '';
+                                            @endphp
+                                            <option value="{{ $kategori->idkategori }}" {{ $select3 }}>
+                                                {{ $kategori->listkategori }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
+                                </div>
+                                <br>
+
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @endif
     @foreach ($judulbuku as $buku)
         <div class="modal fade" id="exampleModal2{{ $buku->idbuku }}" tabindex="-1"
             aria-labelledby="exampleModalLabel1" aria-hidden="true">
@@ -231,33 +242,36 @@
             </div>
         </div>
     @endforeach
-    @foreach ($judulbuku as $buku)
-        <div class="modal fade" id="exampleModal3{{ $buku->idbuku }}" tabindex="-1"
-            aria-labelledby="exampleModalLabel1" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel1">Edit Data</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    @if (Auth::user()->role != 'anggota')
+        @foreach ($judulbuku as $buku)
+            <div class="modal fade" id="exampleModal3{{ $buku->idbuku }}" tabindex="-1"
+                aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel1">Edit Data</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="forms-sample" action="{{ route('hapusdata0', $buku->idbuku) }}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <div class="form-floating">
+                                    <input type="text" class="form-control mb-3" placeholder="Masukan nama"
+                                        id="floatingTextarea2" name="nama" value="{{ $buku->judulbuku }}" required />
+                                    <label for="floatingTextarea2">Nama</label>
+                                </div>
+
+
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+                            </form>
+                        </div>
+
                     </div>
-                    <div class="modal-body">
-                        <form class="forms-sample" action="{{ route('hapusdata0', $buku->idbuku) }}" method="POST">
-                            @csrf
-                            @method('delete')
-                            <div class="form-floating">
-                                <input type="text" class="form-control mb-3" placeholder="Masukan nama"
-                                    id="floatingTextarea2" name="nama" value="{{ $buku->judulbuku }}" required />
-                                <label for="floatingTextarea2">Nama</label>
-                            </div>
-
-
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
-                        </form>
-                    </div>
-
                 </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
+    @endif
 @endsection

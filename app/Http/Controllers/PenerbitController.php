@@ -39,10 +39,16 @@ class PenerbitController extends Controller
     public function store(StorePenerbitRequest $request)
     {
         //
+        try{
          Penerbit::create([
             'namapenerbit' => $request->input('nama')
         ]);
-        return redirect('/penerbit');
+        return redirect('/penerbit')->with('Success','Data Penerbit baru berhasil ditambahkan');
+        }
+        catch(\Exception $e){
+            return redirect('/penerbit')->with('Error','Terjadi kesalahan saat input data');
+        }
+    
     }
 
     /**
