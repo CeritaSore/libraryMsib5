@@ -9,8 +9,8 @@
                     <button class="prev slick-arrow">
                         <i class="icon icon-arrow-left"></i>
                     </button>
-                    @foreach ($listbuku as $buku)
-                        <div class="main-slider pattern-overlay">
+                    <div class="main-slider pattern-overlay">
+                            @foreach ($listbuku as $buku)
                             <div class="slider-item">
                                 <div class="banner-content">
                                     <h2 class="banner-title">{{$buku->judulbuku}}</h2>
@@ -27,8 +27,8 @@
 
                             <!--slider-item-->
 
+                            @endforeach
                         </div>
-                    @endforeach
                     <!--slider-->
 
                     <button class="next slick-arrow">
