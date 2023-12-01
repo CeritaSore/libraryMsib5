@@ -60,7 +60,7 @@
                         </li>
                         <li><a class="dropdown-item" href="{{ url('/profile') }}"><i class="bi bi-person"> Profile</i></a></li>
                         @if (Auth::user()->role == 'administrator')
-                            <li><a class="dropdown-item" href="{{ url('/users') }}">
+                            <li><a class="dropdown-item" href="{{ url('/user') }}">
                                 <i class="bi bi-gear"> Kelola Akun</i></a></li>
                         @endif
                         <li class="dropdown-divider">

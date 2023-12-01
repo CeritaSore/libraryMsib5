@@ -74,11 +74,9 @@ Route::post('/penerbit', [PenerbitController::class, 'store'])->name('simpandata
 Route::put('/penerbit/{idpenerbit}', [PenerbitController::class, 'update'])->name('ubahdata2')->middleware('auth');
 Route::delete('/penerbit/{idpenerbit}', [PenerbitController::class, 'destroy'])->name('hapusdata2')->middleware('auth');
 
-//-----------------table kelola akun------------------
-Route::get('/users', [PenerbitController::class, 'index'])->middleware('auth');
-Route::post('/users', [PenerbitController::class, 'store'])->name('simpandata2')->middleware('auth');
-Route::put('/users/{idusers}', [PenerbitController::class, 'update'])->name('ubahdata2')->middleware('auth');
-Route::delete('/users/{idusers}', [PenerbitController::class, 'destroy'])->name('hapusdata2')->middleware('auth');
+
+
+
 
 Auth::routes();
 
@@ -89,7 +87,7 @@ Route::get('/afterregister', function () {
 });
 
 Route::get('/users', function () {
-    return view('backend.users');
+    return view('backend.user.index');
 });
 
 Route::get('/profile', function () {
