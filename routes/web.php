@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\FrontendbukuController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MeminjamController;
 use App\Http\Controllers\PenerbitController;
@@ -20,17 +21,13 @@ use App\Http\Controllers\SalinanbukuController;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.home');
-});
+Route::get('/', [FrontendbukuController::class,'indexhome']);
 
 Route::get('/bukunya', function () {
     return view('frontend.bukunya');
 });
 
-Route::get('/populer', function () {
-    return view('frontend.populer');
-});
+Route::get('/populer', [FrontendbukuController::class,'indexpopuler']);
 //---------------------backend----------------------
 Route::get('/dashboard', function () {
     return view('backend.dashboard');

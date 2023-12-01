@@ -23,6 +23,7 @@ class BukuController extends Controller
         $listpenerbit = Penerbit::all();
         $listkategori = Kategori::all();
         return view('backend.buku.index', compact('judulbuku', 'listkategori', 'listpenerbit', 'listpengarang'));
+        return view('frontend.home',compact('judulbuku'));
     }
 
     /**
@@ -44,11 +45,21 @@ class BukuController extends Controller
      */
     public function store(StoreBukuRequest $request)
     {
+
+
+        // $request->validate([
+        //     'judulbuku' => 'require|string|45',
+        //     'pengarang_idpengarang' => 'required|max:20',
+        //     'penerbit_idpenerbit' => 'required|max:20',
+        //     'kategori_idkategori' => 'required|max:20',
+        //     'foto' => 'image|file|max:2048'
+        // ]);
+
         $data = $request->all();
-        // dd($data);
         Buku::create([
-            'judulbuku' => $data['nama'], 'pengarang_idpengarang' => $data['pengarang'], 'penerbit_idpenerbit' => $data['penerbit'], 'kategori_idkategori' => $data['kategori'],
+            'judulbuku' => $data['nama'], 'pengarang_idpengarang' => $data['pengarang'], 'penerbit_idpenerbit' => $data['penerbit'], 'kategori_idkategori' => $data['kategori'], 'foto' => $data['foto']->store('publicImage'),
         ]);
+
         return redirect('/buku');
     }
 

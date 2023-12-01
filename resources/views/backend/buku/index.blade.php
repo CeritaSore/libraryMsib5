@@ -77,7 +77,9 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="forms-sample" action="{{ route('simpandata0') }}" method="POST">
+                        <form class="forms-sample" action="{{ route('simpandata0') }}" method="POST"
+                            enctype="multipart/form-data">
+
                             @csrf
                             <div class="form-floating">
                                 <input type="text" class="form-control mb-3" placeholder="Masukan nama"
@@ -85,7 +87,7 @@
                                 <label for="floatingTextarea2">Judul Buku </label>
                             </div>
                             <div class="form-floating">
-                                <select name="pengarang" class="form-select" id="floatingSelect"
+                                <select name="pengarang" class="form-select mb-3" id="floatingSelect"
                                     aria-label="Floating label select example">
                                     <option>-- pengarang Buku --</option>
                                     @foreach ($listpengarang as $pengarang)
@@ -96,7 +98,7 @@
                                 <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
                             </div>
                             <div class="form-floating">
-                                <select name="penerbit" class="form-select" id="floatingSelect"
+                                <select name="penerbit" class="form-select mb-3" id="floatingSelect"
                                     aria-label="Floating label select example">
                                     <option>-- penerbit Buku --</option>
                                     @foreach ($listpenerbit as $penerbit)
@@ -107,7 +109,7 @@
                                 <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
                             </div>
                             <div class="form-floating">
-                                <select name="kategori" class="form-select" id="floatingSelect"
+                                <select name="kategori" class="form-select mb-3" id="floatingSelect"
                                     aria-label="Floating label select example">
                                     <option>-- Kategori Buku --</option>
                                     @foreach ($listkategori as $kategori)
@@ -117,6 +119,13 @@
                                 </select>
                                 <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
                             </div>
+                            <div class="form-floating">
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Upload Cover Buku</label>
+                                    <input class="form-control" type="file" id="formFile" name="foto">
+                                </div>
+                            </div>
+
 
 
                             <button type="submit" class="btn btn-primary">Save changes</button>
@@ -135,7 +144,8 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel1">Edit Data</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form class="forms-sample" action="{{ route('ubahdata0', $buku->idbuku) }}" method="POST">
@@ -213,24 +223,26 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                       
+
                         <div class="card" style="border-radius: 15px;">
                             <div class="card-body text-center">
-                                <div class="mt-3 mb-4">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
-                                        class="rounded-circle img-fluid" style="width: 100px;" />
+                                <div class=" mb-4">
+                                    <img src="storage/{{$buku->foto}}"
+                                        class="" style="height: 14rem" />
                                 </div>
                                 <h4 class="mb-2">{{ $buku->judulbuku }}</h4>
-                                <p class="text-muted mb-4">@Programmer <span class="mx-2">|</span> <a
-                                        href="#!">mdbootstrap.com</a></p>
+                                <p class="text-muted mb-4">{{$buku->pengarang->namapengarang}} <span class="mx-2">|</span> <a
+                                        href="#!">{{$buku->penerbit->namapenerbit}}</a></p>
                                 <div class="mb-4 pb-2">
                                     <button type="button" class="btn btn-outline-primary btn-floating">
-                                        <i class="fab fa-facebook-f fa-lg"></i>
+                                        <i class=" ti-facebook "></i>
                                     </button>
                                     <button type="button" class="btn btn-outline-primary btn-floating">
-                                        <i class="fab fa-twitter fa-lg"></i>
+                                        <i class=" ti-twitter "></i>
                                     </button>
                                     <button type="button" class="btn btn-outline-primary btn-floating">
-                                        <i class="fab fa-skype fa-lg"></i>
+                                        <i class=" ti-skype "></i>
                                     </button>
                                 </div>
 

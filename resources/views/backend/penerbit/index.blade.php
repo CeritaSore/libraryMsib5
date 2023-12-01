@@ -129,34 +129,12 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel1">Edit Data</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel1">View</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <div class="card" style="border-radius: 15px;">
-                                <div class="card-body text-center">
-                                    <div class="mt-3 mb-4">
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
-                                            class="rounded-circle img-fluid" style="width: 100px;" />
-                                    </div>
-                                    <h4 class="mb-2">{{ $penerbit->namapenerbit }}</h4>
-                                    <p class="text-muted mb-4">@Programmer <span class="mx-2">|</span> <a
-                                            href="#!">mdbootstrap.com</a></p>
-                                    <div class="mb-4 pb-2">
-                                        <button type="button" class="btn btn-outline-primary btn-floating">
-                                            <i class="fab fa-facebook-f fa-lg"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-outline-primary btn-floating">
-                                            <i class="fab fa-twitter fa-lg"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-outline-primary btn-floating">
-                                            <i class="fab fa-skype fa-lg"></i>
-                                        </button>
-                                    </div>
-
-                                </div>
-                            </div>
+                            <p class="h3">Penerbit : {{$penerbit->namapenerbit}}</p>
                         </div>
 
                     </div>
@@ -169,7 +147,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel1">Edit Data</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel1">delete Data</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>

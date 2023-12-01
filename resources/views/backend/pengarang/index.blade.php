@@ -126,12 +126,13 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel1">Edit Data</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel1">View</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <div class="card" style="border-radius: 15px;">
+                            <p class="h3">Pengarang : {{$pengarang->namapengarang}}</p>
+                            {{-- <div class="card" style="border-radius: 15px;">
                                 <div class="card-body text-center">
                                     <div class="mt-3 mb-4">
                                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
@@ -153,7 +154,7 @@
                                     </div>
 
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
 
                     </div>
