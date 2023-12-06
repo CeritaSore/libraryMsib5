@@ -17,6 +17,22 @@
         @endif
 
     </main>
+    @foreach ($judulbuku as $buku)
+        <div class="col-4 mb-3">
+            <div class="card bg-primary" style="width: 18rem;">
+                <div style="max-height: 15rem; overflow:hidden;">
+                    <img src="storage/{{ $buku->foto }}" class="card-img-top  rounded-top-4 " alt="...">
+                </div>
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <h5 class="card-title text-center text-light">{{ $buku->judulbuku }}</h5>
+                    <p class="card-text text-center text-light">{{ $buku->pengarang->namapengarang }}</p>
+                    <button type="button" class="btn btn-light fw-bold" data-bs-toggle="modal"
+                        data-bs-target="#exampleModalDetail{{ $buku->idbuku }}">Lihat</button>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
     <div class="col-12 grid-margin">
         <div class="card">
             <div class="card-body">
@@ -125,6 +141,13 @@
                                     <input class="form-control" type="file" id="formFile" name="foto">
                                 </div>
                             </div>
+                            <div class="form-floating">
+
+                                <textarea class="form-control mb-3" placeholder="Masukan Deskripsi(opsional)" id="floatingTextarea"
+                                    name="deskripsi"></textarea>
+                                <label for="floatingTextarea">Deskripsi</label>
+
+                            </div>
 
 
 
@@ -148,7 +171,8 @@
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form class="forms-sample" action="{{ route('ubahdata0', $buku->idbuku) }}" method="POST">
+                            <form class="forms-sample" action="{{ route('ubahdata0', $buku->idbuku) }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-floating">
@@ -157,7 +181,7 @@
                                     <label for="floatingTextarea2">Nama</label>
                                 </div>
                                 <div class="form-floating">
-                                    <select name="pengarang" class="form-select" id="floatingSelect"
+                                    <select name="pengarang" class="form-select mb-3" id="floatingSelect"
                                         aria-label="Floating label select example">
                                         <option>-- pengarang Buku --</option>
                                         @foreach ($listpengarang as $pengarang)
@@ -172,7 +196,7 @@
                                     <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
                                 </div>
                                 <div class="form-floating">
-                                    <select name="penerbit" class="form-select" id="floatingSelect"
+                                    <select name="penerbit" class="form-select mb-3" id="floatingSelect"
                                         aria-label="Floating label select example">
                                         <option>-- penerbit Buku --</option>
                                         @foreach ($listpenerbit as $penerbit)
@@ -187,7 +211,7 @@
                                     <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
                                 </div>
                                 <div class="form-floating">
-                                    <select name="kategori" class="form-select" id="floatingSelect"
+                                    <select name="kategori" class="form-select mb-3" id="floatingSelect"
                                         aria-label="Floating label select example">
                                         <option>-- Kategori Buku --</option>
                                         @foreach ($listkategori as $kategori)
@@ -201,7 +225,12 @@
                                     </select>
                                     <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
                                 </div>
-                                <br>
+                                <div class="form-floating">
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label">Upload Cover Buku</label>
+                                        <input class="form-control" type="file" id="formFile" name="foto">
+                                    </div>
+                                </div>
 
                                 <button type="submit" class="btn btn-primary">Save changes</button>
                                 <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
@@ -223,17 +252,17 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                       
+
 
                         <div class="card" style="border-radius: 15px;">
                             <div class="card-body text-center">
                                 <div class=" mb-4">
-                                    <img src="storage/{{$buku->foto}}"
-                                        class="" style="height: 14rem" />
+                                    <img src="storage/{{ $buku->foto }}" class="" style="height: 14rem" />
                                 </div>
                                 <h4 class="mb-2">{{ $buku->judulbuku }}</h4>
-                                <p class="text-muted mb-4">{{$buku->pengarang->namapengarang}} <span class="mx-2">|</span> <a
-                                        href="#!">{{$buku->penerbit->namapenerbit}}</a></p>
+                                <p class="text-muted mb-4">{{ $buku->pengarang->namapengarang }} <span
+                                        class="mx-2">|</span> <a href="#!">{{ $buku->penerbit->namapenerbit }}</a>
+                                </p>
                                 <div class="mb-4 pb-2">
                                     <button type="button" class="btn btn-outline-primary btn-floating">
                                         <i class=" ti-facebook "></i>
@@ -287,3 +316,45 @@
         @endforeach
     @endif
 @endsection
+@foreach ($judulbuku as $buku)
+    <div class="modal fade" id="exampleModalDetail{{ $buku->idbuku }}" tabindex="-1"
+        aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel1">Detail</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body text-center">
+                            <div class=" mb-4">
+                                <img src="storage/{{ $buku->foto }}" class="" style="height: 14rem" />
+                            </div>
+                            <h4 class="mb-2">{{ $buku->judulbuku }}</h4>
+                            <p class="text-muted mb-4">{{ $buku->pengarang->namapengarang }} <span
+                                    class="mx-2">|</span> <a href="#!">{{ $buku->penerbit->namapenerbit }}</a>
+                            </p>
+                            <p class="text-center">Deskripsi : {{ $buku->deskripsi }}</p>
+                            <p class="text-center">Status saat ini : {{ $buku->status }}</p>
+                            <div class="mb-4 pb-2">
+                                <a href="/pinjam" class="btn btn-outline-success btn-floating">
+                                    <i class=" ti-ticket "></i>
+                                </a>
+                                <button type="button" class="btn btn-outline-warning btn-floating"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal1{{ $buku->idbuku }}">
+                                    <i class=" ti-pencil "></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-danger btn-floating">
+                                    <i class=" ti-trash "></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+@endforeach

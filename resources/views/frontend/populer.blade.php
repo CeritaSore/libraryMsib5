@@ -29,8 +29,9 @@
                                         <div class="product-item">
                                             <figure class="product-style">
                                                 <img src="storage/{{ $buku->foto }}" alt="Books" class="product-item">
-                                                <button type="button" class="add-to-cart"
-                                                    data-product-tile="add-to-cart">pinjam</button>
+                                                <button class="add-to-cart" data-product-tile="add-to-cart">
+                                                    <a href="/pinjam" class="hover">pinjam</a>
+                                                </button>
                                             </figure>
                                             <figcaption>
                                                 <h3>{{ $buku->judulbuku }}</h3>
@@ -348,3 +349,8 @@
         </div>
     </section>
 @endsection
+<style>
+    .hover:hover {
+        color: white;
+    }
+</style>

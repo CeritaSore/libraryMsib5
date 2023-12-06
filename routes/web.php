@@ -4,11 +4,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\FrontendbukuController;
 use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\MeminjamController;
+
 use App\Http\Controllers\PenerbitController;
-use App\Http\Controllers\PengarangbukuController;
+
 use App\Http\Controllers\PengarangController;
-use App\Http\Controllers\SalinanbukuController;
+
+use App\Http\Controllers\TeamController;
+use Illuminate\Support\Facades\Auth;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,29 +25,23 @@ use App\Http\Controllers\SalinanbukuController;
 |
 */
 
-Route::get('/', [FrontendbukuController::class,'indexhome']);
+Route::get('/', [FrontendbukuController::class, 'indexhome']);
 
-Route::get('/bukunya', function () {
-    return view('frontend.bukunya');
-});
+Route::get('/bukunya', [FrontendbukuController::class, 'indexFeatured']);
 
-Route::get('/populer', [FrontendbukuController::class,'indexpopuler']);
+Route::get('/populer', [FrontendbukuController::class, 'indexpopuler']);
+// peminjaman
+Route::get('/pinjam', function () {
+    return view('backend.pinjam.index');
+})->middleware('auth');
+
+
 //---------------------backend----------------------
 Route::get('/dashboard', function () {
     return view('backend.dashboard');
 })->middleware('auth');
 
-/*Route::get('/buku', function () {
-    return view('backend.');
-});
-*/
-//Route::resource('/buku', BukuController::class);
-//Route::resource('/kategori', KategoriController::class);
-Route::resource('/meminjam', MeminjamController::class);
-//Route::resource('/penerbit', PenerbitController::class);
-//Route::resource('/pengarangbuku', PengarangbukuController::class);
-// Route::resource('/pengarang',PengarangController::class);
-//Route::resource('/salinanbuku', SalinanbukuController::class);
+Route::get('/team', [TeamController::class, 'index']);
 
 //-----------------table buku------------------
 Route::get('/buku', [BukuController::class, 'index'])->middleware('auth');
@@ -70,8 +68,6 @@ Route::get('/penerbit', [PenerbitController::class, 'index'])->middleware('auth'
 Route::post('/penerbit', [PenerbitController::class, 'store'])->name('simpandata2')->middleware('auth');
 Route::put('/penerbit/{idpenerbit}', [PenerbitController::class, 'update'])->name('ubahdata2')->middleware('auth');
 Route::delete('/penerbit/{idpenerbit}', [PenerbitController::class, 'destroy'])->name('hapusdata2')->middleware('auth');
-
-
 
 
 

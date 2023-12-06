@@ -20,6 +20,8 @@ return new class extends Migration
             $table->unsignedBigInteger('penerbit_idpenerbit');
             $table->unsignedBigInteger('kategori_idkategori');
             $table->string('foto',255)->nullable();
+            $table->string('deskripsi',100)->nullable();
+            $table->enum('status',['Tersedia','sedang dipinjam'])->default('Tersedia');
             $table->timestamps();
             $table->foreign('kategori_idkategori')->references('idkategori')->on('kategori')->onDelete('cascade');
             $table->foreign('pengarang_idpengarang')->references('idpengarang')->on('pengarang')->onDelete('cascade');
