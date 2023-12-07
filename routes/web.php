@@ -10,6 +10,7 @@ use App\Http\Controllers\PenerbitController;
 use App\Http\Controllers\PengarangController;
 
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -70,6 +71,13 @@ Route::put('/penerbit/{idpenerbit}', [PenerbitController::class, 'update'])->nam
 Route::delete('/penerbit/{idpenerbit}', [PenerbitController::class, 'destroy'])->name('hapusdata2')->middleware('auth');
 
 
+//-----------------table user------------------
+Route::get('/user', [UserController::class, 'index'])->middleware('auth');
+Route::post('/user', [UserController::class, 'store'])->name('simpandata10')->middleware('auth');
+Route::put('/user/{id}', [UserController::class, 'update'])->name('ubahdata10')->middleware('auth');
+Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('hapusdata10')->middleware('auth');
+
+//Route::resource('/user',UserController::class)->middleware('auth');
 
 Auth::routes();
 

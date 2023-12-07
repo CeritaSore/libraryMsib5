@@ -33,7 +33,7 @@
         </div>
     @endforeach
 
-    <div class="col-12 grid-margin">
+    {{-- <div class="col-12 grid-margin">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Basic Sortable Table</h4>
@@ -82,7 +82,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     @if (Auth::user()->role != 'anggota')
         {{-- input --}}
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -138,13 +138,12 @@
                             <div class="form-floating">
                                 <div class="mb-3">
                                     <label for="formFile" class="form-label">Upload Cover Buku</label>
-                                    <input class="form-control" type="file" id="formFile" name="foto">
+                                    <input class="form-control" type="file" id="formFile" name="foto" required>
                                 </div>
                             </div>
                             <div class="form-floating">
 
-                                <textarea class="form-control mb-3" placeholder="Masukan Deskripsi(opsional)" id="floatingTextarea"
-                                    name="deskripsi"></textarea>
+                                <textarea class="form-control mb-3" placeholder="Masukan Deskripsi(opsional)" id="floatingTextarea" name="deskripsi"></textarea>
                                 <label for="floatingTextarea">Deskripsi</label>
 
                             </div>
@@ -167,8 +166,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel1">Edit Data</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form class="forms-sample" action="{{ route('ubahdata0', $buku->idbuku) }}" method="POST"
@@ -228,7 +226,7 @@
                                 <div class="form-floating">
                                     <div class="mb-3">
                                         <label for="formFile" class="form-label">Upload Cover Buku</label>
-                                        <input class="form-control" type="file" id="formFile" name="foto">
+                                        <input class="form-control" type="file" id="formFile" name="foto" required/>
                                     </div>
                                 </div>
 
@@ -323,7 +321,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel1">Detail</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" dat a-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="card" style="border-radius: 15px;">
@@ -341,13 +339,17 @@
                                 <a href="/pinjam" class="btn btn-outline-success btn-floating">
                                     <i class=" ti-ticket "></i>
                                 </a>
-                                <button type="button" class="btn btn-outline-warning btn-floating"
-                                    data-bs-toggle="modal" data-bs-target="#exampleModal1{{ $buku->idbuku }}">
-                                    <i class=" ti-pencil "></i>
-                                </button>
-                                <button type="button" class="btn btn-outline-danger btn-floating">
-                                    <i class=" ti-trash "></i>
-                                </button>
+                                @if (Auth::user()->role != 'anggota')
+                                    <button type="button" class="btn btn-outline-warning btn-floating"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal1{{ $buku->idbuku }}">
+                                        <i class=" ti-pencil "></i>
+                                    </button>
+                                @endif
+                                @if (Auth::user()->role == 'administrator')
+                                    <button type="button" class="btn btn-danger bi bi-trash btn-sm"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal3{{ $buku->idbuku }}">
+                                    </button>
+                                @endif
                             </div>
 
                         </div>
