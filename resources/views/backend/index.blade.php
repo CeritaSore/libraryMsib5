@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/vendors/ti-icons/css/themify-icons.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/js/select.dataTables.min.css') }}">
-    
+
     <link href="{{ asset('backend/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -61,6 +61,35 @@
     <!-- End plugin js for this page -->
     <!-- inject:js -->
 
+                <!--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script type="text/javascript">
+                    $(function() {
+                        $(document).on('click', '#delete', function(e) {
+                            e.preventDefault();
+                            var link = $(this).attr();
+                
+                
+                            Swal.fire({
+                                title: "Are you sure?",
+                                text: "You won't be able to revert this!",
+                                icon: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#3085d6",
+                                cancelButtonColor: "#d33",
+                                confirmButtonText: "Yes, delete it!"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    Swal.fire({
+                                        title: "Deleted!",
+                                        text: "Your file has been deleted.",
+                                        icon: "success"
+                                    });
+                                }
+                            });
+                        });
+                    });
+                </script>-->
+
     <!-- plugins:js -->
     <script src="{{ asset('backend/assets/vendors/js/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
@@ -72,7 +101,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
-    
+
     <script src="{{ asset('backend/assets/js/off-canvas.js') }}"></script>
     <script src="{{ asset('backend/assets/js/hoverable-collapse.js') }}"></script>
     <script src="{{ asset('backend/assets/js/template.js') }}"></script>

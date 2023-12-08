@@ -111,7 +111,7 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
+                                <label class="floatingSelect"for="exampleSelectKategori">Pengarang</label>
                             </div>
                             <div class="form-floating">
                                 <select name="penerbit" class="form-select mb-3" id="floatingSelect"
@@ -122,7 +122,7 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
+                                <label class="floatingSelect"for="exampleSelectKategori">Penerbit</label>
                             </div>
                             <div class="form-floating">
                                 <select name="kategori" class="form-select mb-3" id="floatingSelect"
@@ -133,7 +133,7 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
+                                <label class="floatingSelect"for="exampleSelectKategori">Kategori</label>
                             </div>
                             <div class="form-floating">
                                 <div class="mb-3">
@@ -191,7 +191,7 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                    <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
+                                    <label class="floatingSelect"for="exampleSelectKategori">Pengarang</label>
                                 </div>
                                 <div class="form-floating">
                                     <select name="penerbit" class="form-select mb-3" id="floatingSelect"
@@ -206,7 +206,7 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                    <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
+                                    <label class="floatingSelect"for="exampleSelectKategori">Penerbit</label>
                                 </div>
                                 <div class="form-floating">
                                     <select name="kategori" class="form-select mb-3" id="floatingSelect"
@@ -221,13 +221,20 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                    <label class="floatingSelect"for="exampleSelectKategori">Kategori Buku</label>
+                                    <label class="floatingSelect"for="exampleSelectKategori">Kategori</label>
                                 </div>
-                                <div class="form-floating">
+                              {{-- <div class="form-floating">
                                     <div class="mb-3">
                                         <label for="formFile" class="form-label">Upload Cover Buku</label>
-                                        <input class="form-control" type="file" id="formFile" name="foto" required/>
+                                        <input class="form-control" type="file" id="formFile" name="foto" />
                                     </div>
+                                </div>
+                               --}} 
+                                <div class="form-floating">
+                                    <input type="text" class="form-control mb-3" placeholder="Masukan deskripsi"
+                                        id="floatingTextarea2" name="deskripsi" value="{{ $buku->deskripsi }}"
+                                        required />
+                                    <label for="floatingTextarea2">Deskripsi</label>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Save changes</button>
@@ -346,7 +353,7 @@
                                     </button>
                                 @endif
                                 @if (Auth::user()->role == 'administrator')
-                                    <button type="button" class="btn btn-danger bi bi-trash btn-sm"
+                                    <button type="button" class="btn btn-outline-danger bi bi-trash btn-floating"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal3{{ $buku->idbuku }}">
                                     </button>
                                 @endif
