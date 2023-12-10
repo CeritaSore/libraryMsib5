@@ -14,6 +14,12 @@
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <i class="bi bi-clipboard-plus"></i> Tambah
             </button>
+            <a href="{{ route('buku.pdf') }}" class="btn btn-danger" title="Export to PDF">
+                <i class="bi bi-file-earmark-pdf"></i>
+            </a>
+            <a href="{{ route('buku.excel') }}" class="btn btn-success" title="Export to Excel">
+                <i class="bi bi-file-excel"></i>
+            </a>
         @endif
 
     </main>

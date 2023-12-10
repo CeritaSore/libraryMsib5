@@ -9,7 +9,7 @@ use App\Http\Requests\UpdateBukuRequest;
 use App\Models\Penerbit;
 use App\Models\Pengarang;
 use Illuminate\Support\Facades\Storage;
-
+use PDF;
 
 
 class BukuController extends Controller
@@ -146,5 +146,25 @@ class BukuController extends Controller
         $buku = Buku::find($idbuku);
         $buku->delete();
         return redirect('/buku');
+    }
+
+    public function generatePdf()
+    {
+        $dataBuku = Buku::select('buku.*', 'kategori.listkategori')
+        ->join('kategori', 'buku.kategori_idkategori', '=', 'kategori.idkategori')
+        ->get();
+
+
+        $pdf = PDF::loadView('backend.buku.pdf', ['dataBuku' => $dataBuku]);
+        return $pdf->download('data-buku.pdf');
+    }
+
+    public function generateExcel()
+    {
+        $dataBuku = Buku::select('buku.*', 'kategori.listkategori')
+        ->join('kategori', 'buku.kategori_idkategori', '=', 'kategori.idkategori')
+        ->get();
+
+        return Excel::download(new BukuExport($dataBuku), 'data-buku.xlsx');
     }
 }

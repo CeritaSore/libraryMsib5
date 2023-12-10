@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontendbukuController;
 use App\Http\Controllers\KategoriController;
 
@@ -38,9 +39,7 @@ Route::get('/pinjam', function () {
 
 
 //---------------------backend----------------------
-Route::get('/dashboard', function () {
-    return view('backend.dashboard');
-})->middleware('auth');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 Route::get('/team', [TeamController::class, 'index']);
 
@@ -49,6 +48,9 @@ Route::get('/buku', [BukuController::class, 'index'])->middleware('auth');
 Route::post('/buku', [BukuController::class, 'store'])->name('simpandata0')->middleware('auth');
 Route::put('/buku/{idbuku}', [BukuController::class, 'update'])->name('ubahdata0')->middleware('auth');
 Route::delete('/buku/{idbuku}', [BukuController::class, 'destroy'])->name('hapusdata0')->middleware('auth');
+Route::get('/generate-pdf', [BukuController::class, 'generatePdf'])->name('buku.pdf')->middleware('auth');
+Route::get('/generate-excel', [BukuController::class, 'generateExcel'])->name('buku.excel')->middleware('auth');
+
 
 //-----------------table kategori------------------
 Route::get('/kategori', [KategoriController::class, 'index'])->middleware('auth');
