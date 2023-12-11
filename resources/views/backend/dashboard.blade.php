@@ -126,7 +126,7 @@
                         <table id="example" class="display expandable-table" style="width:100%">
                           <thead>
                             <tr>
-                                <td>ID Buku</td>
+                                <td>#</td>
                                 <td>Judul Buku</td>
                                 <td>Nama Pengarang</td>
                                 <td>Nama Penerbit</td>

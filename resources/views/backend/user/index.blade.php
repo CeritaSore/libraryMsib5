@@ -1,16 +1,17 @@
 @extends('backend.index')
 @section('content')
     @php
-        $ar_judul = ['No', 'Nama', 'Email', 'Role', 'IsActive', 'Action'];
+        $ar_judul = ['No', 'Nama', 'Email', 'Role', 'Status', 'Action'];
         $no = 1;
+        $liststatus = ['Active', 'Not Active', 'Banned'];
+        $listrole = ['Administrator', 'Staff', 'Guest'];
     @endphp
-    @if (Auth::user()->role == 'administrator')
+    @if (Auth::user()->role == 'Administrator')
         <main id="main" class="col-md-12 mb-5">
             <h3>Daftar User</h3>
-            {{-- <button type="button" class="btn btn-primary btn-sm" title="Tambah Data" data-bs-toggle="modal"
-		data-bs-target="#exampleModal-1">
-		
-	</button> --}}
+            <button type="button" class="btn btn-primary btn-sm" title="Tambah Data" data-bs-toggle="modal"
+                data-bs-target="#exampleModal1">
+            </button>
 
 
         </main>
@@ -36,21 +37,21 @@
                                             <td>{{ $u->name }}</td>
                                             <td>{{ $u->email }}</td>
                                             <td>{{ $u->role }}</td>
-                                            <td>{{ $u->isactive }}</td>
+                                            <td>{{ $u->status }}</td>
                                             <td>
                                                 <button type="button" class="btn btn-primary bi bi-pencil btn-sm"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal1{{ $u->id }}">
+                                                    data-bs-target="#exampleModal1{{ $u->iduser }}">
 
                                                 </button>
                                                 <button type="button" class="btn btn-warning bi bi-eye btn-sm"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal2{{ $u->id }}">
+                                                    data-bs-target="#exampleModal2{{ $u->iduser }}">
 
                                                 </button>
                                                 <button type="button" class="btn btn-danger bi bi-trash btn-sm"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal3{{ $u->id }}">
+                                                    data-bs-target="#exampleModal3{{ $u->iduser }}">
 
                                                 </button>
                                             </td>
@@ -63,8 +64,8 @@
                 </div>
             </div>
         </div>
-		{{-- input --}}
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {{-- input --}}
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -79,19 +80,16 @@
                                     id="floatingTextarea2" name="nama" required />
                                 <label for="floatingTextarea2">Nama Pengarang</label>
                             </div>
-
-
                             <button type="submit" class="btn btn-primary">Save changes</button>
                             <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
         {{-- edit --}}
         @foreach ($ar_user as $u)
-            <div class="modal fade" id="exampleModal1{{ $u->id }}" tabindex="-1"
+            <div class="modal fade" id="exampleModal1{{ $u->iduser }}" tabindex="-1"
                 aria-labelledby="exampleModalLabel1" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -100,35 +98,31 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form class="forms-sample" action="{{ route('ubahdata10', $u->id) }}"
-                                method="POST">
+                            <form class="forms-sample" action="{{ route('ubahdata10', $u->iduser) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-floating">
-                                    <select name="isactive" class="form-select mb-3" id="floatingSelect"
+                                    <select name="status" class="form-select mb-3" id="floatingSelect"
                                         aria-label="Floating label select example">
-                                        <option>-- isactive --</option>
-                                        @foreach ($ar_user as $u)
-                                            @php
-                                                $select3 = $u->id  ? 'selected' : '';
-                                            @endphp
-                                            <option value="{{ $u->id }}" {{ $select3 }}>
-                                                {{ $u->isactive }}
+                                        <option>-- Status --</option>
+                                        @foreach ($liststatus as $status)
+                                            <option value="{{ $status }}"
+                                                {{ $u->status === $status ? 'selected' : '' }}>
+                                                {{ $status }}
                                             </option>
                                         @endforeach
                                     </select>
-                                    <label class="floatingSelect"for="exampleSelectKategori">IsActive</label>
+                                    <label class="floatingSelect" for="exampleSelectKategori">Status</label>
                                 </div>
-								<div class="form-floating">
+
+                                <div class="form-floating">
                                     <select name="isactive" class="form-select mb-3" id="floatingSelect"
                                         aria-label="Floating label select example">
                                         <option>-- Role --</option>
-                                        @foreach ($ar_user as $u)
-                                            @php
-                                                $select1 = $u->id  ? 'selected' : '';
-                                            @endphp
-                                            <option value="{{ $u->id }}" {{ $select1 }}>
-                                                {{ $u->role }}
+                                        @foreach ($listrole as $role)
+                                            <option value="{{ $role }}"
+                                                {{ $u->role === $role ? 'selected' : '' }}>
+                                                {{ $role }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -146,7 +140,7 @@
             </div>
         @endforeach
         @foreach ($ar_user as $u)
-            <div class="modal fade" id="exampleModal2{{ $u->id }}" tabindex="-1"
+            <div class="modal fade" id="exampleModal2{{ $u->iduser }}" tabindex="-1"
                 aria-labelledby="exampleModalLabel1" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -156,8 +150,8 @@
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            
-                             <div class="card" style="border-radius: 15px;">
+
+                            <div class="card" style="border-radius: 15px;">
                                 <div class="card-body text-center">
                                     <div class="mt-3 mb-4">
                                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
@@ -165,7 +159,7 @@
                                     </div>
                                     <h4 class="mb-2">{{ $u->name }}</h4>
                                     <p class="text-muted mb-4">{{ $u->role }}</ <span class="mx-2">|</span>
-                                            {{ $u->isactive }}</p>
+                                        {{ $u->isactive }}</p>
                                     <div class="mb-4 pb-2">
                                         <button type="button" class="btn btn-outline-primary btn-floating">
                                             <i class="fab fa-facebook-f fa-lg"></i>
@@ -179,7 +173,7 @@
                                     </div>
 
                                 </div>
-                            </div> 
+                            </div>
                         </div>
 
                     </div>
@@ -187,7 +181,7 @@
             </div>
         @endforeach
         @foreach ($ar_user as $u)
-            <div class="modal fade" id="exampleModal3{{ $u->id }}" tabindex="-1"
+            <div class="modal fade" id="exampleModal3{{ $u->iduser }}" tabindex="-1"
                 aria-labelledby="exampleModalLabel1" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -197,14 +191,12 @@
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form class="forms-sample" action="{{ route('hapusdata10', $u->id) }}"
-                                method="POST">
+                            <form class="forms-sample" action="{{ route('hapusdata10', $u->iduser) }}" method="POST">
                                 @csrf
                                 @method('delete')
                                 <div class="form-floating">
                                     <input type="text" class="form-control mb-3" placeholder="Masukan nama"
-                                        id="floatingTextarea2" name="nama" value="{{ $u->name }}"
-                                        required />
+                                        id="floatingTextarea2" name="nama" value="{{ $u->name }}" required />
                                     <label for="floatingTextarea2">Nama</label>
                                 </div>
 

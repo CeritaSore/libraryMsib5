@@ -10,7 +10,7 @@
             data-bs-target="#exampleModal-1">
             
         </button> --}}
-        @if (Auth::user()->role != 'anggota')
+        @if (Auth::user()->role != 'Guest')
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <i class="bi bi-clipboard-plus"></i> Tambah
             </button>
@@ -38,58 +38,7 @@
             </div>
         </div>
     @endforeach
-
-    {{-- <div class="col-12 grid-margin">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Basic Sortable Table</h4>
-                <p class="card-description">Add class <code>.sortable-table</code></p>
-                <div class="row">
-                    <div class="table-sorter-wrapper col-lg-12 table-responsive">
-                        <table id="sortable-table-1" class="table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th class="sortStyle descStyle">Judul Buku<i class="ti-angle-down"></i></th>
-                                    <th class="sortStyle descStyle">Kategori<i class="ti-angle-down"></i></th>
-                                    <th class="sortStyle descStyle">Action</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($judulbuku as $buku)
-                                    <tr>
-                                        <td>{{ $no++ }}</td>
-                                        <td>{{ $buku->judulbuku }}</td>
-                                        <td>{{ $buku->kategori->listkategori }}</td>
-                                        <td>
-                                            @if (Auth::user()->role != 'anggota')
-                                                <button type="button" class="btn btn-primary bi bi-pencil btn-sm"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal1{{ $buku->idbuku }}">
-                                            @endif
-                                            </button>
-                                            <button type="button" class="btn btn-warning bi bi-eye btn-sm"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModal2{{ $buku->idbuku }}">
-
-                                            </button>
-                                            @if (Auth::user()->role != 'anggota')
-                                                <button type="button" class="btn btn-danger bi bi-trash btn-sm"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal3{{ $buku->idbuku }}">
-                                            @endif
-                                            </button>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    @if (Auth::user()->role != 'anggota')
+    @if (Auth::user()->role != 'Guest')
         {{-- input --}}
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -172,7 +121,8 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel1">Edit Data</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form class="forms-sample" action="{{ route('ubahdata0', $buku->idbuku) }}" method="POST"
@@ -229,13 +179,13 @@
                                     </select>
                                     <label class="floatingSelect"for="exampleSelectKategori">Kategori</label>
                                 </div>
-                              {{-- <div class="form-floating">
+                                {{-- <div class="form-floating">
                                     <div class="mb-3">
                                         <label for="formFile" class="form-label">Upload Cover Buku</label>
                                         <input class="form-control" type="file" id="formFile" name="foto" />
                                     </div>
                                 </div>
-                               --}} 
+                               --}}
                                 <div class="form-floating">
                                     <input type="text" class="form-control mb-3" placeholder="Masukan deskripsi"
                                         id="floatingTextarea2" name="deskripsi" value="{{ $buku->deskripsi }}"
@@ -294,7 +244,7 @@
             </div>
         </div>
     @endforeach
-    @if (Auth::user()->role != 'anggota')
+    @if (Auth::user()->role != 'Guest')
         @foreach ($judulbuku as $buku)
             <div class="modal fade" id="exampleModal3{{ $buku->idbuku }}" tabindex="-1"
                 aria-labelledby="exampleModalLabel1" aria-hidden="true">
@@ -334,7 +284,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel1">Detail</h1>
-                    <button type="button" class="btn-close" dat a-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="card" style="border-radius: 15px;">
@@ -347,18 +297,21 @@
                                     class="mx-2">|</span> <a href="#!">{{ $buku->penerbit->namapenerbit }}</a>
                             </p>
                             <p class="text-center">Deskripsi : {{ $buku->deskripsi }}</p>
-                            <p class="text-center">Status saat ini : {{ $buku->status }}</p>
+                            <p class="text-center ">
+                                Status saat ini : <span
+                                    class="{{ $buku->status === 'Tersedia' ? 'text-bg-success' : 'text-bg-danger' }}">
+                                    {{ $buku->status }}</span> </p>
                             <div class="mb-4 pb-2">
                                 <a href="/pinjam" class="btn btn-outline-success btn-floating">
                                     <i class=" ti-ticket "></i>
                                 </a>
-                                @if (Auth::user()->role != 'anggota')
+                                @if (Auth::user()->role != 'Guest')
                                     <button type="button" class="btn btn-outline-warning btn-floating"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal1{{ $buku->idbuku }}">
                                         <i class=" ti-pencil "></i>
                                     </button>
                                 @endif
-                                @if (Auth::user()->role == 'administrator')
+                                @if (Auth::user()->role == 'Administrator')
                                     <button type="button" class="btn btn-outline-danger bi bi-trash btn-floating"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal3{{ $buku->idbuku }}">
                                     </button>

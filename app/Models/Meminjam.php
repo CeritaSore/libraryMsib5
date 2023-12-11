@@ -14,8 +14,8 @@ class Meminjam extends Model
 
     public $timestamps = false;
 
-    public function salinanbuku(): BelongsTo{
-        return $this->belongsTo(Salinanbuku::class); 
+    public function user(): BelongsTo{
+        return $this->belongsTo(User::class); 
     }
 }
 

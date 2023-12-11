@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('asal',45);
             $table->string('role',45);
             $table->string('foto',45);
-
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pengarangs');
+        Schema::dropIfExists('team');
     }
 };
