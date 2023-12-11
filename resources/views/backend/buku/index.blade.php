@@ -10,7 +10,7 @@
             data-bs-target="#exampleModal-1">
             
         </button> --}}
-        @if (Auth::user()->role != 'anggota')
+        @if (Auth::user()->role != 'guest')
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <i class="bi bi-clipboard-plus"></i> Tambah
             </button>
@@ -63,7 +63,7 @@
                                         <td>{{ $buku->judulbuku }}</td>
                                         <td>{{ $buku->kategori->listkategori }}</td>
                                         <td>
-                                            @if (Auth::user()->role != 'anggota')
+                                            @if (Auth::user()->role != 'guest')
                                                 <button type="button" class="btn btn-primary bi bi-pencil btn-sm"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#exampleModal1{{ $buku->idbuku }}">
@@ -73,7 +73,7 @@
                                                 data-bs-toggle="modal" data-bs-target="#exampleModal2{{ $buku->idbuku }}">
 
                                             </button>
-                                            @if (Auth::user()->role != 'anggota')
+                                            @if (Auth::user()->role != 'guest')
                                                 <button type="button" class="btn btn-danger bi bi-trash btn-sm"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#exampleModal3{{ $buku->idbuku }}">
@@ -89,7 +89,7 @@
             </div>
         </div>
     </div> --}}
-    @if (Auth::user()->role != 'anggota')
+    @if (Auth::user()->role != 'guest')
         {{-- input --}}
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -294,7 +294,7 @@
             </div>
         </div>
     @endforeach
-    @if (Auth::user()->role != 'anggota')
+    @if (Auth::user()->role != 'guest')
         @foreach ($judulbuku as $buku)
             <div class="modal fade" id="exampleModal3{{ $buku->idbuku }}" tabindex="-1"
                 aria-labelledby="exampleModalLabel1" aria-hidden="true">
@@ -352,13 +352,13 @@
                                 <a href="/pinjam" class="btn btn-outline-success btn-floating">
                                     <i class=" ti-ticket "></i>
                                 </a>
-                                @if (Auth::user()->role != 'anggota')
+                                @if (Auth::user()->role != 'guest')
                                     <button type="button" class="btn btn-outline-warning btn-floating"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal1{{ $buku->idbuku }}">
                                         <i class=" ti-pencil "></i>
                                     </button>
                                 @endif
-                                @if (Auth::user()->role == 'administrator')
+                                @if (Auth::user()->role == 'admin')
                                     <button type="button" class="btn btn-outline-danger bi bi-trash btn-floating"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal3{{ $buku->idbuku }}">
                                     </button>

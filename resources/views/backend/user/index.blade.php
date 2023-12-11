@@ -4,7 +4,7 @@
         $ar_judul = ['No', 'Nama', 'Email', 'Role', 'IsActive', 'Action'];
         $no = 1;
     @endphp
-    @if (Auth::user()->role == 'administrator')
+    @if (Auth::user()->role == 'admin')
         <main id="main" class="col-md-12 mb-5">
             <h3>Daftar User</h3>
             {{-- <button type="button" class="btn btn-primary btn-sm" title="Tambah Data" data-bs-toggle="modal"

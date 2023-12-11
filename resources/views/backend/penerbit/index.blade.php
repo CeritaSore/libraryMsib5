@@ -3,7 +3,7 @@
     $no = 1;
 @endphp
 @section('content')
-    @if (Auth::user()->role != 'anggota')
+    @if (Auth::user()->role != 'guest')
         <main id="main" class="col-md-12 mb-5">
 
             <h3>Daftar Penerbit</h3>
