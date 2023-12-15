@@ -19,14 +19,14 @@ berisi progres dari project yang sedang dilaksanakan.
 - membuat models
 - membuat controller untuk memanggil menu
 - menambah kelas active di navbar
+- Buat kelola akun untuk admin (70%)
+- form pinjam hanya boleh tampil oleh anggota/guest.
+- tambah kelas required di form input dan edit
 
 # Progres yang akan datang
-- Buat kelola akun untuk admin (50%)
 - ubah form pinjam nama buku jadi select 2 dengan jquery
 - membuat transaksi tabel dari buku, peminjaman, dan user
 
-- form pinjam hanya boleh tampil oleh anggota/guest.
-- tambah kelas required di form input dan edit
 
 
 

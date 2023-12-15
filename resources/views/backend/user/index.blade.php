@@ -117,7 +117,7 @@
 
                                 <div class="form-floating">
                                     <select name="isactive" class="form-select mb-3" id="floatingSelect"
-                                        aria-label="Floating label select example">
+                                        aria-label="Floating label select example" name="role">
                                         <option>-- Role --</option>
                                         @foreach ($listrole as $role)
                                             <option value="{{ $role }}"

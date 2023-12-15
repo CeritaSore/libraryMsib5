@@ -34,7 +34,7 @@
             @include('backend.sidebar')
             <div class="main-panel">
                 <div class="content-wrapper">
-                    <div class="row">
+                    <div class="row justify-content-sm-center justify-content-xl-start justify-content-md-around">
 
                         @yield('content')
                     </div>
@@ -58,37 +58,7 @@
 
 
 
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-
-                <!--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script type="text/javascript">
-                    $(function() {
-                        $(document).on('click', '#delete', function(e) {
-                            e.preventDefault();
-                            var link = $(this).attr();
-                
-                
-                            Swal.fire({
-                                title: "Are you sure?",
-                                text: "You won't be able to revert this!",
-                                icon: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "#3085d6",
-                                cancelButtonColor: "#d33",
-                                confirmButtonText: "Yes, delete it!"
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    Swal.fire({
-                                        title: "Deleted!",
-                                        text: "Your file has been deleted.",
-                                        icon: "success"
-                                    });
-                                }
-                            });
-                        });
-                    });
-                </script>-->
+    
 
     <!-- plugins:js -->
     <script src="{{ asset('backend/assets/vendors/js/vendor.bundle.base.js') }}"></script>

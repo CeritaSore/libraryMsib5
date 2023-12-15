@@ -41,6 +41,7 @@ class UserController extends Controller
         //
          User::create([
             'ar_user' => $request->input('nama')
+
         ]);
         return redirect('/user');
     }
@@ -78,10 +79,12 @@ class UserController extends Controller
     {
         //
         $request->validate([
-            'nama' => 'required|string|max:45',
+            'nama' => 'required|in:Active,Not Active,Banned',
+            'role' => 'required|in:Administrator,Staff,Guest',
         ]);
         $user = User::find($id);
-        $user->ar_user = $request->nama;
+        $user->status = $request->status;
+        $user->role = $request->role;
         $user->save();
         return redirect('/user');
     }

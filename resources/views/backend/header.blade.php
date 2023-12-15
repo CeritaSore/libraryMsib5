@@ -22,68 +22,70 @@
                 </div>
             </li>
         </ul>
-
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+            data-toggle="offcanvas">
+            <span class="icon-menu"></span>
+        </button>
         @if (empty(Auth::user()->foto))
-        <img src="{{ asset('backend/assets/img/nophoto.jpg') }}" width="4.5%" alt="Profile" class="rounded-circle">
+            <img src="{{ asset('backend/assets/img/nophoto.jpg') }}" width="4.5%" alt="Profile"
+                class="rounded-circle">
         @else
-        <img src="{{ asset('backend/assets/img') }}/{{ Auth::user()->foto }}" width="4.5%" alt="Profile" class="rounded-circle">
+            <img src="{{ asset('backend/assets/img') }}/{{ Auth::user()->foto }}" width="4.5%" alt="Profile"
+                class="rounded-circle">
         @endif
 
-                <div class="dropdown navbar-navnavbar-nav-right">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+        <div class="dropdown navbar-navnavbar-nav-right">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                @if (empty(Auth::user()->name))
+                    ''
+                @else
+                    {{ Auth::user()->name }}
+                @endif
+            </button>
+            <ul class="dropdown-menu">
+                <li class="dropdown-header">
+                    <h6>
                         @if (empty(Auth::user()->name))
                             ''
                         @else
                             {{ Auth::user()->name }}
                         @endif
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-header">
-                            <h6>
-                                @if (empty(Auth::user()->name))
-                                    '' 
-                                @else
-                                    {{ Auth::user()->name }}
-                                @endif
-                            </h6>
-                            <span>
-                                @if (empty(Auth::user()->role))
-                                     '' 
-                                @else
-                                    {{ Auth::user()->role}}
-                                @endif
-                            </span>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="{{ url('/profile') }}"><i class="bi bi-person"> Profile</i></a></li>
-                        @if (Auth::user()->role == 'Administrator')
-                            <li><a class="dropdown-item" href="{{ url('/user') }}">
-                                <i class="bi bi-gear"> Kelola Akun</i></a></li>
+                    </h6>
+                    <span>
+                        @if (empty(Auth::user()->role))
+                            ''
+                        @else
+                            {{ Auth::user()->role }}
                         @endif
-                        <li class="dropdown-divider">
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                 <i class="bi bi-door-open-fill"> {{ __('Logout') }}</i> 
-                            </a>
-                        </li>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </ul>
-                </div>
-
+                    </span>
+                </li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="{{ url('/profile') }}"><i class="bi bi-person"> Profile</i></a></li>
                 
+                <li class="dropdown-divider">
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                        <i class="bi bi-door-open-fill"> {{ __('Logout') }}</i>
+                    </a>
+                </li>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </ul>
+        </div>
 
 
 
-       
+
+
+
 
 
     </div>

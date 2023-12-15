@@ -24,7 +24,7 @@
 
     </main>
     @foreach ($judulbuku as $buku)
-        <div class="col-4 mb-3">
+        <div class="col-md-4 mb-3">
             <div class="card bg-primary" style="width: 18rem;">
                 <div style="max-height: 15rem; overflow:hidden;">
                     <img src="backend/assets/img/{{ $buku->foto }}" class="card-img-top  rounded-top-4 " alt="...">
