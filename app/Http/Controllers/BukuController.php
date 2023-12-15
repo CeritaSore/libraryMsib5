@@ -55,18 +55,23 @@ class BukuController extends Controller
             'pengarang' => 'required|exists:pengarang,idpengarang',
             'penerbit' => 'required|exists:penerbit,idpenerbit',
             'kategori' => 'required|exists:kategori,idkategori',
-            'foto' => 'image|file|max:2048',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|min:2|max:9000',//KB
             'deskripsi' => 'required|string|max:100',
         ]);
-        if ($request->file('foto')) {
-            $validatedData['foto'] = $request->file('foto')->store('storage');
+        if(!empty($request->foto)){
+            $fileName = 'asset_'.date("Ymd_h-i-s").'.'.$request->foto->extension();
+            //$fileName = $request->foto->getClientOriginalName();
+            $request->foto->move(public_path('backend/assets/img'),$fileName);
+        }
+        else{
+            $fileName = '';
         }
         Buku::create([
             'judulbuku' => $request->input('nama'),
             'pengarang_idpengarang' => $request->input('pengarang'),
             'penerbit_idpenerbit' => $request->input('penerbit'),
             'kategori_idkategori' => $request->input('kategori'),
-            'foto' => $request->file('foto')->store('publicImage'),
+            'foto'=>$fileName,
             'deskripsi' => $request->input('deskripsi')
         ]);
 

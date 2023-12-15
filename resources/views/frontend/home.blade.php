@@ -14,15 +14,13 @@
                             <div class="slider-item">
                                 <div class="banner-content">
                                     <h2 class="banner-title">{{$buku->judulbuku}}</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero
-                                        ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend. Amet, quis
-                                        urna, a eu.</p>
+                                    <p>{{ $buku->deskripsi }}</p>
                                     <div class="btn-wrap">
                                         <a href="#" class="btn btn-outline-accent btn-accent-arrow">Read More<i
                                                 class="icon icon-ns-arrow-right"></i></a>
                                     </div>
                                 </div><!--banner-content-->
-                                <img src="storage/{{$buku->foto}}" alt="banner" class="banner-image">
+                                <img src="backend/assets/img/{{ $buku->foto }}" alt="banner" class="banner-image">
                             </div><!--slider-item-->
 
                             <!--slider-item-->

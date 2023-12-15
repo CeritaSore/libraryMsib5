@@ -27,7 +27,7 @@
         <div class="col-4 mb-3">
             <div class="card bg-primary" style="width: 18rem;">
                 <div style="max-height: 15rem; overflow:hidden;">
-                    <img src="storage/{{ $buku->foto }}" class="card-img-top  rounded-top-4 " alt="...">
+                    <img src="backend/assets/img/{{ $buku->foto }}" class="card-img-top  rounded-top-4 " alt="...">
                 </div>
                 <div class="card-body d-flex flex-column justify-content-center">
                     <h5 class="card-title text-center text-light">{{ $buku->judulbuku }}</h5>
@@ -218,7 +218,7 @@
                         <div class="card" style="border-radius: 15px;">
                             <div class="card-body text-center">
                                 <div class=" mb-4">
-                                    <img src="storage/{{ $buku->foto }}" class="" style="height: 14rem" />
+                                    <img src="backend/assets/img/{{ $buku->foto }}" class="" style="height: 14rem" />
                                 </div>
                                 <h4 class="mb-2">{{ $buku->judulbuku }}</h4>
                                 <p class="text-muted mb-4">{{ $buku->pengarang->namapengarang }} <span
@@ -290,7 +290,7 @@
                     <div class="card" style="border-radius: 15px;">
                         <div class="card-body text-center">
                             <div class=" mb-4">
-                                <img src="storage/{{ $buku->foto }}" class="" style="height: 14rem" />
+                                <img src="backend/assets/img/{{ $buku->foto }}" class="" style="height: 14rem" />
                             </div>
                             <h4 class="mb-2">{{ $buku->judulbuku }}</h4>
                             <p class="text-muted mb-4">{{ $buku->pengarang->namapengarang }} <span
