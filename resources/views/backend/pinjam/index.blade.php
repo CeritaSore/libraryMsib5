@@ -1,38 +1,42 @@
 @extends('backend.index')
+
 @section('content')
-    <div class="col-md-6 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Form Peminjaman</h4>
-                <p class="card-description">
-                    Masukan buku serta tanggal peminjaman yang sesuai dengan kamu
-                </p>
-                <form class="forms-sample">
-                    <div class="form-group">
-                        <label for="exampleInputUsername1">Nama Peminjam</label>
-                        <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Masukan nama">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputUsername1">Nama Buku</label>
-                        <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Masukan Buku">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">tanggal peminjaman</label>
-                        <input type="date" class="form-control" id="exampleInputEmail1">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Tanggal pengembalian</label>
-                        <input type="date" class="form-control" id="exampleInputPassword1">
-                    </div>
-                    <button type="submit" class="btn btn-primary me-2">Submit</button>
-                    <button class="btn btn-light">Cancel</button>
-                </form>
-            </div>
-        </div>
-    </div>
+    <h1>Daftar Peminjaman</h1>
+
+    <!-- @if(count($buku) > 0) -->
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Buku</th>
+                    <th>Judul Buku</th>
+                    <th>Stok</th>
+                    <th>tgl peminjaman</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($buku as $b)
+                    <tr>
+                        <td>{{ $b->idbuku }}</td>
+                        <td>{{ $b->judulbuku }}</td>
+                        <td>{{ $b->stok }}</td>
+                        <td>
+                            @if($b->stok > 0)
+                                <form action="{{ route('peminjaman.store') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="buku_id" value="{{ $b->idbuku }}">
+                                    <input type="date" name="tanggal_pengambilan" required>
+                                    <input type="hidden" name="user_id" value="{{ auth()->user()->iduser }}">
+                                    <button type="submit">Pinjam</button>
+                                </form>
+                            @else
+                                Stok Habis
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @else
+        <p>Tidak ada data buku.</p>
+    @endif
 @endsection
-{{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js">
-    $('.js-example-basic-single').select2({
-        placeholder: 'Select an option'
-    });
-</script> --}}

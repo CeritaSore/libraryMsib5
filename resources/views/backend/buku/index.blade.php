@@ -293,7 +293,7 @@
                                 <img src="backend/assets/img/{{ $buku->foto }}" class="" style="height: 14rem" />
                             </div>
                             <h4 class="mb-2">{{ $buku->judulbuku }}</h4>
-                            <p class="text-muted mb-4">{{ $buku->pengarang->namapengarang }} <span
+                           <p class="text-muted mb-4">{{ $buku->pengarang->namapengarang }} <span
                                     class="mx-2">|</span> <a href="#!">{{ $buku->penerbit->namapenerbit }}</a>
                             </p>
                             <p class="text-center">Deskripsi : {{ $buku->deskripsi }}</p>
@@ -302,7 +302,7 @@
                                     class="{{ $buku->status === 'Tersedia' ? 'text-bg-success' : 'text-bg-danger' }}">
                                     {{ $buku->status }}</span> </p>
                             <div class="mb-4 pb-2">
-                                <a href="/pinjam" class="btn btn-outline-success btn-floating">
+                                <a href="/peminjaman" class="btn btn-outline-success btn-floating">
                                     <i class=" ti-ticket "></i>
                                 </a>
                                 @if (Auth::user()->role != 'Guest')

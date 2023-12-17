@@ -10,7 +10,8 @@ class Buku extends Model
     use HasFactory;
     protected $primaryKey = 'idbuku';
     protected $table = 'buku';
-    protected $fillable = ['judulbuku','pengarang_idpengarang','penerbit_idpenerbit','kategori_idkategori','foto','deskripsi'];
+    protected $fillable = ['judulbuku','pengarang_idpengarang',
+    'penerbit_idpenerbit','kategori_idkategori','foto','deskripsi','stok'];
     public function kategori() {
         return $this->belongsTo(kategori::class,'kategori_idkategori','idkategori');
     }

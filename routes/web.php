@@ -5,7 +5,7 @@ use App\Http\Controllers\BukuController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontendbukuController;
 use App\Http\Controllers\KategoriController;
-
+use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PenerbitController;
 
 use App\Http\Controllers\PengarangController;
@@ -33,9 +33,9 @@ Route::get('/bukunya', [FrontendbukuController::class, 'indexFeatured']);
 
 Route::get('/populer', [FrontendbukuController::class, 'indexpopuler']);
 // peminjaman
-Route::get('/pinjam', function () {
-    return view('backend.pinjam.index');
-})->middleware('auth');
+Route::get('/peminjaman', [PeminjamanController::class, 'index'])->middleware('auth');
+Route::get('/peminjaman/create', [PeminjamanController::class, 'create'])->name('peminjaman.create')->middleware('auth');
+Route::post('/peminjaman/store', [PeminjamanController::class, 'store'])->name('peminjaman.store')->middleware('auth');
 
 
 //---------------------backend----------------------
@@ -80,6 +80,11 @@ Route::put('/user/{id}', [UserController::class, 'update'])->name('ubahdata10')-
 Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('hapusdata10')->middleware('auth');
 
 //Route::resource('/user',UserController::class)->middleware('auth');
+
+// // Rute untuk Pengembalian
+// Route::get('/pengembalian', [PengembalianController::class, 'index'])->name('pengembalian.index');
+// Route::get('/pengembalian/create', [PengembalianController::class, 'create'])->name('pengembalian.create');
+// Route::post('/pengembalian/store', [PengembalianController::class, 'store'])->name('pengembalian.store');
 
 Auth::routes();
 
