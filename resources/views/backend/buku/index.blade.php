@@ -31,7 +31,7 @@
                 </div>
                 <div class="card-body d-flex flex-column justify-content-center">
                     <h5 class="card-title text-center text-light">{{ $buku->judulbuku }}</h5>
-                    <p class="card-text text-center text-light">{{ $buku->pengarang->namapengarang }}</p>
+<p class="card-text text-center text-light">{{ $buku->pengarang->namapengarang }}</p>
                     <button type="button" class="btn btn-light fw-bold" data-bs-toggle="modal"
                         data-bs-target="#exampleModalDetail{{ $buku->idbuku }}">Lihat</button>
                 </div>
