@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('kategori_idkategori');
             $table->string('foto',255)->nullable();
             $table->string('deskripsi',100)->nullable();
+            $table->integer('stok')->default(0);
             $table->enum('status',['Tersedia','sedang dipinjam'])->default('Tersedia');
             $table->timestamps();
             $table->foreign('kategori_idkategori')->references('idkategori')->on('kategori')->onDelete('cascade');
