@@ -10,7 +10,7 @@
                     <th>ID Buku</th>
                     <th>Judul Buku</th>
                     <th>Stok</th>
-                    <th>tgl peminjaman</th>
+                    <th>tanggal pengambilan</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,7 +32,19 @@
                                 Stok Habis
                             @endif
                         </td>
-                    </tr>
+                        @endforeach
+                    <td>
+                        @foreach($peminjaman as $p)
+                        @if($p->tanggal_pengembalian)
+                        Sudah Dikembalikan
+                        @else
+                        <form action="{{ route('peminjaman.kembalikan', $p->id) }}" method="post">
+                            @csrf
+                            <button type="submit">Kembalikan</button>
+                        </form>
+                        @endif
+                    </td>
+                </tr>
                 @endforeach
             </tbody>
         </table>

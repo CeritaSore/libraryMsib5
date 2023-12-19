@@ -37,6 +37,7 @@ class PeminjamanController extends Controller
         // Logika untuk mengurangi stok buku yang dipinjam
         $buku = Buku::find($request->buku_id);
         $buku->stok -= 1;
+        // $buku->status = 'tersedia';
         $buku->save();
 
         // Periksa apakah peminjaman telah melewati 7 hari
@@ -46,8 +47,25 @@ class PeminjamanController extends Controller
                 ->with('error', 'Batas peminjaman sudah melewati 7 hari.');
         }
 
-        return redirect('/buku')
-            ->with('success', 'Buku berhasil dipinjam. Batas pengembalian: ' . $batasPeminjaman->format('Y-m-d'));
+        return redirect('/buku')->with('success', 'Buku berhasil dipinjam. Batas pengembalian: ' . $batasPeminjaman->format('Y-m-d'));
     }
+
+    public function kembalikan($id)
+    {
+        $peminjaman = Peminjaman::find($id);
+
+        // Logika pengembalian buku
+        $peminjaman->tanggal_pengembalian = now();
+        $peminjaman->save();
+
+        // Logika untuk menambah stok buku yang dikembalikan
+        $buku = Buku::find($peminjaman->buku_id);
+        $buku->stok += 1;
+        // $buku->status = 'tersedia'; 
+        $buku->save();
+
+        return redirect('/buku')->with('success', 'Buku berhasil dikembalikan.');
+    }
+
         
 }

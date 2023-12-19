@@ -32,10 +32,12 @@ Route::get('/', [FrontendbukuController::class, 'indexhome']);
 Route::get('/bukunya', [FrontendbukuController::class, 'indexFeatured']);
 
 Route::get('/populer', [FrontendbukuController::class, 'indexpopuler']);
+
 // peminjaman
 Route::get('/peminjaman', [PeminjamanController::class, 'index'])->middleware('auth');
 Route::get('/peminjaman/create', [PeminjamanController::class, 'create'])->name('peminjaman.create')->middleware('auth');
 Route::post('/peminjaman/store', [PeminjamanController::class, 'store'])->name('peminjaman.store')->middleware('auth');
+Route::post('/peminjaman/kembalikan/{id}', [PeminjamanController::class, 'kembalikan'])->name('peminjaman.kembalikan');
 
 
 //---------------------backend----------------------

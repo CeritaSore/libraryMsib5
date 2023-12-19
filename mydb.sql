@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Des 2023 pada 14.43
+-- Waktu pembuatan: 18 Des 2023 pada 17.09
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.1.25
 
@@ -51,7 +51,7 @@ CREATE TABLE `buku` (
 --
 
 INSERT INTO `buku` (`idbuku`, `judulbuku`, `kategori_idkategori`, `stok`, `updated_at`) VALUES
-(1, 'membaca', 1, 20, '2023-12-16 22:05:12'),
+(1, 'membaca', 1, 23, '2023-12-17 20:45:08'),
 (2, 'mendengar', 2, 30, '2023-12-16 16:21:47'),
 (3, 'menulis', 1, 30, '2023-12-16 16:21:47');
 
@@ -153,17 +153,18 @@ CREATE TABLE `peminjaman` (
   `tanggal_peminjaman` date NOT NULL,
   `tanggal_pengambilan` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `tanggal_pengembalian` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `peminjaman`
 --
 
-INSERT INTO `peminjaman` (`id`, `user_id`, `buku_id`, `tanggal_peminjaman`, `tanggal_pengambilan`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, '2023-12-17', '2023-12-17', '2023-12-16 22:02:00', '2023-12-16 22:02:00'),
-(2, 1, 1, '2023-12-17', '2023-12-17', '2023-12-16 22:04:21', '2023-12-16 22:04:21'),
-(3, 2, 1, '2023-12-17', '2023-12-17', '2023-12-16 22:05:12', '2023-12-16 22:05:12');
+INSERT INTO `peminjaman` (`id`, `user_id`, `buku_id`, `tanggal_peminjaman`, `tanggal_pengambilan`, `created_at`, `updated_at`, `tanggal_pengembalian`) VALUES
+(1, 1, 1, '2023-12-17', '2023-12-17', '2023-12-16 22:02:00', '2023-12-17 20:45:08', '2023-12-18'),
+(2, 1, 1, '2023-12-17', '2023-12-17', '2023-12-16 22:04:21', '2023-12-17 20:41:25', '2023-12-18'),
+(3, 2, 1, '2023-12-17', '2023-12-17', '2023-12-16 22:05:12', '2023-12-17 20:44:11', '2023-12-18');
 
 -- --------------------------------------------------------
 
