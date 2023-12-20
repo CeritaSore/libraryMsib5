@@ -14,28 +14,35 @@
             </a>
         </li>
 
+
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#tables" role="button" aria-expanded="false"
+                aria-controls="tables">
+                <i class="icon-grid-2 menu-icon"></i>
+                <span class="menu-title">Tables</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="tables">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/kategori') }}">Kategori</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/pengarang') }}">Pengarang</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/penerbit') }}">Penerbit</a>
+                    </li>
+                </ul>
+            </div>
+
+        </li>
         
-            <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#tables" role="button" aria-expanded="false"
-                    aria-controls="tables">
-                    <i class="icon-grid-2 menu-icon"></i>
-                    <span class="menu-title">Tables</span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <div class="collapse" id="tables">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/kategori') }}">Kategori</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/pengarang') }}">Pengarang</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/penerbit') }}">Penerbit</a>
-                        </li>
-                    </ul>
-                </div>
-        
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('/status') }}">
+                <i class="ti-book icon-grid menu-icon"></i>
+                <span class="menu-title">Status Peminjaman</span>
+            </a>
         </li>
         @if (Auth::user()->role != 'Guest' && 'Staff')
             <li class="nav-item">

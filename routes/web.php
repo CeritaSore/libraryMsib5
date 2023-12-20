@@ -38,7 +38,9 @@ Route::get('/peminjaman', [PeminjamanController::class, 'index'])->middleware('a
 Route::get('/peminjaman/create', [PeminjamanController::class, 'create'])->name('peminjaman.create')->middleware('auth');
 Route::post('/peminjaman/store', [PeminjamanController::class, 'store'])->name('peminjaman.store')->middleware('auth');
 Route::post('/peminjaman/kembalikan/{id}', [PeminjamanController::class, 'kembalikan'])->name('peminjaman.kembalikan');
-
+Route::get('/status', function () {
+    return view('backend.pinjam.status');
+});
 
 //---------------------backend----------------------
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
