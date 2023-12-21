@@ -19,7 +19,7 @@
             <a class="nav-link" data-bs-toggle="collapse" href="#tables" role="button" aria-expanded="false"
                 aria-controls="tables">
                 <i class="icon-grid-2 menu-icon"></i>
-                <span class="menu-title">Tables</span>
+                <span class="menu-title">Master Data</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="tables">
