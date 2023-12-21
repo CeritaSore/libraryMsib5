@@ -9,16 +9,18 @@
                             <div class="col-lg-4">
                                 <div class="border-bottom text-center pb-4">
                                     @if (empty(Auth::user()->foto))
-        <img src="{{ asset('backend/assets/img/nophoto.jpg') }}" width="" alt="Profile" class="rounded-circle">
-        @else
-        <img src="{{ asset('backend/assets/img') }}/{{ Auth::user()->foto }}" width="" alt="Profile" class="rounded-circle">
-        @endif
+                                        <img src="{{ asset('backend/assets/img/nophoto.jpg') }}" width="" alt="Profile"
+                                            class="rounded-circle">
+                                    @else
+                                        <img src="{{ asset('backend/assets/img') }}/{{ Auth::user()->foto }}" width=""
+                                            alt="Profile" class="rounded-circle">
+                                    @endif
 
                                     <div class="mb-3">
-                                        <h3>{{Auth::user()->name}}</h3>
+                                        <h3>{{ Auth::user()->name }}</h3>
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <h5 class="mb-0 me-2 text-muted">{{Auth::user()->role}}</h5>
-                                           
+                                            <h5 class="mb-0 me-2 text-muted">{{ Auth::user()->role }}</h5>
+
                                         </div>
                                     </div>
                                     <p class="w-75 mx-auto mb-3">Seorang Admin dari website kelola perpustakaan </p>
@@ -50,30 +52,36 @@
                                 <div class="py-4">
                                     <p class="clearfix">
                                         <span class="float-left">
-                                            {{Auth::user()->status}}
+                                            {{ Auth::user()->status }}
                                         </span>
                                         <span class="float-right text-muted">
                                             Status
                                         </span>
                                     </p>
-                                    
+
                                     <p class="clearfix">
                                         <span class="float-left">
                                             Mail
                                         </span>
                                         <span class="float-right text-muted">
-                                            {{Auth::user()->email}}
+                                            {{ Auth::user()->email }}
                                         </span>
                                     </p>
-                                   
+
                                 </div>
                                 <button class="btn btn-primary btn-block mb-2">Preview</button>
                             </div>
                             <div class="col-lg-8">
                                 <div class="d-block d-md-flex justify-content-between mt-4 mt-md-0">
                                     <div class="text-center mt-4 mt-md-0">
-                                        <button class="btn btn-outline-primary">Message</button>
-                                        <button class="btn btn-primary">Request</button>
+                                        
+                                        
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
+                                            Change Password
+                                        </button>
+
                                     </div>
                                 </div>
                                 <div class="mt-4 py-2 border-top border-bottom">
@@ -90,12 +98,12 @@
                                                 Feed
                                             </a>
                                         </li>
-                                        
+
                                     </ul>
                                 </div>
                                 <div class="profile-feed">
                                     <div class="d-flex align-items-start profile-feed-item">
-                                        <img src="{{asset('backend/assets/img/nophoto.jpg')}}" alt="profile"
+                                        <img src="{{ asset('backend/assets/img/nophoto.jpg') }}" alt="profile"
                                             class="img-sm rounded-circle">
                                         <div class="ms-4">
                                             <h6>
@@ -121,7 +129,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-start profile-feed-item">
-                                        <img src="{{asset('backend/assets/img/nophoto.jpg')}}" alt="profile"
+                                        <img src="{{ asset('backend/assets/img/nophoto.jpg') }}" alt="profile"
                                             class="img-sm rounded-circle">
                                         <div class="ms-4">
                                             <h6>
@@ -129,8 +137,7 @@
                                                 <small class="ms-4 text-muted"><i class="ti-time me-1"></i>10
                                                     hours</small>
                                             </h6>
-                                            <img src="" alt="sample"
-                                                class="rounded mw-100">
+                                            <img src="" alt="sample" class="rounded mw-100">
                                             <p class="small text-muted mt-2 mb-0">
                                                 <span>
                                                     <i class="ti-star me-1"></i>4
@@ -145,7 +152,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-start profile-feed-item">
-                                        <img src="{{asset('backend/assets/img/nophoto.jpg')}}" alt="profile"
+                                        <img src="{{ asset('backend/assets/img/nophoto.jpg') }}" alt="profile"
                                             class="img-sm rounded-circle">
                                         <div class="ms-4">
                                             <h6>
@@ -181,4 +188,47 @@
             </div>
         </div>
     </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="forms-sample" action="{{ route('password.action') }}" method="POST"
+                            enctype="multipart/form-data">
+
+                            @csrf
+            
+                            <div class="form-floating">
+                                <input type="password" class="form-control mb-3" placeholder="Masukan Password lama"
+                                    id="floatingTextarea2" name="old_password" required />
+                                <label for="floatingTextarea2">Password Lama </label>
+                            </div>
+                            <div class="form-floating">
+                                <input type="password" class="form-control mb-3" placeholder="Masukan Password Baru"
+                                    id="floatingTextarea2" name="new_password" required />
+                                <label for="floatingTextarea2">Password Baru </label>
+                            </div>
+                            <div class="form-floating">
+                                <input type="password" class="form-control mb-3" placeholder="Masukan Password Baru"
+                                    id="floatingTextarea2" name="new_password_confirmation" required />
+                                <label for="floatingTextarea2">Password Baru Confirmation </label>
+                            </div>
+                          
+                            
+
+
+
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+                        </form>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
 @endsection

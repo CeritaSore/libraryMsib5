@@ -105,3 +105,8 @@ Route::get('/users', function () {
 Route::get('/profile', function () {
     return view('backend.profile');
 });
+
+//Ubah password
+Route::get('password', [UserController::class, 'password'])->name('password');
+Route::post('password', [UserController::class, 'password_action'])->name('password.action');
+

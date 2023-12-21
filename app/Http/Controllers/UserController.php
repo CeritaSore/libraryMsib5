@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 
@@ -101,5 +104,23 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
         return redirect('/user');
+    }
+
+    public function password(){
+        $data['tittle'] = 'Change Password';
+        return view('user/password', $data);
+    }
+
+    public function password_action(Request $request){
+        $request->validate([
+            'old_password'=>'required|current_password',
+            'new_password'=>'required',
+            'new_password_confirmation'=>'required|same:new_password',
+        ]);
+        $user = User::find(Auth::id());
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+        $request->session()->regenerate();
+        return back()->with('success', 'Password Berhasil Diubah');
     }
 }
