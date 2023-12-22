@@ -38,10 +38,10 @@
                         @if($p->tanggal_pengembalian)
                         Sudah Dikembalikan
                         @else
-                        <form action="{{ route('peminjaman.kembalikan', $p->id) }}" method="post">
+                        {{-- <form action="{{ route('peminjaman.kembalikan', $p->id) }}" method="post">
                             @csrf
                             <button type="submit">Kembalikan</button>
-                        </form>
+                        </form> --}}
                         @endif
                     </td>
                 </tr>

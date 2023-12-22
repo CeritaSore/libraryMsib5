@@ -10,7 +10,7 @@
         <main id="main" class="col-md-12 mb-5">
             <h3>Daftar User</h3>
             <button type="button" class="btn btn-primary btn-sm" title="Tambah Data" data-bs-toggle="modal"
-                data-bs-target="#exampleModal1">
+                data-bs-target="#exampleModal1"><i class="ti-plus"></i>Tambah user 
             </button>
 
 
@@ -78,7 +78,7 @@
                             <div class="form-floating">
                                 <input type="text" class="form-control mb-3" placeholder="Masukan nama"
                                     id="floatingTextarea2" name="nama" required />
-                                <label for="floatingTextarea2">Nama Pengarang</label>
+                                <label for="floatingTextarea2">Nama user</label>
                             </div>
                             <button type="submit" class="btn btn-primary">Save changes</button>
                             <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
@@ -139,6 +139,7 @@
                 </div>
             </div>
         @endforeach
+        {{-- view --}}
         @foreach ($ar_user as $u)
             <div class="modal fade" id="exampleModal2{{ $u->iduser }}" tabindex="-1"
                 aria-labelledby="exampleModalLabel1" aria-hidden="true">
@@ -180,6 +181,7 @@
                 </div>
             </div>
         @endforeach
+        {{-- delete --}}
         @foreach ($ar_user as $u)
             <div class="modal fade" id="exampleModal3{{ $u->iduser }}" tabindex="-1"
                 aria-labelledby="exampleModalLabel1" aria-hidden="true">
@@ -214,3 +216,5 @@
         @include('backend.accessDenied')
     @endif
 @endsection
+
+

@@ -31,7 +31,7 @@
                 </div>
                 <div class="card-body d-flex flex-column justify-content-center">
                     <h5 class="card-title text-center text-light">{{ $buku->judulbuku }}</h5>
-<p class="card-text text-center text-light">{{ $buku->pengarang->namapengarang }}</p>
+                    <p class="card-text text-center text-light">{{ $buku->pengarang->namapengarang }}</p>
                     <button type="button" class="btn btn-light fw-bold" data-bs-toggle="modal"
                         data-bs-target="#exampleModalDetail{{ $buku->idbuku }}">Lihat</button>
                 </div>
@@ -203,6 +203,7 @@
             </div>
         @endforeach
     @endif
+    {{-- bagian edit --}}
     @foreach ($judulbuku as $buku)
         <div class="modal fade" id="exampleModal2{{ $buku->idbuku }}" tabindex="-1"
             aria-labelledby="exampleModalLabel1" aria-hidden="true">
@@ -218,7 +219,8 @@
                         <div class="card" style="border-radius: 15px;">
                             <div class="card-body text-center">
                                 <div class=" mb-4">
-                                    <img src="backend/assets/img/{{ $buku->foto }}" class="" style="height: 14rem" />
+                                    <img src="backend/assets/img/{{ $buku->foto }}" class=""
+                                        style="height: 14rem" />
                                 </div>
                                 <h4 class="mb-2">{{ $buku->judulbuku }}</h4>
                                 <p class="text-muted mb-4">{{ $buku->pengarang->namapengarang }} <span
@@ -244,6 +246,7 @@
             </div>
         </div>
     @endforeach
+    {{-- hapus data --}}
     @if (Auth::user()->role != 'Guest')
         @foreach ($judulbuku as $buku)
             <div class="modal fade" id="exampleModal3{{ $buku->idbuku }}" tabindex="-1"
@@ -251,7 +254,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel1">Edit Data</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel1">Hapus Data</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
@@ -277,6 +280,7 @@
         @endforeach
     @endif
 @endsection
+{{-- look --}}
 @foreach ($judulbuku as $buku)
     <div class="modal fade" id="exampleModalDetail{{ $buku->idbuku }}" tabindex="-1"
         aria-labelledby="exampleModalLabel1" aria-hidden="true">
@@ -290,10 +294,11 @@
                     <div class="card" style="border-radius: 15px;">
                         <div class="card-body text-center">
                             <div class=" mb-4">
-                                <img src="backend/assets/img/{{ $buku->foto }}" class="" style="height: 14rem" />
+                                <img src="backend/assets/img/{{ $buku->foto }}" class=""
+                                    style="height: 14rem" />
                             </div>
                             <h4 class="mb-2">{{ $buku->judulbuku }}</h4>
-                           <p class="text-muted mb-4">{{ $buku->pengarang->namapengarang }} <span
+                            <p class="text-muted mb-4">{{ $buku->pengarang->namapengarang }} <span
                                     class="mx-2">|</span> <a href="#!">{{ $buku->penerbit->namapenerbit }}</a>
                             </p>
                             <p class="text-center">Deskripsi : {{ $buku->deskripsi }}</p>
@@ -302,9 +307,11 @@
                                     class="{{ $buku->status === 'Tersedia' ? 'text-bg-success' : 'text-bg-danger' }}">
                                     {{ $buku->status }}</span> </p>
                             <div class="mb-4 pb-2">
-                                <a href="/peminjaman" class="btn btn-outline-success btn-floating">
+                                <button type="button"
+                                    class="btn btn-outline-success btn-floating"data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal{{ $buku->idbuku }}">
                                     <i class=" ti-ticket "></i>
-                                </a>
+                                </button>
                                 @if (Auth::user()->role != 'Guest')
                                     <button type="button" class="btn btn-outline-warning btn-floating"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal1{{ $buku->idbuku }}">
@@ -328,3 +335,56 @@
 @endforeach
 
 <!-- Pinjam -->
+@foreach ($judulbuku as $buku)
+    <div class="modal fade" id="exampleModal{{ $buku->idbuku }}" tabindex="-1"
+        aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel1">Form Peminjaman</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="forms-sample" action="#" method="POST">
+                        @csrf
+                        <div class="form-floating">
+                            @foreach ($listpeminjaman as $pinjam)
+                                
+                            <input type="hidden" class="form-control mb-3" 
+                                id="floatingTextarea2" name="iduser"  value="{{$pinjam->user_id}}"/>
+                            @endforeach
+                        </div>
+                        <div class="form-floating">
+                            <select name="pengarang" class="form-select mb-3" id="floatingSelect"
+                                aria-label="Floating label select example">
+                                <option>-- Buku --</option>
+                                
+                                <option value="{{$buku->idbuku}}" selected >
+                                    {{$buku->judulbuku}}
+                                </option>
+
+                            </select>
+                            <label class="floatingSelect"for="exampleSelectKategori">Buku</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="date" class="form-control mb-3" placeholder="Masukan nama"
+                                id="floatingTextarea2" name="nama" required />
+                            <label for="floatingTextarea2">tanggal pengambilan </label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="date" class="form-control mb-3" placeholder="Masukan nama"
+                                id="floatingTextarea2" name="nama" required />
+                            <label for="floatingTextarea2">tanggal pengembalian </label>
+                        </div>
+
+                        
+
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+@endforeach

@@ -6,6 +6,7 @@ use App\Models\Buku;
 use App\Models\Kategori;
 use App\Http\Requests\StoreBukuRequest;
 use App\Http\Requests\UpdateBukuRequest;
+use App\Models\Peminjaman;
 use App\Models\Penerbit;
 use App\Models\Pengarang;
 use Illuminate\Support\Facades\Storage;
@@ -25,7 +26,8 @@ class BukuController extends Controller
         $listpengarang = Pengarang::all();
         $listpenerbit = Penerbit::all();
         $listkategori = Kategori::all();
-        return view('backend.buku.index', compact('judulbuku', 'listkategori', 'listpenerbit', 'listpengarang'));
+        $listpeminjaman = Peminjaman::all();
+        return view('backend.buku.index', compact('judulbuku', 'listkategori', 'listpenerbit', 'listpengarang','listpeminjaman'));
         return view('frontend.home', compact('judulbuku'));
     }
 
