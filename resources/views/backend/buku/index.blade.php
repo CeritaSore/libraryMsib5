@@ -302,16 +302,20 @@
                                     class="mx-2">|</span> <a href="#!">{{ $buku->penerbit->namapenerbit }}</a>
                             </p>
                             <p class="text-center">Deskripsi : {{ $buku->deskripsi }}</p>
+
                             <p class="text-center ">
                                 Status saat ini : <span
                                     class="{{ $buku->status === 'Tersedia' ? 'text-bg-success' : 'text-bg-danger' }}">
                                     {{ $buku->status }}</span> </p>
                             <div class="mb-4 pb-2">
-                                <button type="button"
-                                    class="btn btn-outline-success btn-floating"data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal{{ $buku->idbuku }}">
-                                    <i class=" ti-ticket "></i>
-                                </button>
+                                @if ($buku->status == 'Tersedia')
+                                    <button type="button"
+                                        class="btn btn-outline-success btn-floating"data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal{{ $buku->idbuku }}">
+                                        <i class=" ti-ticket "></i>
+                                    </button>
+                                @else
+                                @endif
                                 @if (Auth::user()->role != 'Guest')
                                     <button type="button" class="btn btn-outline-warning btn-floating"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal1{{ $buku->idbuku }}">
@@ -345,22 +349,21 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="forms-sample" action="#" method="POST">
+                    <form class="forms-sample" action="{{ route('peminjaman.store') }}" method="POST">
                         @csrf
                         <div class="form-floating">
-                            @foreach ($listpeminjaman as $pinjam)
-                                
-                            <input type="hidden" class="form-control mb-3" 
-                                id="floatingTextarea2" name="iduser"  value="{{$pinjam->user_id}}"/>
+                            @foreach ($listuser as $users)
+                                <input type="hidden" class="form-control mb-3" id="floatingTextarea2"
+                                    name="iduser" value="{{ $users->iduser }}" />
                             @endforeach
                         </div>
                         <div class="form-floating">
-                            <select name="pengarang" class="form-select mb-3" id="floatingSelect"
+                            <select name="buku" class="form-select mb-3" id="floatingSelect"
                                 aria-label="Floating label select example">
                                 <option>-- Buku --</option>
-                                
-                                <option value="{{$buku->idbuku}}" selected >
-                                    {{$buku->judulbuku}}
+
+                                <option value="{{ $buku->idbuku }}" selected>
+                                    {{ $buku->judulbuku }}
                                 </option>
 
                             </select>
@@ -368,16 +371,16 @@
                         </div>
                         <div class="form-floating">
                             <input type="date" class="form-control mb-3" placeholder="Masukan nama"
-                                id="floatingTextarea2" name="nama" required />
+                                id="floatingTextarea2" name="pengambilan" required />
                             <label for="floatingTextarea2">tanggal pengambilan </label>
                         </div>
                         <div class="form-floating">
                             <input type="date" class="form-control mb-3" placeholder="Masukan nama"
-                                id="floatingTextarea2" name="nama" required />
-                            <label for="floatingTextarea2">tanggal pengembalian </label>
+                                id="floatingTextarea2" name="peminjaman" required />
+                            <label for="floatingTextarea2">tanggal peminjaman </label>
                         </div>
 
-                        
+
 
                         <button type="submit" class="btn btn-primary">Save changes</button>
                         <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>

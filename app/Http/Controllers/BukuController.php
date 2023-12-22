@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateBukuRequest;
 use App\Models\Peminjaman;
 use App\Models\Penerbit;
 use App\Models\Pengarang;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use PDF;
 
@@ -27,7 +28,8 @@ class BukuController extends Controller
         $listpenerbit = Penerbit::all();
         $listkategori = Kategori::all();
         $listpeminjaman = Peminjaman::all();
-        return view('backend.buku.index', compact('judulbuku', 'listkategori', 'listpenerbit', 'listpengarang','listpeminjaman'));
+        $listuser = User::all();
+        return view('backend.buku.index', compact('judulbuku', 'listkategori', 'listpenerbit', 'listpengarang','listpeminjaman','listuser'));
         return view('frontend.home', compact('judulbuku'));
     }
 
