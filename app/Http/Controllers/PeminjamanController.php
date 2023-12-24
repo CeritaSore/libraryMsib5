@@ -2,106 +2,112 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Peminjaman;
 use App\Models\Buku;
-use App\Models\User;
-use Carbon\Carbon;
+use App\Http\Requests\StorePeminjamanRequest;
+use App\Http\Requests\UpdatePeminjamanRequest;
+use Illuminate\Http\Request;
 
 class PeminjamanController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        // Logika untuk menampilkan daftar peminjaman
-        $peminjaman = Peminjaman::all();
-        $listuser = User::all();
-        $buku = Buku::all();
-
-        return view('backend.pinjam.status', compact('buku', 'peminjaman','listuser'));
+        $listbuku = Buku::all();
+        return view('backend.pinjam', compact('listbuku'));
     }
-    public function store(Request $request)
+    public function status()
     {
-        // Validasi input form
-        // dd($request->buku);
+        $listpinjam = Peminjaman::all();
+        return view('backend.status', compact('listpinjam'));
+    }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StorePeminjamanRequest $request)
+    {
+        // dd($request);
         Peminjaman::create([
-            'user_id' => $request->iduser,
-            'buku_id' => $request->buku,
-            'tanggal_pengambilan' => $request->pengambilan,
-            'tanggal_peminjaman' => $request->peminjaman,
+            'buku_id' => $request->judul,
+            'tgl_pinjam' => $request->tglpinjam,
+            'tgl_ambil' => $request->tglambil,
+            'lama_peminjaman' => $request->durasi,
 
         ]);
-
-        $statusBuku = Buku::find($request->buku);
-        // dd($statusBuku->status);
-        $statusBuku->status = 'sedang dipinjam';
-        $statusBuku->save();
-        return redirect('/buku');
+        return redirect('/status');
     }
-    // public function store(Request $request)
-    // {
-    //     // Validasi input form
-    //     // dd($request->buku);
 
-    //     Peminjaman::create([
-    //         'user_id' => $request->iduser,
-    //         'buku_id' => $request->buku,
-    //         'tanggal_pengambilan' => $request->pengambilan,
-    //         'tanggal_peminjaman' => $request->peminjaman,
-
-    //     ]);
-
-    //     $statusbuku = Buku::find($idbuku);
-    //     if ($statusbuku) {
-    //         $statusbuku->update([
-    //             'status' => 'sedang dipinjam',
-    //         ]);
-    //     };
-    //     return redirect('/buku');
-    //     // $request->validate([
-    //     //     'buku_id' => 'required|exists:buku,idbuku',
-    //     //     'tanggal_pengambilan' => 'required|date',
-    //     // ]);
-
-    //     // // Logika untuk menyimpan data peminjaman ke database
-    //     // $peminjaman = Peminjaman::create([
-    //     //     'buku_id' => $request->buku_id,
-    //     //     'tanggal_peminjaman' => now(),
-    //     //     'tanggal_pengambilan' => $request->tanggal_pengambilan,
-    //     //     'user_id' => $request->user_id,
-
-    //     // ]);
-
-    //     // // Logika untuk mengurangi stok buku yang dipinjam
-    //     // $buku = Buku::find($request->buku_id);
-    //     // $buku->stok -= 1;
-    //     // // $buku->status = 'tersedia';
-    //     // $buku->save();
-
-    //     // // Periksa apakah peminjaman telah melewati 7 hari
-    //     // $batasPeminjaman = Carbon::parse($peminjaman->tanggal_peminjaman)->addDays(7);
-    //     // if (now()->greaterThan($batasPeminjaman)) {
-    //     //     return redirect()->route('buku.index')
-    //     //         ->with('error', 'Batas peminjaman sudah melewati 7 hari.');
-    //     // }
-
-    //     // return redirect('/buku')->with('success', 'Buku berhasil dipinjam. Batas pengembalian: ' . $batasPeminjaman->format('Y-m-d'));
-    // }
-
-    public function kembalikan($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(Peminjaman $peminjaman)
     {
-        $peminjaman = Peminjaman::find($id);
+        //
+    }
 
-        // Logika pengembalian buku
-        $peminjaman->tanggal_pengembalian = now();
-        $peminjaman->save();
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Peminjaman $peminjaman)
+    {
+        //
+    }
 
-        // Logika untuk menambah stok buku yang dikembalikan
-        $buku = Buku::find($peminjaman->buku_id);
-        $buku->stok += 1;
-        // $buku->status = 'tersedia'; 
-        $buku->save();
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdatePeminjamanRequest $request, $idpeminjaman)
+    {
+        // dd($request);
+        $getpinjam = Peminjaman::find($idpeminjaman);
+        // $getpinjam->status_peminjaman = $request->status;
+        // $getpinjam->save();
 
-        return redirect('/buku')->with('success', 'Buku berhasil dikembalikan.');
+        // $getbuku = Buku::find($request->idbuku);
+        // if($getpinjam == 'approved'){
+        //     $getbuku->status_buku = 'sedang dipinjam';
+        //     $getbuku->save();
+        // }
+        if ($request->status == 'approved') {
+            $getpinjam->status_peminjaman = 'approved';
+            $getpinjam->save();
+
+            $getbuku = Buku::find($request->idbuku);
+            $getbuku->status_buku = 'sedang dipinjam';
+            $getbuku->save();
+        } else if ($request->status == 'returned') {
+            $getpinjam->status_peminjaman = 'returned';
+            $getpinjam->save();
+            $getbuku = Buku::find($request->idbuku);
+            $getbuku->status_buku = 'tersedia';
+            $getbuku->save();
+        } else {
+            $getpinjam->status_peminjaman = 'pending';
+            $getpinjam->save();
+            $getbuku = Buku::find($request->idbuku);
+            $getbuku->status_buku = 'tersedia';
+            $getbuku->save();
+        }
+        return redirect('/status');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($idpeminjaman)
+    {
+        $delpeminjaman = Peminjaman::find($idpeminjaman);
+        $delpeminjaman->delete();
+        return redirect('/status');
     }
 }

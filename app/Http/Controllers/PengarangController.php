@@ -10,20 +10,16 @@ class PengarangController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
         //
-        $listpengarang = Pengarang::orderBy('idpengarang', 'desc')->get();
-        return view('backend.pengarang.index', compact('listpengarang'));
+        $listpengarang = Pengarang::all();
+        return view('backend.pengarang', compact('listpengarang'));
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -32,24 +28,18 @@ class PengarangController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StorePengarangRequest  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(StorePengarangRequest $request)
     {
         //
         Pengarang::create([
-            'namapengarang' => $request->input('nama')
+            'nama_pengarang' => $request['nama'],
         ]);
         return redirect('/pengarang');
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Pengarang  $pengarang
-     * @return \Illuminate\Http\Response
      */
     public function show(Pengarang $pengarang)
     {
@@ -58,9 +48,6 @@ class PengarangController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Pengarang  $pengarang
-     * @return \Illuminate\Http\Response
      */
     public function edit(Pengarang $pengarang)
     {
@@ -69,34 +56,26 @@ class PengarangController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatePengarangRequest  $request
-     * @param  \App\Models\Pengarang  $pengarang
-     * @return \Illuminate\Http\Response
      */
     public function update(UpdatePengarangRequest $request, $idpengarang)
     {
         //
-        $request->validate([
-            'nama' => 'required|string|max:45',
-        ]);
-        $pengarang = Pengarang::find($idpengarang);
-        $pengarang->namapengarang = $request->nama;
-        $pengarang->save();
+        // dd($idpengarang);
+        $ambilpengarang  = Pengarang::find($idpengarang);
+        $ambilpengarang->nama_pengarang = $request->nama;
+        $ambilpengarang->save();
         return redirect('/pengarang');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Pengarang  $pengarang
-     * @return \Illuminate\Http\Response
      */
-    public function destroy($idpengarang)
+    public function destroy(Pengarang $request,$idpengarang)
     {
         //
-        $pengarang = Pengarang::find($idpengarang);
-        $pengarang->delete();
+        // dd($idpengarang);
+        $delpengarang = Pengarang::find($idpengarang);
+        $delpengarang->delete();
         return redirect('/pengarang');
     }
 }

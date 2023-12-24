@@ -4,93 +4,77 @@ namespace App\Http\Controllers;
 
 use App\Models\Buku;
 use App\Models\Kategori;
-use App\Http\Requests\StoreBukuRequest;
-use App\Http\Requests\UpdateBukuRequest;
-use App\Models\Peminjaman;
 use App\Models\Penerbit;
 use App\Models\Pengarang;
-use App\Models\User;
-use Illuminate\Support\Facades\Storage;
-use PDF;
-
+use Illuminate\Support\Facades\File;
+use App\Http\Requests\StoreBukuRequest;
+use App\Http\Requests\UpdateBukuRequest;
 
 class BukuController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $judulbuku = Buku::orderBy('idbuku', 'desc')->get();
+        $listbuku = Buku::all();
         $listpengarang = Pengarang::all();
-        $listpenerbit = Penerbit::all();
-        $listkategori = Kategori::all();
-        $listpeminjaman = Peminjaman::all();
-        $listuser = User::all();
-        return view('backend.buku.index', compact('judulbuku', 'listkategori', 'listpenerbit', 'listpengarang','listpeminjaman','listuser'));
-        return view('frontend.home', compact('judulbuku'));
+        $listpenerbit = penerbit::all();
+        $listkategori = kategori::all();
+        return view('backend.buku', compact('listbuku', 'listpengarang', 'listpenerbit', 'listkategori'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //    
-
+        //
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(StoreBukuRequest $request)
     {
-
         // dd($request);
         $request->validate([
-            'nama' => 'required|string|max:45',
-            'pengarang' => 'required|exists:pengarang,idpengarang',
-            'penerbit' => 'required|exists:penerbit,idpenerbit',
-            'kategori' => 'required|exists:kategori,idkategori',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|min:2|max:9000',//KB
-            'deskripsi' => 'required|string|max:100',
+            'judul' => 'required|min:3|max:100',
+            'pengarang' => 'exists:pengarangs,idpengarang',
+            'penerbit' => 'exists:penerbits,idpenerbit',
+            'kategori' => 'exists:kategoris,idkategori',
+            'tahun' => 'required|numeric',
+            'deskripsi' => 'nullable|max:255',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048|nullable',
         ]);
-        if(!empty($request->foto)){
-            $fileName = 'asset_'.date("Ymd_h-i-s").'.'.$request->foto->extension();
-            //$fileName = $request->foto->getClientOriginalName();
-            $request->foto->move(public_path('backend/assets/img'),$fileName);
-        }
-        else{
-            $fileName = '';
-        }
-        Buku::create([
-            'judulbuku' => $request->input('nama'),
-            'pengarang_idpengarang' => $request->input('pengarang'),
-            'penerbit_idpenerbit' => $request->input('penerbit'),
-            'kategori_idkategori' => $request->input('kategori'),
-            'foto'=>$fileName,
-            'deskripsi' => $request->input('deskripsi')
-        ]);
+        $buku = new Buku();
+        $buku->judul_buku = $request->judul;
+        $buku->pengarang_id = $request->pengarang;
+        $buku->penerbit_id = $request->penerbit;
+        $buku->kategori_id = $request->kategori;
+        $buku->tahun_terbit = $request->tahun;
 
-        // Buku::create([
-        //     'judulbuku' => $data['nama'], 'pengarang_idpengarang' => $data['pengarang'], 'penerbit_idpenerbit' => $data['penerbit'], 'kategori_idkategori' => $data['kategori'], 'foto' => $data['foto']->store('publicImage'), 'deskripsi' => $data['deskripsi'],
-        // ]);
+        $buku->deskripsi = $request->deskripsi;
+        $buku->foto = $request->foto;
+        if ($request->hasFile('foto')) {
+            // Pindahkan file foto hanya jika ada file yang diunggah
+            $request->validate([
+                'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
 
+            $fileName = 'buku_' . time() . '.' . $request->foto->extension();
+            $request->foto->move(public_path('assets/buku'), $fileName);
+
+            $buku->foto = 'assets/buku/' . $fileName;
+        } else {
+            $buku->foto = ''; // Set foto menjadi string kosong jika tidak ada file yang diunggah
+        }
+        $buku->save();
         return redirect('/buku');
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Buku  $buku
-     * @return \Illuminate\Http\Response
      */
     public function show(Buku $buku)
     {
@@ -99,9 +83,6 @@ class BukuController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Buku  $buku
-     * @return \Illuminate\Http\Response
      */
     public function edit(Buku $buku)
     {
@@ -110,70 +91,64 @@ class BukuController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateBukuRequest  $request
-     * @param  \App\Models\Buku  $buku
-     * @return \Illuminate\Http\Response
      */
     public function update(UpdateBukuRequest $request, $idbuku)
     {
         // dd($request);
         $request->validate([
-            'nama' => 'required|string|max:45',
-            'pengarang' => 'required|exists:pengarang,idpengarang',
-            'penerbit' => 'required|exists:penerbit,idpenerbit',
-            'kategori' => 'required|exists:kategori,idkategori',
-            'foto' => 'image|file|max:2048',
+            'judul' => 'required|min:3|max:100',
+            'pengarang' => 'exists:pengarangs,idpengarang',
+            'penerbit' => 'exists:penerbits,idpenerbit',
+            'kategori' => 'exists:kategoris,idkategori',
+            'deskripsi' => 'nullable|max:255',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
-        $buku = Buku::find($idbuku);
-        $buku->judulbuku = $request->nama;
-        $buku->pengarang_idpengarang = $request->pengarang;
-        $buku->penerbit_idpenerbit = $request->penerbit;
-        $buku->kategori_idkategori = $request->kategori;
+        $ambilBuku = Buku::find($idbuku);
+        $ambilBuku->judul_buku = $request->judul;
+        $ambilBuku->pengarang_id = $request->pengarang;
+        $ambilBuku->penerbit_id = $request->penerbit;
+        $ambilBuku->kategori_id = $request->kategori;
+        $ambilBuku->deskripsi = $request->deskripsi;
         if ($request->hasFile('foto')) {
+            $request->validate([
+                'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+
             // Hapus foto lama jika ada
-            if ($buku->foto) {
-                Storage::delete('storage/' . $buku->foto);
+            if ($ambilBuku->foto && file_exists(public_path($ambilBuku->foto))) {
+                unlink(public_path($ambilBuku->foto));
             }
-            $buku->foto = $request->file('foto')->store('publicImage');
+
             // Upload foto baru
+            $fileName = 'buku_' . time() . '.' . $request->foto->extension();
+            $request->foto->move(public_path('assets/buku'), $fileName);
+            $ambilBuku->foto = 'assets/buku/' . $fileName;
         }
-        $buku->save();
+        $ambilBuku->save();
         return redirect('/buku');
     }
-
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Buku  $buku
-     * @return \Illuminate\Http\Response
      */
     public function destroy($idbuku)
     {
-        //
-        $buku = Buku::find($idbuku);
-        $buku->delete();
+        // dd($idbuku);
+        $delbuku = Buku::find($idbuku);
+        if (!$delbuku) {
+            return redirect('/buku')->with('error', 'Buku tidak ditemukan.');
+        }
+
+        // Hapus foto yang bersangkutan jika ada
+        if ($delbuku->foto) {
+            $fotoPath = public_path($delbuku->foto);
+
+            // Periksa apakah file foto benar-benar ada sebelum dihapus
+            if (File::exists($fotoPath)) {
+                // Hapus file foto
+                File::delete($fotoPath);
+            }
+        }
+        $delbuku->delete();
         return redirect('/buku');
-    }
-
-    public function generatePdf()
-    {
-        $dataBuku = Buku::select('buku.*', 'kategori.listkategori')
-        ->join('kategori', 'buku.kategori_idkategori', '=', 'kategori.idkategori')
-        ->get();
-
-
-        $pdf = PDF::loadView('backend.buku.pdf', ['dataBuku' => $dataBuku]);
-        return $pdf->download('data-buku.pdf');
-    }
-
-    public function generateExcel()
-    {
-        $dataBuku = Buku::select('buku.*', 'kategori.listkategori')
-        ->join('kategori', 'buku.kategori_idkategori', '=', 'kategori.idkategori')
-        ->get();
-
-        return Excel::download(new BukuExport($dataBuku), 'data-buku.xlsx');
     }
 }

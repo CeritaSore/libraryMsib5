@@ -8,19 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Buku extends Model
 {
     use HasFactory;
+    protected $table = 'bukus';
+    protected $fillable = ['judul_buku', 'pengarang_id', 'penerbit_id', 'kategori_id','deskripsi','foto','tahun_terbit'];
     protected $primaryKey = 'idbuku';
-    protected $table = 'buku';
-    protected $fillable = ['judulbuku','pengarang_idpengarang',
-    'penerbit_idpenerbit','kategori_idkategori','foto','deskripsi','stok','status'];
-    public function kategori() {
-        return $this->belongsTo(kategori::class,'kategori_idkategori','idkategori');
+    public function pengarang()
+    {
+        return $this->belongsTo(pengarang::class,'pengarang_id','idpengarang');
     }
-    public function pengarang() {
-        return $this->belongsTo(pengarang::class,'pengarang_idpengarang','idpengarang');
+    public function penerbit()
+    {
+        return $this->belongsTo(penerbit::class,'penerbit_id','idpenerbit');
     }
-    public function penerbit() {
-        return $this->belongsTo(penerbit::class,'penerbit_idpenerbit','idpenerbit');
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class,'kategori_id','idkategori');
     }
-    
-    
 }
