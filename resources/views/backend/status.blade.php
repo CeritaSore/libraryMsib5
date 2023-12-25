@@ -33,10 +33,23 @@
                                     <td>Peminjaman {{ $pinjam->idpeminjaman }}</td>
                                     <td>
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModalView{{ $pinjam->idpeminjaman }}">
-                                            <i class="ti-eye"></i>
+                                        data-bs-target="#exampleModalView{{ $pinjam->idpeminjaman }}">
+                                        <i class="ti-eye"></i>
                                         </button>
-
+                                     </td>
+                                    <td>
+                                        @if ($pinjam->status_peminjaman == 'approved')
+                                        <form action="{{ route('return', $pinjam->idpeminjaman)}}" method="post">
+                                            @csrf
+                                            @method('put')
+                                            <button type="submit"class="btn btn-success" data-bs-toggle="modal"
+                                            data-bs-target="">
+                                            <i class="ti-close"></i>
+                                        </button>
+                                        </form>
+                                        @else
+                                        Tersedia
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -77,7 +90,7 @@
                                 <a href="#!" class="text-muted">{{ $pinjam->tgl_ambil }}</a>
                             </p>
                             <p class="text-muted mb-4">Lama peminjaman<span class="mx-2">|</span>
-                                <a href="#!" class="text-muted">{{ $pinjam->lama_peminjaman }} Hari</a>
+                                <a href="#!" class="text-muted">{{ $pinjam->tgl_pinjam->diffInDays($pinjam->lama_peminjaman) }} Hari</a>
                             </p>
                             <p class="text-muted mb-4">Status peminjaman<span class="mx-2">|</span>
                                 <a href="#!" class="text-muted">{{ $pinjam->status_peminjaman }} </a>
@@ -86,12 +99,10 @@
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                     data-bs-target="#exampleModalEdit{{ $pinjam->idpeminjaman }}">
                                     <i class="ti-pencil"></i>
-
                                 </button>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#exampleModalDelete{{ $pinjam->idpeminjaman }}">
                                     <i class="ti-trash"></i>
-
                                 </button>
                             </div>
                         </div>

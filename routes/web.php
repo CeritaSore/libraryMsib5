@@ -71,3 +71,5 @@ Route::get('/pinjam', [PeminjamanController::class,'index']);
 Route::post('/pinjam', [PeminjamanController::class,'store'])->name('up4');
 Route::put('/status/{id}', [PeminjamanController::class,'update'])->name('edit4');
 Route::delete('/status/{id}', [PeminjamanController::class,'destroy'])->name('delete4');
+Route::put('/peminjaman/{id}/return', [PeminjamanController::class, 'return'])->name('return');
+

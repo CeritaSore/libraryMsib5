@@ -24,10 +24,10 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{ $buku->judul_buku }}</h5>
-                            <p class="card-text">deskripsi(nanti)</p>
-                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#exampleModalLook{{ $buku->idbuku }}">Tambah buku<i
-                                    class="ti-arrow-circle-right ms-1"></i></button>
+                            <p class="card-text">{{$buku->deskripsi}}</p>
+                            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#exampleModalLook{{ $buku->idbuku }}">Detail<i
+                                    class="ti-arrow-circle-right ms-2"></i></button>
                         </div>
                     </div>
                 </div>

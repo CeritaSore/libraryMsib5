@@ -25,19 +25,12 @@
                             @endforeach
                         </select>
                     </div>
-
+                    
                     <div class="form-group">
-                        <label for="exampleInputName1">Tanggal Peminjaman</label>
-                        <input type="date" name="tglpinjam" class="form-control" id="exampleInputName1">
+                        <label for="tglambil">Tanggal Pengambilan:</label>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputName1">Tanggal Pengambilan</label>
-                        <input type="date" name="tglambil" class="form-control" id="exampleInputName1">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputName1">Lama Peminjaman</label>
-                        <input type="number" name="durasi" class="form-control" max='7' id="exampleInputName1"
-                            oninput="valid(this)">
+                        <input type="date" name="tglambil" id="tglambil" required>
                     </div>
                     <button type="submit" class="btn btn-success">Submit</button>
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
