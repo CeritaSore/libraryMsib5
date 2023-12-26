@@ -137,7 +137,7 @@ class BukuSeeder extends Seeder
             'penerbit_id' => '14',
             'kategori_id' => '2',
             'tahun_terbit' => '2020',
-            'foto' => '',
+            'foto' => 'https://i.ibb.co/XjC3tRF/psycologi-of-money.jpg',
         ]);
 
         // buku 15
@@ -147,7 +147,7 @@ class BukuSeeder extends Seeder
             'penerbit_id' => '14',
             'kategori_id' => '2',
             'tahun_terbit' => '2018',
-            'foto' => '',
+            'foto' => 'https://i.ibb.co/Vm8DhCz/BIcara-Itu-Ada-Seninay.jpg',
         ]);
         // buku 16
         Buku::create([
@@ -156,7 +156,7 @@ class BukuSeeder extends Seeder
             'penerbit_id' => '8',
             'kategori_id' => '2',
             'tahun_terbit' => '2011',
-            'foto' => '',
+            'foto' => 'https://i.ibb.co/mt0qKYp/thinking-fast-and-slow.jpg',
         ]);
     }
 }
