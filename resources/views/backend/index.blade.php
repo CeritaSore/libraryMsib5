@@ -139,7 +139,7 @@
                             </span>
                           </div>
                           <hr>
-                            <a class="dropdown-item">
+                            <a class="dropdown-item" href="/profile">
                                 <i class="ti-settings text-primary"></i>
                                 Settings
                             </a>

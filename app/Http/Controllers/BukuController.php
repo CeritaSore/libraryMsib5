@@ -11,7 +11,7 @@ use App\Http\Requests\StoreBukuRequest;
 use App\Http\Requests\UpdateBukuRequest;
 
 class BukuController extends Controller
-{
+{ 
     /**
      * Display a listing of the resource.
      */
