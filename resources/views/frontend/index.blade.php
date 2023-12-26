@@ -31,7 +31,7 @@
                     <!-- logo -->
                     <div class="col-md-2">
                         <div class="main-logo">
-                            <a href="index.html"><img src="images/main-logo.png" alt="logo"></a>
+                            <a href="index.html"><img style="height:7rem" src="assets/logo/logo.png" alt="logo"></a>
                         </div>
                     </div>
                     <!-- navbar -->

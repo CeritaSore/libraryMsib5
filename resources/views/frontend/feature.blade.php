@@ -15,66 +15,73 @@
 
                     <div class="product-list" data-aos="fade-up">
                         <div class="row">
-
-                            <div class="col-md-3">
-                                <div class="product-item">
-                                    <figure class="product-style">
-                                        <img src="images/product-item1.jpg" alt="Books" class="product-item">
-                                        <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to
-                                            Cart</button>
-                                    </figure>
-                                    <figcaption>
-                                        <h3>Simple way of piece life</h3>
-                                        <span>Armor Ramsey</span>
-                                        <div class="item-price">$ 40.00</div>
-                                    </figcaption>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="product-item">
-                                    <figure class="product-style">
-                                        <img src="images/product-item2.jpg" alt="Books" class="product-item">
-                                        <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to
-                                            Cart</button>
-                                    </figure>
-                                    <figcaption>
-                                        <h3>Great travel at desert</h3>
-                                        <span>Sanchit Howdy</span>
-                                        <div class="item-price">$ 38.00</div>
-                                    </figcaption>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="product-item">
-                                    <figure class="product-style">
-                                        <img src="images/product-item3.jpg" alt="Books" class="product-item">
-                                        <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to
-                                            Cart</button>
-                                    </figure>
-                                    <figcaption>
-                                        <h3>The lady beauty Scarlett</h3>
-                                        <span>Arthur Doyle</span>
-                                        <div class="item-price">$ 45.00</div>
-                                    </figcaption>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="product-item">
-                                    <figure class="product-style">
-                                        <img src="images/product-item4.jpg" alt="Books" class="product-item">
-                                        <button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to
-                                            Cart</button>
-                                    </figure>
-                                    <figcaption>
-                                        <h3>Once upon a time</h3>
-                                        <span>Klien Marry</span>
-                                        <div class="item-price">$ 35.00</div>
-                                    </figcaption>
-                                </div>
-                            </div>
+                            @foreach ($listbuku as $target => $buku)
+                                @if ($target == 13)
+                                    <div class="col-md-3">
+                                        <div class="product-item">
+                                            <figure class="product-style">
+                                                <img src="{{ $buku->foto }}" alt="Books" class="product-item">
+                                                <button type="button" class="add-to-cart"
+                                                    data-product-tile="add-to-cart">Add
+                                                    to
+                                                    Cart</button>
+                                            </figure>
+                                            <figcaption>
+                                                <h3>{{ $buku->judul_buku }}</h3>
+                                                <span>{{ $buku->pengarang->nama_pengarang }}</span>
+                                            </figcaption>
+                                        </div>
+                                    </div>
+                                @elseif($target == 14)
+                                    <div class="col-md-3">
+                                        <div class="product-item">
+                                            <figure class="product-style">
+                                                <img src="{{ $buku->foto }}" alt="Books" class="product-item">
+                                                <button type="button" class="add-to-cart"
+                                                    data-product-tile="add-to-cart">Add
+                                                    to
+                                                    Cart</button>
+                                            </figure>
+                                            <figcaption>
+                                                <h3>{{ $buku->judul_buku }}</h3>
+                                                <span>{{ $buku->pengarang->nama_pengarang }}</span>
+                                            </figcaption>
+                                        </div>
+                                    </div>
+                                @elseif($target == 1)
+                                    <div class="col-md-3">
+                                        <div class="product-item">
+                                            <figure class="product-style">
+                                                <img src="{{ $buku->foto }}" alt="Books" class="product-item">
+                                                <button type="button" class="add-to-cart"
+                                                    data-product-tile="add-to-cart">Add
+                                                    to
+                                                    Cart</button>
+                                            </figure>
+                                            <figcaption>
+                                                <h3>{{ $buku->judul_buku }}</h3>
+                                                <span>{{ $buku->pengarang->nama_pengarang }}</span>
+                                            </figcaption>
+                                        </div>
+                                    </div>
+                                @elseif($target == 15)
+                                    <div class="col-md-3">
+                                        <div class="product-item">
+                                            <figure class="product-style">
+                                                <img src="{{ $buku->foto }}" alt="Books" class="product-item">
+                                                <button type="button" class="add-to-cart"
+                                                    data-product-tile="add-to-cart">Add
+                                                    to
+                                                    Cart</button>
+                                            </figure>
+                                            <figcaption>
+                                                <h3>{{ $buku->judul_buku }}</h3>
+                                                <span>{{ $buku->pengarang->nama_pengarang }}</span>
+                                            </figcaption>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
 
                         </div><!--ft-books-slider-->
                     </div><!--grid-->
@@ -87,7 +94,7 @@
                 <div class="col-md-12">
 
                     <div class="btn-wrap align-right">
-                        <a href="#" class="btn-accent-arrow">View all products <i
+                        <a href="/popular" class="btn-accent-arrow">Lihat Semua buku<i
                                 class="icon icon-ns-arrow-right"></i></a>
                     </div>
 

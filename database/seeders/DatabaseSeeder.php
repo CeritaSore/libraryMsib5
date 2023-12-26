@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PenerbitSeeder::class);
         $this->call(KategoriSeeder::class);
         $this->call(BukuSeeder::class);
+        $this->call(TeamSeeder::class);
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
