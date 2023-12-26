@@ -77,3 +77,7 @@ Route::delete('/status/{id}', [PeminjamanController::class,'destroy'])->name('de
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Ubah password
+Route::get('password', [HomeController::class, 'password'])->name('password');
+Route::post('password', [HomeController::class, 'password_action'])->name('password.action');
