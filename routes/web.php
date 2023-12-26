@@ -66,6 +66,12 @@ Route::get('/profile', function () {
     return view('backend.profile');
 });
 
+Route::get('/afterRegister', function () {
+    return view('backend.afterRegister');
+});
+Route::get('/accessDenied', function () {
+    return view('backend.accessDenied');
+});
 
 
 Route::get('/status', [PeminjamanController::class,'status'])->middleware('auth');
