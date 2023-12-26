@@ -48,13 +48,13 @@
                     <h5>Discover</h5>
                     <ul class="menu-list">
                         <li class="menu-item">
-                            <a href="#">Home</a>
+                            <a href="/">Home</a>
                         </li>
                         <li class="menu-item">
-                            <a href="#">Books</a>
+                            <a href="/buku">Books</a>
                         </li>
                         <li class="menu-item">
-                            <a href="#">Authors</a>
+                            <a href="/pengarang">Authors</a>
                         </li>
                         <li class="menu-item">
                             <a href="#">Subjects</a>
@@ -72,10 +72,10 @@
                     <h5>My account</h5>
                     <ul class="menu-list">
                         <li class="menu-item">
-                            <a href="#">Sign In</a>
+                            <a href="/login">Sign In</a>
                         </li>
                         <li class="menu-item">
-                            <a href="#">View Cart</a>
+                            <a href="/status">View Status</a>
                         </li>
                         <li class="menu-item">
                             <a href="#">My Wishtlist</a>
