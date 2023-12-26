@@ -18,7 +18,7 @@
     <div class="col-1 col-xl-12 grid-margin">
         <div class="row justifiy-content-around">
             @foreach ($listbuku as $buku)
-                <div class="col-4 col-xl-3 mb-4">
+                <div class="col-12 col-xl-4 mb-4 mb-xl-4">
                     <div class="card text-center" style="width: 18rem;">
                         <div class="" style="max-height:15rem; overflow:hidden;">
                             <img src="{{ $buku->foto }}" class="card-img-top" alt="{{ $buku->judul_buku }}">
