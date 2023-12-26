@@ -62,6 +62,11 @@ Route::get('/kelola', function(){
     return view('backend.user.index');
 });
 
+Route::get('/profile', function () {
+    return view('backend.profile');
+});
+
+
 
 Route::get('/status', [PeminjamanController::class,'status'])->middleware('auth');
 Route::get('/pinjam', [PeminjamanController::class,'index'])->middleware('auth');
