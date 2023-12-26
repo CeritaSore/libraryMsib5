@@ -36,17 +36,26 @@
                 <span class="menu-title">Status peminjaman</span>
             </a>
         </li>
+        @if (Auth::user()->role == 'admin')
         <li class="nav-item">
             <a class="nav-link" href="/kelola">
                 <i class="bi bi-person menu-icon"></i>
                 <span class="menu-title">Kelola Akun</span>
             </a>
         </li>
+        @endif
         <li class="nav-item">
-            <a class="nav-link" href="/">
+            <a class="nav-link"href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();">
                 <i class="bi bi-box-arrow-left menu-icon"></i>
-                <span class="menu-title">Logout</span>
+                <span class="menu-title">{{ __('Logout') }}</span>
             </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
         </li>
+
+        
     </ul>
 </nav>

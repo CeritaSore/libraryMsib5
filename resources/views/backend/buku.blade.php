@@ -7,9 +7,10 @@
                 <h6 class="font-weight-normal mb-4 text-capitalize">Temukan buku yang kamu inginkan dan <span
                         class="font-weight-bold">pinjam sekarang</span>!
                 </h6>
+                @if (Auth::user()->role != 'guest')
                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                     data-bs-target="#exampleModal">Tambah buku<i class="ti-arrow-circle-right ms-1"></i></button>
-
+                @endif
             </div>
         </div>
 
@@ -26,7 +27,7 @@
                             <h5 class="card-title">{{ $buku->judul_buku }}</h5>
                             <p class="card-text">deskripsi(nanti)</p>
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#exampleModalLook{{ $buku->idbuku }}">Tambah buku<i
+                                data-bs-target="#exampleModalLook{{ $buku->idbuku }}">Lihat Buku<i
                                     class="ti-arrow-circle-right ms-1"></i></button>
                         </div>
                     </div>
@@ -38,6 +39,7 @@
     {{-- <div class="modal-backdrop fade show"></div> --}}
 @endsection
 {{-- input data --}}
+@if (Auth::user()->role != 'guest')
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -113,6 +115,7 @@
         </div>
     </div>
 </div>
+
 {{-- edit data --}}
 @foreach ($listbuku as $buku)
     <div class="modal fade" id="exampleModalEdit{{ $buku->idbuku }}" tabindex="-1" role="dialog"
@@ -194,6 +197,7 @@
         </div>
     </div>
 @endforeach
+@endif
 {{-- delete --}}
 @foreach ($listbuku as $buku)
     <div class="modal fade" id="exampleModalDelete{{ $buku->idbuku }}" tabindex="-1" role="dialog"
@@ -268,17 +272,19 @@
                                         <i class="ti-ticket"></i>
                                     </a>
                                 @endif
-
+                                @if (Auth::user()->role != 'guest')
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                     data-bs-target="#exampleModalEdit{{ $buku->idbuku }}">
                                     <i class="ti-pencil"></i>
-
                                 </button>
+                                @endif
+                                @if (Auth::user()->role == 'admin')
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#exampleModalDelete{{ $buku->idbuku }}">
                                     <i class="ti-trash"></i>
 
                                 </button>
+                                @endif
                             </div>
                         </div>
                     </div>

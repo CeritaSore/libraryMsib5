@@ -46,9 +46,13 @@
                                     <li class="menu-item {{$title === 'popular'?'active':''}}"><a href="/popular" class="nav-link">Popular</a></li>
                                     <li class="menu-item {{$title === 'about'?'active':''}}"><a href="/about" class="nav-link">About</a></li>
                                     
-                                    <li class="menu-item"><a
-                                            href="/dashboard"
+                                    @if (empty(Auth::user()->name))
+                                    <li class="menu-item"><a href="{{ url('/dashboard') }}"
                                             class="nav-link btn btn-outline-dark rounded-pill m-0">Login</a></li>
+                                @else
+                                    <li class="menu-item"><a href="{{ url('/dashboard') }}"
+                                            class="nav-link btn btn-outline-dark rounded-pill m-0">{{Auth::user()->name}}</a></li>
+                                @endif
                                 </ul>
 
                                 <div class="hamburger">

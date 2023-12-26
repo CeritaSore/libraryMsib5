@@ -9,7 +9,9 @@
                 <h3 class="font-weight-bold">Kategori</h3>
                 <h6 class="font-weight-normal">Cari kategori yang kamu mau!
                 </h6>
+                @if (Auth::user()->role != 'guest')
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Tambah Data</button>
+                @endif
             </div>
         </div>
     </div>
@@ -32,15 +34,19 @@
                                     <td>{{$no++}}</td>
                                     <td>{{$kategori->kategori}}</td>
                                     <td>
+                                        @if (Auth::user()->role != 'guest')
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal{{ $kategori->idkategori }}"><i
                                                 class="ti-pencil"></i></button>
+                                        @endif
                                         <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal1{{ $kategori->idkategori }}"><i
                                                 class="ti-eye"></i></button>
+                                        @if (Auth::user()->role == 'admin')
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal2{{ $kategori->idkategori }}"><i
                                                 class="ti-trash"></i></button>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -51,6 +57,7 @@
         </div>
     </div>
 @endsection
+@if (Auth::user()->role != 'guest')
 {{-- input --}}
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2"
     aria-hidden="true">
@@ -117,6 +124,7 @@
         </div>
     </div>
 @endforeach
+@endif
 {{-- view --}}
 @foreach ($listkategori as $kategori)
     <div class="modal fade" id="exampleModal1{{ $kategori->idkategori }}" tabindex="-1" role="dialog"
@@ -157,6 +165,7 @@
     </div>
 @endforeach
 {{-- delete --}}
+@if (Auth::user()->role != 'guest')
 @foreach ($listkategori as $kategori)
     <div class="modal fade" id="exampleModal2{{ $kategori->idkategori }}" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel-2" aria-hidden="true">
@@ -186,3 +195,4 @@
         </div>
     </div>
 @endforeach
+@endif

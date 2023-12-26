@@ -9,8 +9,10 @@
                 <h3 class="font-weight-bold">Penerbit</h3>
                 <h6 class="font-weight-normal">Cari penerbit buku favorit kamu!
                 </h6>
+                @if (Auth::user()->role != 'guest')
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Tambah
                     Data</button>
+                @endif
             </div>
         </div>
     </div>
@@ -33,15 +35,19 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $penerbit->nama_penerbit }}</td>
                                     <td>
+                                        @if (Auth::user()->role != 'guest')
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal{{ $penerbit->idpenerbit }}"><i
                                                 class="ti-pencil"></i></button>
+                                        @endif
                                         <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal1{{ $penerbit->idpenerbit }}"><i
                                                 class="ti-eye"></i></button>
+                                        @if (Auth::user()->role == 'admin')
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal2{{ $penerbit->idpenerbit }}"><i
                                                 class="ti-trash"></i></button>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -53,6 +59,7 @@
     </div>
 @endsection
 {{-- input --}}
+@if (Auth::user()->role != 'guest')
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -118,6 +125,7 @@
         </div>
     </div>
 @endforeach
+@endif
 {{-- view --}}
 @foreach ($listpenerbit as $penerbit)
     <div class="modal fade" id="exampleModal1{{ $penerbit->idpenerbit }}" tabindex="-1" role="dialog"
@@ -158,6 +166,7 @@
     </div>
 @endforeach
 {{-- delete --}}
+@if (Auth::user()->role != 'guest')
 @foreach ($listpenerbit as $penerbit)
     <div class="modal fade" id="exampleModal2{{ $penerbit->idpenerbit }}" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel-2" aria-hidden="true">
@@ -187,3 +196,4 @@
         </div>
     </div>
 @endforeach
+@endif

@@ -21,7 +21,7 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link rel="stylesheet" type="text/css" href="backend/js/select.dataTables.min.css">
-    
+
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="backend/css/vertical-layout-light/style.css">
@@ -34,10 +34,10 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="assets/logo/logo.png"
-                        class="mr-2" alt="logo" style="height:7rem" /></a>
-                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/logo/logo.png"
-                        alt="logo" style="height:6rem;width:6rem"/></a>
+                <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="assets/logo/logo.png" class="mr-2"
+                        alt="logo" style="height:7rem" /></a>
+                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/logo/logo.png" alt="logo"
+                        style="height:6rem;width:6rem" /></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -110,18 +110,40 @@
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
                             id="profileDropdown">
-                            <img src="backend/images/faces/face28.jpg" alt="profile" />
+                            @if (empty(Auth::user()->foto))
+                                <img src="assets/nophoto/nophoto.jpg" width="4.5%" alt="Profile"
+                                    class="rounded-circle">
+                            @else
+                                <img src="backend/assets/img/{{ Auth::user()->foto }}" width="4.5%" alt="Profile"
+                                    class="rounded-circle">
+                            @endif
                         </a>
+
+                        
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                             aria-labelledby="profileDropdown">
+                          <div class="dropdown-header">
+                            <h6>
+                                @if (empty(Auth::user()->name))
+                                    ''
+                                @else
+                                    {{ Auth::user()->name }}
+                                @endif
+                            </h6>
+                            <span>
+                                @if (empty(Auth::user()->role))
+                                    ''
+                                @else
+                                    {{ Auth::user()->role }}
+                                @endif
+                            </span>
+                          </div>
+                          <hr>
                             <a class="dropdown-item">
                                 <i class="ti-settings text-primary"></i>
                                 Settings
                             </a>
-                            <a class="dropdown-item">
-                                <i class="ti-power-off text-primary"></i>
-                                Logout
-                            </a>
+                            
                         </div>
                     </li>
                     <li class="nav-item nav-settings d-none d-lg-flex">
@@ -230,6 +252,7 @@
                 input.value = '7';
             }
         }
+
         function justNumber(input) {
             // Menghapus karakter selain angka
             input.value = input.value.replace(/[^0-9]/g, '');
