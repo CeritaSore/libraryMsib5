@@ -62,9 +62,11 @@ Route::delete('/kategori/{id}', [KategoriController::class,'destroy'])->name('de
 Route::get('/generate-pdfBuku', [PDFController::class, 'PDFBuku'])->name('PDFBuku')->middleware('auth');
 Route::get('/generate-pdfPeminjaman', [PDFController::class, 'PDFPeminjaman'])->name('PDFPeminjaman')->middleware('auth');
 
-Route::get('/kelola', function(){
-    return view('backend.user.index');
-});
+//kelola akun
+Route::get('/kelola', [UserController::class, 'index']);
+Route::post('/kategori', [UserController::class,'store'])->name('createuser');
+Route::put('/kelola/{id}', [UserController::class, 'update'])->name('updateuser');
+Route::delete('/kelola/{id}', [UserController::class, 'destroy'])->name('deleteuser');
 
 Route::get('/profile', function () {
     return view('backend.profile');
