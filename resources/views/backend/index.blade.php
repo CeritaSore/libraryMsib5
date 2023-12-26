@@ -21,7 +21,7 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link rel="stylesheet" type="text/css" href="backend/js/select.dataTables.min.css">
-    
+
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="backend/css/vertical-layout-light/style.css">
@@ -34,10 +34,10 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="assets/logo/logo.png"
-                        class="mr-2" alt="logo" style="height:7rem" /></a>
-                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/logo/logo.png"
-                        alt="logo" style="height:6rem;width:6rem"/></a>
+                <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="assets/logo/logo.png" class="mr-2"
+                        alt="logo" style="height:7rem" /></a>
+                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/logo/logo.png" alt="logo"
+                        style="height:6rem;width:6rem" /></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -230,11 +230,39 @@
                 input.value = '7';
             }
         }
+
         function justNumber(input) {
             // Menghapus karakter selain angka
             input.value = input.value.replace(/[^0-9]/g, '');
 
         }
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('form').submit(function() {
+                $(this).addClass('loading-container');
+                $(this).append(
+                '<div class="loading-overlay mt-5">' +
+                    '<div class="dot-opacity-loader">' +
+                        '<span></span>' +
+                        '<span></span>' +
+                        '<span></span>' +
+                    '</div>' +
+                '</div>'
+            );
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var liveAlertPlaceholder = document.getElementById('liveAlertPlaceholder');
+            var liveAlert = new bootstrap.Alert(liveAlertPlaceholder.parentNode);
+
+            // Menutup alert setelah 3 detik
+            setTimeout(function () {
+                liveAlert.close();
+            }, 3000);
+        });
     </script>
 </body>
 

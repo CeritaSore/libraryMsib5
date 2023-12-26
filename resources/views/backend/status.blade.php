@@ -6,7 +6,13 @@
                 <h3 class="font-weight-bold">Status peminjaman</h3>
                 <h6 class="font-weight-normal">Periksa status buku yang kamu pinjam!
                 </h6>
-
+                @if (session('success') || session('error'))
+                    <div class="alert alert-{{ session('success') ? 'success' : 'danger' }}" role="alert">
+                        <div id="liveAlertPlaceholder">
+                            {{ session('success') ?: session('error') }}
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -33,24 +39,11 @@
                                     <td>Peminjaman {{ $pinjam->idpeminjaman }}</td>
                                     <td>
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModalView{{ $pinjam->idpeminjaman }}">
-                                        <i class="ti-eye"></i>
+                                            data-bs-target="#exampleModalView{{ $pinjam->idpeminjaman }}">
+                                            <i class="ti-eye"></i>
                                         </button>
-                                     </td>
-                                    <td>
-                                        @if ($pinjam->status_peminjaman == 'approved')
-                                        <form action="{{ route('return', $pinjam->idpeminjaman)}}" method="post">
-                                            @csrf
-                                            @method('put')
-                                            <button type="submit"class="btn btn-success" data-bs-toggle="modal"
-                                            data-bs-target="">
-                                            <i class="ti-close"></i>
-                                        </button>
-                                        </form>
-                                        @else
-                                        Tersedia
-                                        @endif
                                     </td>
+
                                 </tr>
                             @endforeach
                         </tbody>
@@ -83,14 +76,19 @@
                             <p class="text-muted mb-4">Judul Buku<span class="mx-2">|</span>
                                 <a href="#!" class="text-muted">{{ $pinjam->buku->judul_buku }}</a>
                             </p>
-                            <p class="text-muted mb-4">Dipinjam pada<span class="mx-2">|</span>
-                                <a href="#!" class="text-muted">{{ $pinjam->tgl_pinjam }}</a>
+                            <p class="text-muted mb-4">Dipinjam<span class="mx-2">|</span>
+                                <a href="#!" class="text-muted">{{ $pinjam->tgl_pinjam->format('d-m-Y') }}</a>
                             </p>
                             <p class="text-muted mb-4">Akan diambil pada<span class="mx-2">|</span>
                                 <a href="#!" class="text-muted">{{ $pinjam->tgl_ambil }}</a>
                             </p>
                             <p class="text-muted mb-4">Lama peminjaman<span class="mx-2">|</span>
-                                <a href="#!" class="text-muted">{{ $pinjam->tgl_pinjam->diffInDays($pinjam->lama_peminjaman) }} Hari</a>
+                                <a href="#!"
+                                    class="text-muted">{{ $pinjam->tgl_pinjam->diffInDays($pinjam->lama_peminjaman) }}
+                                    Hari</a>
+                            </p>
+                            <p class="text-muted mb-4">Kembalikan buku sebelum <span class="mx-2">|</span>
+                                <a href="#!" class="text-muted">{{ $pinjam->lama_peminjaman }}</a>
                             </p>
                             <p class="text-muted mb-4">Status peminjaman<span class="mx-2">|</span>
                                 <a href="#!" class="text-muted">{{ $pinjam->status_peminjaman }} </a>
@@ -114,7 +112,7 @@
     </div>
 @endforeach
 @php
-    $stats = ['pending', 'approved','returned'];
+    $stats = ['pending', 'approved', 'returned'];
 @endphp
 @foreach ($listpinjam as $pinjam)
     <div class="modal fade" id="exampleModalEdit{{ $pinjam->idpeminjaman }}" tabindex="-1" role="dialog"
@@ -128,7 +126,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('edit4',$pinjam->idpeminjaman)}}" method="post">
+                    <form action="{{ route('edit4', $pinjam->idpeminjaman) }}" method="post">
                         @csrf
                         @method('put')
                         <div class="form-group">
@@ -167,13 +165,15 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h2>anda yakin ingin menghapus data?</h2>
-                    <form action="{{route('delete4',$pinjam->idpeminjaman)}}" method="post">
+                    <h2 class="text-capitalize text-center mb-5">anda yakin ingin menghapus data?</h2>
+                    <form action="{{ route('delete4', $pinjam->idpeminjaman) }}" method="post">
                         @csrf
                         @method('delete')
-                        
-                        <button type="submit" class="btn btn-success">yes</button>
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">no</button>
+                        <div class="d-flex justify-content-around">
+                            <button type="submit" class="btn btn-success">yes</button>
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">no</button>
+
+                        </div>
                     </form>
                 </div>
 
