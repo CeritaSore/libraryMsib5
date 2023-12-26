@@ -8,6 +8,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PenerbitController;
 use App\Http\Controllers\PengarangController;
+use App\Http\Controllers\PDFController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,6 +58,9 @@ Route::post('/kategori', [KategoriController::class,'store'])->name('up2')->midd
 Route::put('/kategori/{id}', [KategoriController::class,'update'])->name('edit2')->middleware('auth');
 Route::delete('/kategori/{id}', [KategoriController::class,'destroy'])->name('delete2')->middleware('auth');
 
+//PDF
+Route::get('/generate-pdfBuku', [PDFController::class, 'PDFBuku'])->name('PDFBuku')->middleware('auth');
+Route::get('/generate-pdfPeminjaman', [PDFController::class, 'PDFPeminjaman'])->name('PDFPeminjaman')->middleware('auth');
 
 Route::get('/kelola', function(){
     return view('backend.user.index');

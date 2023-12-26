@@ -6,6 +6,12 @@
                 <h3 class="font-weight-bold">Status peminjaman</h3>
                 <h6 class="font-weight-normal">Periksa status buku yang kamu pinjam!
                 </h6>
+                @if (Auth::user()->role != 'guest')
+                <a href="{{ route('PDFPeminjaman') }}" class="btn btn-danger" title="Export to PDF">
+                <i class="bi bi-file-earmark-pdf"></i>
+                </a>
+                
+                @endif
                 @if (session('success') || session('error'))
                     <div class="alert alert-{{ session('success') ? 'success' : 'danger' }}" role="alert">
                         <div id="liveAlertPlaceholder">
