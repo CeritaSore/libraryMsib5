@@ -94,14 +94,18 @@
                                 <a href="#!" class="text-muted">{{ $pinjam->status_peminjaman }} </a>
                             </p>
                             <div class="d-flex justify-content-around text-center mt-5 mb-2">
+                                @if (Auth::user()->role != 'guest')
                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                                     data-bs-target="#exampleModalEdit{{ $pinjam->idpeminjaman }}">
                                     <i class="ti-pencil"></i>
                                 </button>
+                                @endif
+                                @if (Auth::user()->role == 'admin')
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#exampleModalDelete{{ $pinjam->idpeminjaman }}">
                                     <i class="ti-trash"></i>
                                 </button>
+                                @endif
                             </div>
                         </div>
                     </div>

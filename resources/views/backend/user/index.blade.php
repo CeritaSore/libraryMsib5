@@ -1,6 +1,6 @@
 @extends('backend.index')
 @section('container')
-@if (Auth::user()->role == 'dmin')
+@if (Auth::user()->role == 'admin')
     <div class="col-md-12 grid-margin">
         <div class="row">
             <div class="col-12 col-xl-8 mb-xl-0">

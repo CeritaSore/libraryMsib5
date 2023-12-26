@@ -25,7 +25,7 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{ $buku->judul_buku }}</h5>
-                            <p class="card-text">deskripsi(nanti)</p>
+                            <p class="card-text">{{ $buku->deskripsi }}</p>
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#exampleModalLook{{ $buku->idbuku }}">Lihat Buku<i
                                     class="ti-arrow-circle-right ms-1"></i></button>
