@@ -7,7 +7,9 @@
 
                 <div class="footer-item">
                     <div class="company-brand">
-                        <img src="images/main-logo.png" alt="logo" class="footer-logo">
+                        <div class="main-logo">
+                            <a href="index.html"><img style="height:6rem" src="assets/logo/logo.png" alt="logo"></a>
+                        </div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sagittis sed ptibus liberolectus
                             nonet psryroin. Amet sed lorem posuere sit iaculis amet, ac urna. Adipiscing fames
                             semper erat ac in suspendisse iaculis.</p>
