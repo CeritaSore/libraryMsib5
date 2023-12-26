@@ -8,8 +8,8 @@
                         class="font-weight-bold">pinjam sekarang</span>!
                 </h6>
                 @if (Auth::user()->role != 'guest')
-                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">Tambah buku<i class="ti-arrow-circle-right ms-1"></i></button>
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">Tambah buku<i class="ti-arrow-circle-right ms-1"></i></button>
                 @endif
             </div>
         </div>
@@ -40,150 +40,70 @@
 @endsection
 {{-- input data --}}
 @if (Auth::user()->role != 'guest')
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel-2">Masukan Buku</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('up3') }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
-                        <label for="exampleInputName1">Judul</label>
-                        <input type="text" name="judul" class="form-control" id="exampleInputName1"
-                            placeholder="Name">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect2">pengarang</label>
-                        <select class="form-control" id="exampleFormControlSelect2" name="pengarang">
-                            <option default>-- pilih pengarang --</option>
-                            @foreach ($listpengarang as $pengarang)
-                                <option value="{{ $pengarang->idpengarang }}">{{ $pengarang->nama_pengarang }}</option>
-                            @endforeach
-
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect2">Penerbit</label>
-                        <select class="form-control" id="exampleFormControlSelect2" name="penerbit">
-                            <option default>-- pilih penerbit --</option>
-                            @foreach ($listpenerbit as $penerbit)
-                                <option value="{{ $penerbit->idpenerbit }}">{{ $penerbit->nama_penerbit }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-group">
-                            <label for="tahun">Tahun terbit</label>
-                            <input type="number" name="tahun" class="form-control" id="tahun" placeholder="Name"
-                               oninput="justNumber(this)">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect2">Kategori</label>
-                        <select class="form-control" id="exampleFormControlSelect2" name="kategori">
-                            <option default>-- pilih kategori --</option>
-                            @foreach ($listkategori as $kategori)
-                                <option value="{{ $kategori->idkategori }}">{{ $kategori->kategori }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputName1">Deskripsi(opsional)</label>
-                        <input type="text" name="deskripsi" class="form-control" id="exampleInputName1"
-                            placeholder="Name">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="formFile" class="form-label">Masukan foto(opsional)</label>
-                        <input class="form-control" name="foto" type="file" id="formFile">
-                    </div>
-
-                    <button type="submit" class="btn btn-success">Submit</button>
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                </form>
-
-            </div>
-            {{-- <div class="modal-footer">
-                
-                
-            </div> --}}
-        </div>
-    </div>
-</div>
-
-{{-- edit data --}}
-@foreach ($listbuku as $buku)
-    <div class="modal fade" id="exampleModalEdit{{ $buku->idbuku }}" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel-2" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content modal-dialog-scrollable">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-long-title" id="exampleModalLabel-2">Edit Buku</h5>
+                    <h5 class="modal-title" id="exampleModalLabel-2">Masukan Buku</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('edit3', $buku->idbuku) }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('up3') }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        @method('put')
                         <div class="form-group">
                             <label for="exampleInputName1">Judul</label>
-                            <input type="text" name="judul" value="{{ $buku->judul_buku }}"
-                                class="form-control" id="exampleInputName1" placeholder="Name">
+                            <input type="text" name="judul" class="form-control" id="exampleInputName1"
+                                placeholder="Name">
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect2">pengarang</label>
-                            <select class="form-control" name="pengarang" id="exampleFormControlSelect2">
+                            <select class="form-control" id="exampleFormControlSelect2" name="pengarang">
                                 <option default>-- pilih pengarang --</option>
                                 @foreach ($listpengarang as $pengarang)
-                                    <option value="{{ $pengarang->idpengarang }}"
-                                        {{ $pengarang->idpengarang === $buku->pengarang_id ? 'selected' : '' }}>
-                                        {{ $buku->pengarang->nama_pengarang }}</option>
+                                    <option value="{{ $pengarang->idpengarang }}">{{ $pengarang->nama_pengarang }}
+                                    </option>
                                 @endforeach
+
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect2">Penerbit</label>
-                            <select class="form-control" name="penerbit" id="exampleFormControlSelect2">
-                                <option default>-- pilih pengarang --</option>
+                            <select class="form-control" id="exampleFormControlSelect2" name="penerbit">
+                                <option default>-- pilih penerbit --</option>
                                 @foreach ($listpenerbit as $penerbit)
-                                    <option value="{{ $penerbit->idpenerbit }}"
-                                        {{ $penerbit->idpenerbit === $buku->penerbit_id ? 'selected' : '' }}>
-                                        {{ $buku->penerbit->nama_penerbit }}</option>
+                                    <option value="{{ $penerbit->idpenerbit }}">{{ $penerbit->nama_penerbit }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
+                            <div class="form-group">
+                                <label for="tahun">Tahun terbit</label>
+                                <input type="number" name="tahun" class="form-control" id="tahun"
+                                    placeholder="Name" oninput="justNumber(this)">
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="exampleFormControlSelect2">Kategori</label>
-                            <select class="form-control" name="kategori" id="exampleFormControlSelect2">
-                                <option default>-- pilih pengarang --</option>
+                            <select class="form-control" id="exampleFormControlSelect2" name="kategori">
+                                <option default>-- pilih kategori --</option>
                                 @foreach ($listkategori as $kategori)
-                                    <option value="{{ $kategori->idkategori }}"
-                                        {{ $kategori->idkategori === $buku->kategori_id ? 'selected' : '' }}>
-                                        {{ $buku->kategori->kategori }}</option>
+                                    <option value="{{ $kategori->idkategori }}">{{ $kategori->kategori }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputName1">Deskripsi(opsional)</label>
                             <input type="text" name="deskripsi" class="form-control" id="exampleInputName1"
-                                placeholder="Name" value="{{ $buku->deskripsi }}">
+                                placeholder="Name">
                         </div>
                         <div class="form-group mb-3">
                             <label for="formFile" class="form-label">Masukan foto(opsional)</label>
-                            <div style="max-height: 20rem;overflow:hidden;">
-
-                                <img src="{{ $buku->foto }}" alt="" class="img-thumbnail">
-                            </div>
-                            <input class="form-control" value="" name="foto" type="file"
-                                id="formFile">
+                            <input class="form-control" name="foto" type="file" id="formFile">
                         </div>
+
                         <button type="submit" class="btn btn-success">Submit</button>
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
                     </form>
@@ -196,7 +116,89 @@
             </div>
         </div>
     </div>
-@endforeach
+
+    {{-- edit data --}}
+    @foreach ($listbuku as $buku)
+        <div class="modal fade" id="exampleModalEdit{{ $buku->idbuku }}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel-2" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content modal-dialog-scrollable">
+                    <div class="modal-header">
+                        <h5 class="modal-long-title" id="exampleModalLabel-2">Edit Buku</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('edit3', $buku->idbuku) }}" method="post"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('put')
+                            <div class="form-group">
+                                <label for="exampleInputName1">Judul</label>
+                                <input type="text" name="judul" value="{{ $buku->judul_buku }}"
+                                    class="form-control" id="exampleInputName1" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect2">pengarang</label>
+                                <select class="form-control" name="pengarang" id="exampleFormControlSelect2">
+                                    <option default>-- pilih pengarang --</option>
+                                    @foreach ($listpengarang as $pengarang)
+                                        <option value="{{ $pengarang->idpengarang }}"
+                                            {{ $pengarang->idpengarang === $buku->pengarang_id ? 'selected' : '' }}>
+                                            {{ $buku->pengarang->nama_pengarang }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect2">Penerbit</label>
+                                <select class="form-control" name="penerbit" id="exampleFormControlSelect2">
+                                    <option default>-- pilih pengarang --</option>
+                                    @foreach ($listpenerbit as $penerbit)
+                                        <option value="{{ $penerbit->idpenerbit }}"
+                                            {{ $penerbit->idpenerbit === $buku->penerbit_id ? 'selected' : '' }}>
+                                            {{ $buku->penerbit->nama_penerbit }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect2">Kategori</label>
+                                <select class="form-control" name="kategori" id="exampleFormControlSelect2">
+                                    <option default>-- pilih pengarang --</option>
+                                    @foreach ($listkategori as $kategori)
+                                        <option value="{{ $kategori->idkategori }}"
+                                            {{ $kategori->idkategori === $buku->kategori_id ? 'selected' : '' }}>
+                                            {{ $buku->kategori->kategori }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputName1">Deskripsi(opsional)</label>
+                                <input type="text" name="deskripsi" class="form-control" id="exampleInputName1"
+                                    placeholder="Name" value="{{ $buku->deskripsi }}">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="formFile" class="form-label">Masukan foto(opsional)</label>
+                                <div style="max-height: 20rem;overflow:hidden;">
+
+                                    <img src="{{ $buku->foto }}" alt="" class="img-thumbnail">
+                                </div>
+                                <input class="form-control" value="" name="foto" type="file"
+                                    id="formFile">
+                            </div>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        </form>
+
+                    </div>
+                    {{-- <div class="modal-footer">
+                
+                
+            </div> --}}
+                </div>
+            </div>
+        </div>
+    @endforeach
 @endif
 {{-- delete --}}
 @foreach ($listbuku as $buku)
@@ -273,17 +275,17 @@
                                     </a>
                                 @endif
                                 @if (Auth::user()->role != 'guest')
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModalEdit{{ $buku->idbuku }}">
-                                    <i class="ti-pencil"></i>
-                                </button>
+                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalEdit{{ $buku->idbuku }}">
+                                        <i class="ti-pencil"></i>
+                                    </button>
                                 @endif
                                 @if (Auth::user()->role == 'admin')
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModalDelete{{ $buku->idbuku }}">
-                                    <i class="ti-trash"></i>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalDelete{{ $buku->idbuku }}">
+                                        <i class="ti-trash"></i>
 
-                                </button>
+                                    </button>
                                 @endif
                             </div>
                         </div>
