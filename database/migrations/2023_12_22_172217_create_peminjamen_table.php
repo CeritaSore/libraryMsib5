@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('buku_id');
             $table->date('tgl_pinjam');
             $table->date('tgl_ambil');
-            $table->integer('lama_peminjaman');
+            $table->date('lama_peminjaman');
             $table->enum('status_peminjaman',['pending','approved','returned'])->default('pending')->nullable();
             $table->timestamps();
             $table->foreign('buku_id')->references('idbuku')->on('bukus');

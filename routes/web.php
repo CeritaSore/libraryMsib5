@@ -61,16 +61,9 @@ Route::get('/kelola', function(){
     return view('backend.user.index');
 });
 
-Route::get('/afterregister', function () {
-    return view('backend.afterRegister');
-});
 
-Route::get('/status', [PeminjamanController::class,'status'])->middleware('auth');
-Route::get('/pinjam', [PeminjamanController::class,'index'])->middleware('auth');
-Route::post('/pinjam', [PeminjamanController::class,'store'])->name('up4')->middleware('auth');
-Route::put('/status/{id}', [PeminjamanController::class,'update'])->name('edit4')->middleware('auth');
-Route::delete('/status/{id}', [PeminjamanController::class,'destroy'])->name('delete4')->middleware('auth');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/status', [PeminjamanController::class,'status']);
+Route::get('/pinjam', [PeminjamanController::class,'index']);
+Route::post('/pinjam', [PeminjamanController::class,'store'])->name('up4');
+Route::put('/status/{id}', [PeminjamanController::class,'update'])->name('edit4');
+Route::delete('/status/{id}', [PeminjamanController::class,'destroy'])->name('delete4');

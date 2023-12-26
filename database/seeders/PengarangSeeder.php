@@ -74,8 +74,9 @@ class PengarangSeeder extends Seeder
         Pengarang::create([
             'nama_pengarang' => 'Daniel Kahneman',
         ]);
+        // buku 16
         Pengarang::create([
-            'nama_pengarang' => 'The Psycology of Money',
+            'nama_pengarang' => 'Morgan Housel',
         ]);
     }
 }

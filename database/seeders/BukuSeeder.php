@@ -134,7 +134,7 @@ class BukuSeeder extends Seeder
         Buku::create([
             'judul_buku' => 'the Psycology of Money',
             'pengarang_id' => '16',
-            'penerbit_id' => '15',
+            'penerbit_id' => '14',
             'kategori_id' => '2',
             'tahun_terbit' => '2020',
 

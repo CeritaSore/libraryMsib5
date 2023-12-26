@@ -259,6 +259,33 @@
 
         }
     </script>
+    <script>
+        $(document).ready(function() {
+            $('form').submit(function() {
+                $(this).addClass('loading-container');
+                $(this).append(
+                '<div class="loading-overlay mt-5">' +
+                    '<div class="dot-opacity-loader">' +
+                        '<span></span>' +
+                        '<span></span>' +
+                        '<span></span>' +
+                    '</div>' +
+                '</div>'
+            );
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var liveAlertPlaceholder = document.getElementById('liveAlertPlaceholder');
+            var liveAlert = new bootstrap.Alert(liveAlertPlaceholder.parentNode);
+
+            // Menutup alert setelah 3 detik
+            setTimeout(function () {
+                liveAlert.close();
+            }, 3000);
+        });
+    </script>
 </body>
 
 </html>
