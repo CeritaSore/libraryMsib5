@@ -20,7 +20,7 @@ class BukuSeeder extends Seeder
             'penerbit_id' => '1',
             'kategori_id' => '1',
             'tahun_terbit' => '2016',
-
+            'foto' => 'https://i.ibb.co/cDCQnrp/IMG-20231110-120203-1.png',
         ]);
         //buku 2
         Buku::create([
@@ -29,16 +29,16 @@ class BukuSeeder extends Seeder
             'penerbit_id' => '2',
             'kategori_id' => '1',
             'tahun_terbit' => '2021',
-
+            'foto' => 'https://i.ibb.co/2kmQzVv/IMG-20231110-120203-3.png',
         ]);
         //buku 3
         Buku::create([
-            'judul_buku' => 'Bahasa ibu:Ilmu sosial budaya dasar',
+            'judul_buku' => 'Ilmu sosial budaya dasar',
             'pengarang_id' => '3',
             'penerbit_id' => '3',
             'kategori_id' => '1',
             'tahun_terbit' => '2023',
-
+            'foto' => 'https://i.ibb.co/fS53bTG/IMG-20231110-120203-5.png',
         ]);
         //buku 4
         Buku::create([
@@ -47,7 +47,7 @@ class BukuSeeder extends Seeder
             'penerbit_id' => '4',
             'kategori_id' => '1',
             'tahun_terbit' => '2019',
-
+            'foto' => 'https://i.ibb.co/fYJvJRq/IMG-20231110-120203-7.png',
         ]);
         //buku 5
         Buku::create([
@@ -56,7 +56,7 @@ class BukuSeeder extends Seeder
             'penerbit_id' => '5',
             'kategori_id' => '1',
             'tahun_terbit' => '2023',
-
+            'foto' => 'https://i.ibb.co/4Ndxjhv/IMG-20231110-120203-9.png',
         ]);
         //buku 6
         Buku::create([
@@ -65,7 +65,7 @@ class BukuSeeder extends Seeder
             'penerbit_id' => '6',
             'kategori_id' => '1',
             'tahun_terbit' => '2016',
-
+            'foto' => 'https://i.ibb.co/30XtW7F/content-1-1.png',
         ]);
         //buku 7
         Buku::create([
@@ -74,7 +74,7 @@ class BukuSeeder extends Seeder
             'penerbit_id' => '7',
             'kategori_id' => '1',
             'tahun_terbit' => '2020',
-
+            'foto' => 'https://i.ibb.co/6FSBsz2/content-1-3.png',
         ]);
         //buku 8
         Buku::create([
@@ -83,7 +83,7 @@ class BukuSeeder extends Seeder
             'penerbit_id' => '8',
             'kategori_id' => '1',
             'tahun_terbit' => '2009',
-
+            'foto' => 'https://i.ibb.co/KyKPGw0/content-1-5.png',
         ]);
         //buku 9
         Buku::create([
@@ -92,7 +92,7 @@ class BukuSeeder extends Seeder
             'penerbit_id' => '9',
             'kategori_id' => '4',
             'tahun_terbit' => '2010',
-
+            'foto' => 'https://i.ibb.co/106kxTJ/content-1-7.png'
         ]);
         //buku 10
         Buku::create([
@@ -101,7 +101,7 @@ class BukuSeeder extends Seeder
             'penerbit_id' => '10',
             'kategori_id' => '1',
             'tahun_terbit' => '2015',
-
+            'foto' => 'https://i.ibb.co/yP4h13W/content-1-9.png',
         ]);
         //buku 11
         Buku::create([
@@ -110,7 +110,7 @@ class BukuSeeder extends Seeder
             'penerbit_id' => '10',
             'kategori_id' => '1',
             'tahun_terbit' => '2020',
-
+            'foto' => 'https://i.ibb.co/SrRs85p/content-1-11.png',
         ]);
         //buku 12
         Buku::create([
@@ -119,7 +119,7 @@ class BukuSeeder extends Seeder
             'penerbit_id' => '11',
             'kategori_id' => '1',
             'tahun_terbit' => '1992',
-
+            'foto' => 'https://i.ibb.co/rtDzzF7/content-1-13.png',
         ]);
         //buku 13
         Buku::create([
@@ -128,7 +128,7 @@ class BukuSeeder extends Seeder
             'penerbit_id' => '12',
             'kategori_id' => '1',
             'tahun_terbit' => '2018',
-
+            'foto' => 'https://i.ibb.co/W5k70Bj/content-1-15.png',
         ]);
         // buku 14
         Buku::create([
@@ -137,7 +137,7 @@ class BukuSeeder extends Seeder
             'penerbit_id' => '14',
             'kategori_id' => '2',
             'tahun_terbit' => '2020',
-
+            'foto' => '',
         ]);
 
         // buku 15
@@ -147,7 +147,7 @@ class BukuSeeder extends Seeder
             'penerbit_id' => '14',
             'kategori_id' => '2',
             'tahun_terbit' => '2018',
-
+            'foto' => '',
         ]);
         // buku 16
         Buku::create([
@@ -156,7 +156,7 @@ class BukuSeeder extends Seeder
             'penerbit_id' => '8',
             'kategori_id' => '2',
             'tahun_terbit' => '2011',
-
+            'foto' => '',
         ]);
     }
 }
