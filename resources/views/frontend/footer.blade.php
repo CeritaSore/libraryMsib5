@@ -10,9 +10,7 @@
                         <div class="main-logo">
                             <a href="index.html"><img style="height:6rem" src="assets/logo/logo.png" alt="logo"></a>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sagittis sed ptibus liberolectus
-                            nonet psryroin. Amet sed lorem posuere sit iaculis amet, ac urna. Adipiscing fames
-                            semper erat ac in suspendisse iaculis.</p>
+                        <p>Sistem Informasi Manajemen Perpustakaan (e-library) merupakan sistem informasi yang dikembangkan untuk memudahkan dalam pelayanan serta memudahkan petugas perpustakaan dalam mengelola perpustakaan.” (sevima.com 20 juli 2020)</p>
                     </div>
                 </div>
 
@@ -24,7 +22,7 @@
                     <h5>About Us</h5>
                     <ul class="menu-list">
                         <li class="menu-item">
-                            <a href="#">vision</a>
+                            <a href="/about">Team</a>
                         </li>
                         <li class="menu-item">
                             <a href="#">articles </a>

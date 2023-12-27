@@ -21,10 +21,10 @@
                                         <div class="product-item">
                                             <figure class="product-style">
                                                 <img src="{{ $buku->foto }}" alt="Books" class="product-item">
+                                                <a href="/pinjam">
                                                 <button type="button" class="add-to-cart"
-                                                    data-product-tile="add-to-cart">Add
-                                                    to
-                                                    Cart</button>
+                                                    data-product-tile="add-to-cart">Pinjam</button>
+                                                </a>
                                             </figure>
                                             <figcaption>
                                                 <h3>{{ $buku->judul_buku }}</h3>
@@ -37,10 +37,10 @@
                                         <div class="product-item">
                                             <figure class="product-style">
                                                 <img src="{{ $buku->foto }}" alt="Books" class="product-item">
-                                                <button type="button" class="add-to-cart"
-                                                    data-product-tile="add-to-cart">Add
-                                                    to
-                                                    Cart</button>
+                                                <a href="/pinjam">
+                                                    <button type="button" class="add-to-cart"
+                                                        data-product-tile="add-to-cart">Pinjam</button>
+                                                    </a>
                                             </figure>
                                             <figcaption>
                                                 <h3>{{ $buku->judul_buku }}</h3>
@@ -53,10 +53,10 @@
                                         <div class="product-item">
                                             <figure class="product-style">
                                                 <img src="{{ $buku->foto }}" alt="Books" class="product-item">
-                                                <button type="button" class="add-to-cart"
-                                                    data-product-tile="add-to-cart">Add
-                                                    to
-                                                    Cart</button>
+                                                <a href="/pinjam">
+                                                    <button type="button" class="add-to-cart"
+                                                        data-product-tile="add-to-cart">Pinjam</button>
+                                                    </a>
                                             </figure>
                                             <figcaption>
                                                 <h3>{{ $buku->judul_buku }}</h3>
@@ -69,10 +69,10 @@
                                         <div class="product-item">
                                             <figure class="product-style">
                                                 <img src="{{ $buku->foto }}" alt="Books" class="product-item">
-                                                <button type="button" class="add-to-cart"
-                                                    data-product-tile="add-to-cart">Add
-                                                    to
-                                                    Cart</button>
+                                                <a href="/pinjam">
+                                                    <button type="button" class="add-to-cart"
+                                                        data-product-tile="add-to-cart">Pinjam</button>
+                                                    </a>
                                             </figure>
                                             <figcaption>
                                                 <h3>{{ $buku->judul_buku }}</h3>
