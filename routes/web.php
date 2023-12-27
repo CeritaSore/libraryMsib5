@@ -64,9 +64,10 @@ Route::get('/generate-pdfPeminjaman', [PDFController::class, 'PDFPeminjaman'])->
 
 //kelola akun
 Route::get('/kelola', [UserController::class, 'index'])->middleware('auth');
-Route::post('/kategori', [UserController::class,'store'])->name('createuser')->middleware('auth');
-Route::put('/kelola/{id}', [UserController::class, 'update'])->name('updateuser')->middleware('auth');
-Route::delete('/kelola/{id}', [UserController::class, 'destroy'])->name('deleteuser')->middleware('auth');
+Route::post('/kategori', [UserController::class,'store'])->name('simpandata10')->middleware('auth');
+Route::put('/kelola/{id}', [UserController::class, 'update'])->name('ubahdata10')->middleware('auth');
+Route::delete('/kelola/{id}', [UserController::class, 'destroy'])->name('hapusdata10')->middleware('auth');
+
 
 Route::get('/profile', function () {
     return view('backend.profile');
