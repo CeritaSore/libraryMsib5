@@ -1,5 +1,11 @@
 @extends('backend.index')
 @section('container')
+@php
+        $ar_judul = ['No', 'Nama', 'Email', 'Role', 'Status', 'Action'];
+        $no = 1;
+        $liststatus = ['Active', 'Not Active', 'Banned'];
+        $listrole = ['Administrator', 'Staff', 'Guest'];
+    @endphp
 @if (Auth::user()->role == 'admin')
     <div class="col-md-12 grid-margin">
         <div class="row">
@@ -82,6 +88,34 @@
                                 placeholder="Name" value="{{ $u->email }}" required>
                         </div>
                         
+                        
+                        <div class="form-floating">
+                            <select name="status" class="form-select mb-3" id="floatingSelect"
+                                aria-label="Floating label select example">
+                                <option>-- Status --</option>
+                                @foreach ($liststatus as $status)
+                                    <option value="{{ $status }}"
+                                        {{ $u->status === $status ? 'selected' : '' }}>
+                                        {{ $status }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <label class="floatingSelect" for="exampleSelectKategori">Status</label>
+                        </div>
+
+                        <div class="form-floating">
+                            <select name="isactive" class="form-select mb-3" id="floatingSelect"
+                                aria-label="Floating label select example" name="role">
+                                <option>-- Role --</option>
+                                @foreach ($listrole as $role)
+                                    <option value="{{ $role }}"
+                                        {{ $u->role === $role ? 'selected' : '' }}>
+                                        {{ $role }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <label class="floatingSelect"for="exampleSelectKategori">Role</label>
+                        </div>
                         <button type="submit" class="btn btn-success">Submit</button>
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
                     </form>
