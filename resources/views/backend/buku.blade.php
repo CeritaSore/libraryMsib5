@@ -10,10 +10,11 @@
                 @if (Auth::user()->role != 'guest')
                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                         data-bs-target="#exampleModal">Tambah buku<i class="ti-arrow-circle-right ms-1"></i></button>
-                    <a href="{{ route('PDFBuku') }}" class="btn btn-danger" title="Export to PDF">
-                    <i class="bi bi-file-earmark-pdf"></i>
-                    </a>        
+                       
                 @endif
+                <a href="{{ route('PDFBuku') }}" class="btn btn-danger" title="Export to PDF">
+                    <i class="bi bi-file-earmark-pdf"></i>
+                    </a>    
             </div>
         </div>
 

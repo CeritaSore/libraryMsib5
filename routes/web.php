@@ -63,10 +63,11 @@ Route::get('/generate-pdfBuku', [PDFController::class, 'PDFBuku'])->name('PDFBuk
 Route::get('/generate-pdfPeminjaman', [PDFController::class, 'PDFPeminjaman'])->name('PDFPeminjaman')->middleware('auth');
 
 //kelola akun
-Route::get('/kelola', [UserController::class, 'index']);
-Route::post('/kategori', [UserController::class,'store'])->name('createuser');
-Route::put('/kelola/{id}', [UserController::class, 'update'])->name('updateuser');
-Route::delete('/kelola/{id}', [UserController::class, 'destroy'])->name('deleteuser');
+Route::get('/kelola', [UserController::class, 'index'])->middleware('auth');
+Route::post('/kategori', [UserController::class,'store'])->name('simpandata10')->middleware('auth');
+Route::put('/kelola/{id}', [UserController::class, 'update'])->name('ubahdata10')->middleware('auth');
+Route::delete('/kelola/{id}', [UserController::class, 'destroy'])->name('hapusdata10')->middleware('auth');
+
 
 Route::get('/profile', function () {
     return view('backend.profile');
@@ -91,5 +92,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Ubah password
-Route::get('password', [HomeController::class, 'password'])->name('password');
-Route::post('password', [HomeController::class, 'password_action'])->name('password.action');
+
